@@ -1,0 +1,62 @@
+{
+  "executive_summary": "This comprehensive parliamentary meeting covered several critical national issues including climate policy, housing regulation, energy infrastructure, and agricultural reforms. The session featured extensive debate about implementation challenges of climate goals, housing enforcement measures, and the substantial €195 billion investment needed for power grid upgrades. Multiple motions were passed regarding energy infrastructure, housing construction, and ferry services.",
+  "main_topics": [
+    {
+      "topic": "Climate Policy and Energy Transition",
+      "summary": "Extensive discussion about the feasibility of achieving 55% emission reduction by 2030, energy infrastructure investments, and implementation challenges",
+      "party_positions": {
+        "VVD": "Advocates for practical implementation over new targets",
+        "GroenLinks-PvdA": "Pushes for more ambitious climate action",
+        "CDA": "Suggests aligning with EU policy rather than stricter national targets",
+        "PVV": "Opposes additional climate measures",
+        "Minister Hermans": "Supports major infrastructure investment while maintaining economic viability"
+      },
+      "outcome": "Government maintained commitment to climate goals despite implementation challenges; agreement to address grid investment costs in Spring"
+    },
+    {
+      "topic": "Housing Regulation and Tenant Protection",
+      "summary": "Discussion focused on enforcement of Good Landlord Act and protecting tenants from poor conditions and excessive rents",
+      "party_positions": {
+        "GroenLinks-PvdA": "Called for stronger enforcement against malicious landlords",
+        "Minister Keijzer": "Defended current framework while acknowledging some misconduct"
+      },
+      "outcome": "Minister agreed to gather municipal enforcement data and confirmed progress on rent registry"
+    },
+    {
+      "topic": "Agricultural Emissions",
+      "summary": "Debate about reducing agricultural emissions while maintaining sector viability",
+      "party_positions": {
+        "NSC": "Supports smaller-scale agriculture",
+        "PvdD": "Advocates for mandatory livestock reduction",
+        "Minister of Agriculture": "Opposes mandatory reduction, favors technical solutions"
+      },
+      "outcome": "Agreement to develop farm-specific emission targets for both nitrogen and greenhouse gases"
+    }
+  ],
+  "key_decisions": [
+    "Approval of motion to expedite power grid permit processes",
+    "Adoption of multiple motions on Wadden ferry services",
+    "Agreement to schedule debate about TenneT power grid costs",
+    "Commitment to develop action plan for offshore wind tenders",
+    "Agreement to gather municipal housing enforcement data"
+  ],
+  "political_dynamics": "The meeting revealed significant divisions between parties on climate policy implementation, with traditional right-wing parties advocating for more gradual approaches while left-wing parties pushed for immediate action. Coalition dynamics showed tension between maintaining ambitious climate goals and addressing practical implementation challenges. Cross-party agreement was more evident on housing enforcement and infrastructure investment needs.",
+  "next_steps": [
+    "Government to present cost mitigation measures for grid investments in Spring",
+    "Development of farm-specific emission targets",
+    "Collection and analysis of municipal housing enforcement data",
+    "Publication of research on net metering abolition effects",
+    "Development of action plan for offshore wind tenders"
+  ],
+  "meeting_info": {
+    "vergadering_titel": "61e vergadering, dinsdag 11 maart 2025",
+    "vergadering_datum": "2025-03-11T00:00:00+01:00",
+    "verslag_id": "84d94edd-499f-4d88-9e06-c5c0cd71b1c4",
+    "status": "VerslagStatus.GECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 16,
+    "total_topics_found": 29,
+    "processing_date": "2025-05-31T14:05:17.050143"
+  }
+}

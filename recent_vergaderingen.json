@@ -1,0 +1,162 @@
+[
+  {
+    "id": "e03c5a93-35a5-4902-952a-8c49deb6b39a",
+    "titel": "61e vergadering, dinsdag 11 maart 2025",
+    "datum": "2025-03-11T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.504437"
+  },
+  {
+    "id": "30502ff2-ab8e-4a2d-bd1c-e7bb936c1046",
+    "titel": "60e vergadering, donderdag 6 maart 2025",
+    "datum": "2025-03-06T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.504708"
+  },
+  {
+    "id": "e4b08bdc-2a51-4bd2-bcc6-1595d856fb6c",
+    "titel": "89e vergadering, woensdag 28 mei 2025",
+    "datum": "2025-05-28T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.504962"
+  },
+  {
+    "id": "01a00d89-833c-4655-b9fb-8ba258802a35",
+    "titel": "Strafrechtketen",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.505224"
+  },
+  {
+    "id": "3b43b5b7-8d19-4901-b840-4bb251790a24",
+    "titel": "88e vergadering, dinsdag 27 mei 2025",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.505450"
+  },
+  {
+    "id": "e13c9739-769e-4024-bce6-f1bd531f83ea",
+    "titel": "Passend onderwijs",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.505664"
+  },
+  {
+    "id": "3342c352-aa9f-43f4-a16d-6dfbd7d35ee2",
+    "titel": "Justitiële jeugd",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.505875"
+  },
+  {
+    "id": "e023bcea-7d09-47ed-a5e2-aa59a789f9d3",
+    "titel": "NAVO Defensie ministeriële",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.506088"
+  },
+  {
+    "id": "706304c5-5438-4868-ba5e-eb420760c8f4",
+    "titel": "Armoede- en schuldenbeleid",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.506300"
+  },
+  {
+    "id": "d3424fac-9420-4bb3-8940-7e3845e4cb95",
+    "titel": "Staat van de volkshuisvesting",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.506510"
+  },
+  {
+    "id": "e10ec3ad-4a59-4354-82e3-e5f9af091702",
+    "titel": "75e vergadering, donderdag 10 april 2025",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.506724"
+  },
+  {
+    "id": "efab2aaf-549d-4c8a-8fd6-e64806115f45",
+    "titel": "Initiatiefnota van het lid Bushoff - “Stop de commercie, steun de huisarts. Een plan voor toekomstbestendige huisartsenzorg” (Kamerstuk 36666)",
+    "datum": "2025-05-26T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.506937"
+  },
+  {
+    "id": "2f2e05d7-bcba-4654-9201-7d1ddaade448",
+    "titel": "Initiatiefnota van het lid Beckerman: ‘Red de camping’",
+    "datum": "2025-05-26T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.507148"
+  },
+  {
+    "id": "225a6458-cd07-48c1-870a-0849534f9b06",
+    "titel": "Gewasbeschermingsmiddelen",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.507348"
+  },
+  {
+    "id": "bccd7c59-a842-47dd-aee5-d816c7cb19b7",
+    "titel": "59e vergadering, woensdag 5 maart 2025",
+    "datum": "2025-03-05T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.507523"
+  },
+  {
+    "id": "aba1974b-4a6d-4f4c-809c-2ee14a849b06",
+    "titel": "85e vergadering, dinsdag 20 mei 2025",
+    "datum": "2025-05-20T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.507697"
+  },
+  {
+    "id": "efe6d7e2-3278-47ed-9c88-dbb31bcdbb38",
+    "titel": "Arbeidsmarktkrapte",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.507870"
+  },
+  {
+    "id": "040047a7-2415-4504-8ae2-e69c651b0fd2",
+    "titel": "87e vergadering, donderdag 22 mei 2025",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.508044"
+  },
+  {
+    "id": "3fca5260-db89-460f-965e-4576920db5be",
+    "titel": "Toetsen en examens",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.508217"
+  },
+  {
+    "id": "2962166a-6a6c-435e-91de-c2c1dc70e971",
+    "titel": "Gesprek met Prof. Daniel Waldenström en Dr. Huub Brouwer",
+    "datum": "2025-05-13T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "retrieved_at": "2025-05-31T13:03:57.508402"
+  }
+]

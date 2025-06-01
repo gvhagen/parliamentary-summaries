@@ -34,7 +34,7 @@ class ParliamentarySummarizer:
         self.client = anthropic.Anthropic(api_key=api_key)
         self.max_chunk_size = 50000  # Characters per chunk (roughly 12-15k tokens)
     
-    def identify_speakers_and_parties(self, text: str) -> Dict[str, str]:
+    def identify_speakers_and_parties(self, text: str, verslag_data: Dict = None) -> Dict[str, str]:
         """
         Extract speaker names and their party affiliations from the text
         
@@ -65,7 +65,7 @@ class ParliamentarySummarizer:
         
         try:
             response = self.client.messages.create(
-                model="claude-3-haiku-20240307",
+                model="claude-3-5-sonnet-20241022",
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -153,7 +153,7 @@ class ParliamentarySummarizer:
         return chunks
     
     def summarize_chunk(self, chunk: ChunkInfo, speakers_map: Dict[str, str], 
-                       meeting_info: Dict) -> Dict:
+                       meeting_info: Dict, max_retries: int = 2) -> Dict:
         """
         Summarize a single chunk of parliamentary debate
         
@@ -161,6 +161,7 @@ class ParliamentarySummarizer:
             chunk: ChunkInfo object with text to summarize
             speakers_map: Mapping of speakers to parties
             meeting_info: Information about the meeting
+            max_retries: Number of retry attempts for failed requests
             
         Returns:
             Dictionary with chunk summary
@@ -203,25 +204,52 @@ class ParliamentarySummarizer:
         {chunk.text}
         """
         
-        try:
-            response = self.client.messages.create(
-                model="claude-3-5-sonnet-20241022",
-                max_tokens=2000,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            # Parse JSON response
-            chunk_analysis = json.loads(response.content[0].text)
-            chunk_analysis['chunk_number'] = chunk.chunk_number
-            return chunk_analysis
-            
-        except Exception as e:
-            print(f"Error summarizing chunk {chunk.chunk_number}: {e}")
-            return {
-                'chunk_number': chunk.chunk_number,
-                'error': str(e),
-                'chunk_summary': 'Error processing this chunk'
-            }
+        for attempt in range(max_retries + 1):
+            try:
+                response = self.client.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=2000,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                
+                # Check if we got a response
+                if not response.content or not response.content[0].text:
+                    raise ValueError("Empty response from Claude")
+                
+                response_text = response.content[0].text.strip()
+                
+                # Sometimes Claude adds markdown formatting - clean it
+                if response_text.startswith('```json'):
+                    response_text = response_text.replace('```json', '').replace('```', '').strip()
+                
+                # Parse JSON response
+                chunk_analysis = json.loads(response_text)
+                chunk_analysis['chunk_number'] = chunk.chunk_number
+                return chunk_analysis
+                
+            except json.JSONDecodeError as e:
+                print(f"JSON parsing error on chunk {chunk.chunk_number}, attempt {attempt + 1}: {e}")
+                if attempt < max_retries:
+                    print(f"  Retrying chunk {chunk.chunk_number}...")
+                    continue
+                else:
+                    print(f"  Failed to parse after {max_retries + 1} attempts. Response was: {response_text[:200]}...")
+                    
+            except Exception as e:
+                print(f"Error summarizing chunk {chunk.chunk_number}, attempt {attempt + 1}: {e}")
+                if attempt < max_retries:
+                    print(f"  Retrying chunk {chunk.chunk_number}...")
+                    continue
+        
+        # If all retries failed, return an error chunk
+        return {
+            'chunk_number': chunk.chunk_number,
+            'error': f'Failed to process after {max_retries + 1} attempts',
+            'chunk_summary': 'Error processing this chunk - content may have been too complex or API temporarily unavailable',
+            'topics': [],
+            'key_decisions': [],
+            'notable_exchanges': []
+        }
     
     def combine_chunk_summaries(self, chunk_summaries: List[Dict], 
                                meeting_info: Dict) -> Dict:
@@ -359,8 +387,13 @@ class ParliamentarySummarizer:
         
         # Step 1: Identify speakers and parties
         print("Step 1: Identifying speakers and parties...")
-        speakers_map = self.identify_speakers_and_parties(text)
-        print(f"Found {len(speakers_map)} speakers/parties")
+        try:
+            speakers_map = self.identify_speakers_and_parties(text, verslag_data)
+            print(f"Found {len(speakers_map)} speakers/parties")
+        except Exception as e:
+            print(f"Speaker identification failed: {e}")
+            print("Continuing without speaker mapping...")
+            speakers_map = {}
         
         # Step 2: Chunk the text
         print("Step 2: Chunking text...")
@@ -414,7 +447,7 @@ def main():
         summarizer = ParliamentarySummarizer(api_key)
         
         # Process first verslag as test
-        test_verslag = ready_verslagen[0]
+        test_verslag = ready_verslagen[1]
         print(f"\nTesting with: {test_verslag.get('vergadering_titel', 'Unknown')}")
         
         # Create summary

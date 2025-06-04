@@ -313,31 +313,41 @@ class DeepSeekParliamentarySummarizer:
         speaker_context = relevant_speakers if len(relevant_speakers) <= 30 else dict(list(speakers_map.items())[:30])
         
         prompt = f"""
-        Analyze this Dutch parliamentary debate chunk and return valid JSON only.
+        Analyze this Dutch parliamentary debate chunk with attention to both factual content and political dynamics.
 
         Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
         Date: {meeting_info.get('vergadering_datum', 'Unknown')}
 
         Speakers mentioned in this section: {speaker_context}
 
-        Return this exact JSON structure with your analysis:
+        Guidelines for analysis:
+        - Capture not just what was said, but HOW it was said (tone, tensions, agreements)
+        - Note coalition dynamics, opposition challenges, and cross-party collaborations
+        - Identify underlying political strategies and rhetorical approaches
+        - Look for subtext and implications beyond literal statements
+        - Highlight moments of conflict, consensus, or unexpected alignment
+
+        Return this exact JSON structure with nuanced analysis:
         {{
-            "chunk_summary": "Brief overview of what was discussed",
+            "chunk_summary": "Brief overview capturing both content AND political dynamics",
             "topics": [
                 {{
                     "topic": "Topic name",
-                    "description": "What was discussed about this topic", 
+                    "description": "What was discussed, including context and implications", 
                     "party_positions": [
                         {{
                             "party": "Party or speaker name",
-                            "position": "Their stance on this topic",
-                            "key_quotes": []
+                            "position": "Their stance, including tone and strategy",
+                            "key_quotes": ["Important quotes that show their approach"]
                         }}
-                    ]
+                    ],
+                    "tensions": "Any disagreements or conflicts on this topic",
+                    "consensus": "Areas of agreement across parties"
                 }}
             ],
-            "key_decisions": [],
-            "notable_exchanges": []
+            "key_decisions": ["Include context: who pushed for it, who opposed"],
+            "notable_exchanges": ["Describe heated debates, clever responses, or revealing moments"],
+            "political_undercurrents": "Subtle dynamics, coalition pressures, or strategic positioning"
         }}
 
         Text to analyze:
@@ -372,6 +382,11 @@ class DeepSeekParliamentarySummarizer:
                         chunk_analysis = json.loads(fixed_json)
                     
                     chunk_analysis['chunk_number'] = chunk.chunk_number
+                    
+                    # Ensure all expected fields exist
+                    if 'political_undercurrents' not in chunk_analysis:
+                        chunk_analysis['political_undercurrents'] = ''
+                    
                     return chunk_analysis
                 else:
                     raise ValueError("No JSON found in response")
@@ -407,7 +422,8 @@ class DeepSeekParliamentarySummarizer:
             'chunk_summary': f'Chunk {chunk.chunk_number} could not be processed',
             'topics': [],
             'key_decisions': [],
-            'notable_exchanges': []
+            'notable_exchanges': [],
+            'political_undercurrents': ''
         }
     
     def combine_chunk_summaries(self, chunk_summaries: List[Dict], 
@@ -419,6 +435,7 @@ class DeepSeekParliamentarySummarizer:
         all_topics = {}
         all_decisions = []
         all_exchanges = []
+        political_themes = []
         
         for chunk_summary in chunk_summaries:
             if 'topics' in chunk_summary:
@@ -430,7 +447,9 @@ class DeepSeekParliamentarySummarizer:
                             'topic': topic_name,
                             'description': topic_info['description'],
                             'party_positions': [],
-                            'mentioned_in_chunks': []
+                            'mentioned_in_chunks': [],
+                            'tensions': [],
+                            'consensus': []
                         }
                     
                     all_topics[topic_name]['party_positions'].extend(
@@ -439,38 +458,56 @@ class DeepSeekParliamentarySummarizer:
                     all_topics[topic_name]['mentioned_in_chunks'].append(
                         chunk_summary['chunk_number']
                     )
+                    if 'tensions' in topic_info:
+                        all_topics[topic_name]['tensions'].append(topic_info['tensions'])
+                    if 'consensus' in topic_info:
+                        all_topics[topic_name]['consensus'].append(topic_info['consensus'])
             
             all_decisions.extend(chunk_summary.get('key_decisions', []))
             all_exchanges.extend(chunk_summary.get('notable_exchanges', []))
+            if chunk_summary.get('political_undercurrents'):
+                political_themes.append(chunk_summary['political_undercurrents'])
         
         # Create final summary using DeepSeek
         topics_json = json.dumps(list(all_topics.values()), ensure_ascii=False, indent=2)
         
         synthesis_prompt = f"""
-    Create a comprehensive summary of this Dutch parliamentary meeting.
+    Create a comprehensive and nuanced summary of this Dutch parliamentary meeting.
 
     Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
     Date: {meeting_info.get('vergadering_datum', 'Unknown')}
 
     Topics found: {len(all_topics)}
     Decisions: {len(all_decisions)}
+    Political themes observed: {political_themes[:5]}
+
+    Guidelines for the final summary:
+    - Write an executive summary that captures both what happened AND the political significance
+    - For each topic, explain not just positions but WHY parties took those positions
+    - Analyze coalition dynamics: who aligned unexpectedly? What tensions emerged?
+    - Identify strategic moves: blocking tactics, compromise attempts, political theater
+    - Note the meeting's tone: cooperative, contentious, procedural, dramatic?
+    - Consider broader implications: what do these discussions mean for future policy?
 
     Return this exact JSON structure:
     {{
-        "executive_summary": "2-3 sentence overview of the entire meeting",
+        "executive_summary": "2-3 sentences that capture the essence and political significance of the meeting",
         "main_topics": [
             {{
                 "topic": "Topic name",
-                "summary": "What was discussed about this topic",
+                "summary": "What was discussed and why it matters politically",
                 "party_positions": {{
-                    "Party/Speaker": "Their overall position on this topic"
+                    "Party/Speaker": "Their position and strategic reasoning"
                 }},
-                "outcome": "Any decisions or next steps"
+                "outcome": "Decision reached and its implications",
+                "political_context": "Why this topic was contentious or important"
             }}
         ],
-        "key_decisions": ["List of decisions/motions/votes"],
-        "political_dynamics": "Brief analysis of agreements, disagreements, coalition dynamics",
-        "next_steps": ["What happens next based on this meeting"]
+        "key_decisions": ["Decision with context about support/opposition"],
+        "political_dynamics": "Analysis of coalition behavior, opposition strategies, cross-party dynamics, and notable tensions or agreements",
+        "meeting_tone": "Overall atmosphere: cooperative, hostile, procedural, dramatic, etc.",
+        "strategic_implications": "What this meeting reveals about party strategies and future policy directions",
+        "next_steps": ["What happens next, including political maneuvering expected"]
     }}
 
     Topics and positions data:

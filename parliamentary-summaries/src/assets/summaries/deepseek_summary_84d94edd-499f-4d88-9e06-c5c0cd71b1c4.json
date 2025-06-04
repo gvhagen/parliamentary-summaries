@@ -1,0 +1,51 @@
+{
+  "executive_summary": "The Dutch parliamentary meeting on March 11, 2025, covered a wide range of topics, including rental price enforcement, participation in the ReArm Europe initiative, and climate policies. Key decisions included the adoption of motions on climate citizens' assembly funding and smart readiness indicators, while others like lowering gas taxes were rejected. Political dynamics revealed coalition tensions, particularly on social and environmental issues.",
+  "main_topics": [
+    {
+      "topic": "Enforcement of rental price regulations",
+      "summary": "Debate focused on the effectiveness of enforcement measures against landlords charging excessive rents, with Minister Keijzer highlighting recent rule implementations and compliance rates, while GroenLinks-PvdA criticized the lack of penalty data.",
+      "party_positions": {
+        "Minister Keijzer": "Acknowledges recent rules but lacks penalty overview; emphasizes most landlords comply.",
+        "GroenLinks-PvdA (De heer De Hoop)": "Criticizes landlords for excessive rents and demands transparency on penalties."
+      },
+      "outcome": "No immediate decision; further data collection expected."
+    },
+    {
+      "topic": "ReArm Europe Participation",
+      "summary": "Discussion on Netherlands' potential participation in the ReArm Europe initiative, with GroenLinks-PvdA opposing the motion, advocating for unity and strong alliances.",
+      "party_positions": {
+        "GroenLinks-PvdA": "Against participation, stressing the need for European unity and influence."
+      },
+      "outcome": "No decision recorded; debate ongoing."
+    }
+  ],
+  "key_decisions": [
+    "Motion-Eerdmans on no additional funds for the National Climate Citizens' Assembly was adopted.",
+    "Motion-Eerdmans on lowering gas taxes was rejected.",
+    "Motion-Eerdmans on abandoning the 2050 gas-free target was rejected.",
+    "Motion-Kröger/Erkens on Smart Readiness Indicators was adopted.",
+    "Motion-Kröger on area funds for nature-inclusive projects was rejected.",
+    "Motion by Klaver on income-benefit linkage was supported by NSC and others.",
+    "Motion to prevent childcare cost hikes was rejected.",
+    "Motion to benefit middle incomes over high incomes was passed.",
+    "Motion by Ergin to reduce essential product prices was rejected."
+  ],
+  "political_dynamics": "Coalition tensions were evident, with NSC supporting social motions like income-benefit linkage, while climate-related motions saw mixed outcomes. Opposition parties like GroenLinks-PvdA challenged government positions on rental enforcement and ReArm Europe.",
+  "next_steps": [
+    "Further data collection on rental enforcement penalties.",
+    "Continued debate on ReArm Europe participation.",
+    "Implementation of adopted motions, such as Smart Readiness Indicators and income-benefit linkage."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "61e vergadering, dinsdag 11 maart 2025",
+    "vergadering_datum": "2025-03-11T00:00:00+01:00",
+    "verslag_id": "84d94edd-499f-4d88-9e06-c5c0cd71b1c4",
+    "status": "VerslagStatus.GECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 16,
+    "total_topics_found": 31,
+    "processing_date": "2025-06-03T23:17:04.007112",
+    "ai_model": "deepseek-chat"
+  }
+}

@@ -5,6 +5,8 @@ from datetime import datetime
 import requests
 import os
 from dataclasses import dataclass
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 @dataclass
 class ChunkInfo:
@@ -33,179 +35,166 @@ class DeepSeekParliamentarySummarizer:
         
         self.api_key = api_key
         self.base_url = "https://api.deepseek.com/v1"
-        self.max_chunk_size = 15000  # Further reduced for faster processing
+        self.max_chunk_size = 50000  # Match Claude's chunk size
         
         # Headers for API requests
         self.headers = {
             "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-            "Connection": "keep-alive",  # Reuse connections
-            "User-Agent": "Parliamentary-Summarizer/1.0"
+            "Content-Type": "application/json"
         }
         
-        # Create persistent session for connection reuse
-        self.session = requests.Session()
-        self.session.headers.update(self.headers)
+        # Rate limiting
+        self.last_request_time = 0
+        self.min_request_interval = 0.5  # Minimum seconds between requests
         
-        # Configure session for better performance
-        adapter = requests.adapters.HTTPAdapter(
-            pool_connections=1,
-            pool_maxsize=1,
-            max_retries=3
-        )
-        self.session.mount('https://', adapter)
+    def _rate_limit(self):
+        """Simple rate limiting to avoid hitting API limits"""
+        current_time = time.time()
+        time_since_last_request = current_time - self.last_request_time
+        if time_since_last_request < self.min_request_interval:
+            time.sleep(self.min_request_interval - time_since_last_request)
+        self.last_request_time = time.time()
     
-    def make_api_request(self, messages: List[Dict], max_tokens: int = 2000, model: str = "deepseek-chat") -> str:
+    def make_api_request(self, messages: List[Dict], max_tokens: int = 1500, 
+                        temperature: float = 0.1, max_retries: int = 3) -> str:
         """
-        Make a request to DeepSeek API
+        Make a request to DeepSeek API with retries
         
         Args:
             messages: List of message dictionaries
             max_tokens: Maximum tokens in response
-            model: DeepSeek model to use
+            temperature: Model temperature
+            max_retries: Maximum number of retries
             
         Returns:
             Response text from the API
         """
-        # Clean messages to avoid encoding issues
-        cleaned_messages = []
-        for message in messages:
-            cleaned_content = message['content']
-            # Replace problematic Unicode characters
-            cleaned_content = cleaned_content.replace(''', "'").replace(''', "'")
-            cleaned_content = cleaned_content.replace('"', '"').replace('"', '"')
-            cleaned_content = cleaned_content.replace('–', '-').replace('—', '-')
-            cleaned_content = cleaned_content.replace('…', '...')
-            
-            cleaned_messages.append({
-                'role': message['role'],
-                'content': cleaned_content
-            })
+        self._rate_limit()
         
         payload = {
-            "model": model,
-            "messages": cleaned_messages,
+            "model": "deepseek-chat",
+            "messages": messages,
             "max_tokens": max_tokens,
-            "temperature": 0.1,  # Low temperature for consistent, factual responses
+            "temperature": temperature,
             "stream": False
         }
         
-        try:
-            response = requests.post(
-                f"{self.base_url}/chat/completions",
-                headers=self.headers,
-                json=payload,
-                timeout=60
-            )
-            response.raise_for_status()
-            
-            result = response.json()
-            return result['choices'][0]['message']['content']
-            
-        except requests.exceptions.RequestException as e:
-            print(f"DeepSeek API request failed: {e}")
-            if hasattr(e, 'response') and e.response is not None:
-                print(f"Response content: {e.response.text}")
-            raise
-        except KeyError as e:
-            print(f"Unexpected API response format: {e}")
-            print(f"Response: {response.text if 'response' in locals() else 'No response'}")
-            raise
+        for attempt in range(max_retries + 1):
+            try:
+                response = requests.post(
+                    f"{self.base_url}/chat/completions",
+                    headers=self.headers,
+                    json=payload,
+                    timeout=60
+                )
+                response.raise_for_status()
+                
+                result = response.json()
+                return result['choices'][0]['message']['content']
+                
+            except requests.exceptions.RequestException as e:
+                if attempt < max_retries:
+                    print(f"  Retry {attempt + 1}/{max_retries} after error: {str(e)[:100]}")
+                    time.sleep(2 ** attempt)  # Exponential backoff
+                    continue
+                else:
+                    print(f"  Failed after {max_retries} retries: {e}")
+                    raise
     
-    def clean_text_for_api(self, text: str) -> str:
-        """
-        Clean text to avoid Unicode encoding issues
-        
-        Args:
-            text: Input text with potential Unicode issues
-            
-        Returns:
-            Cleaned text safe for API transmission
-        """
-        if not text:
-            return ""
-        
-        # Replace problematic Unicode characters
-        replacements = {
-            ''': "'", ''': "'",  # Smart quotes
-            '"': '"', '"': '"',  # Smart double quotes
-            '–': '-', '—': '-',  # Em/en dashes
-            '…': '...',          # Ellipsis
-            '€': 'EUR',          # Euro symbol
-            '°': ' degrees',     # Degree symbol
-            '\u2018': "'",       # Left single quotation mark
-            '\u2019': "'",       # Right single quotation mark
-            '\u201c': '"',       # Left double quotation mark
-            '\u201d': '"',       # Right double quotation mark
-            '\u2013': '-',       # En dash
-            '\u2014': '-',       # Em dash
-            '\u2026': '...',     # Horizontal ellipsis
-        }
-        
-        cleaned_text = text
-        for old, new in replacements.items():
-            cleaned_text = cleaned_text.replace(old, new)
-        
-        # More aggressive cleaning: encode to ASCII and ignore errors
-        try:
-            # Try UTF-8 first
-            cleaned_text.encode('utf-8')
-        except UnicodeEncodeError:
-            # If that fails, force ASCII
-            cleaned_text = cleaned_text.encode('ascii', errors='ignore').decode('ascii')
-        
-        return cleaned_text
-
-    def identify_speakers_and_parties(self, text: str) -> Dict[str, str]:
+    def identify_speakers_and_parties(self, text: str, verslag_data: Dict = None) -> Dict[str, str]:
         """
         Extract speaker names and their party affiliations from the text
         
         Args:
             text: Parliamentary debate text
+            verslag_data: Full verslag data (to get pre-parsed speakers)
             
         Returns:
             Dictionary mapping speaker names to parties
         """
-        messages = [
-            {
-                "role": "user",
-                "content": f"""
-Analyze this Dutch parliamentary debate text and extract all speakers and their party affiliations.
-
-Look for patterns like:
-- "De heer [Name] ([Party]):"
-- "Mevrouw [Name] ([Party]):"
-- "Minister [Name]:"
-- etc.
-
-Return ONLY a JSON object mapping speaker names to their parties/roles:
-{{
-    "speaker_name": "party_or_role",
-    "another_speaker": "another_party"
-}}
-
-Text to analyze:
-{text[:5000]}...
-"""
-            }
-        ]
-        
-        try:
-            response_text = self.make_api_request(messages, max_tokens=1000)
+        # First try to use the parsed speaker data (same as Claude version)
+        if verslag_data and 'parsed_content' in verslag_data and 'sprekers' in verslag_data['parsed_content']:
+            sprekers = verslag_data['parsed_content']['sprekers']
+            speakers_map = {}
             
-            # Try to parse the JSON response
-            # Sometimes the response includes extra text, so extract JSON
-            json_match = re.search(r'\{[^}]*\}', response_text, re.DOTALL)
-            if json_match:
-                speakers = json.loads(json_match.group())
-                return speakers
-            else:
-                # Fallback: try to parse the entire response
-                speakers = json.loads(response_text)
-                return speakers
-        except Exception as e:
-            print(f"Error identifying speakers: {e}")
-            return {}
+            for spreker in sprekers:
+                naam = spreker.get('naam')
+                fractie = spreker.get('fractie')
+                
+                if naam and fractie and naam != 'null' and fractie != 'null':
+                    speakers_map[naam] = fractie
+                    continue
+                
+                # Parse the tekst field
+                tekst = spreker.get('tekst', '')
+                if tekst and tekst != 'null':
+                    party = None
+                    name = None
+                    
+                    known_parties = ['PVV', 'VVD', 'GroenLinks-PvdA', 'D66', 'CDA', 'SP', 'NSC', 
+                                   'BBB', 'DENK', 'Volt', 'JA21', 'SGP', 'ChristenUnie', 'FVD', 'PvdD']
+                    
+                    # Check if this is a minister/government official
+                    if 'minister' in tekst.lower() or 'staatssecretaris' in tekst.lower():
+                        words = tekst.split()
+                        
+                        # Find the name
+                        if 'heer' in tekst.lower():
+                            heer_index = next((j for j, part in enumerate(words) if 'heer' in part.lower()), -1)
+                            if heer_index >= 0 and heer_index + 1 < len(words):
+                                name = words[heer_index + 1]
+                        elif 'mevrouw' in tekst.lower():
+                            mevrouw_index = next((j for j, part in enumerate(words) if 'mevrouw' in part.lower()), -1)
+                            if mevrouw_index >= 0 and mevrouw_index + 1 < len(words):
+                                name = words[mevrouw_index + 1]
+                        
+                        # Extract ministerial role
+                        if 'minister van' in tekst.lower():
+                            van_index = tekst.lower().find('minister van')
+                            role_part = tekst[van_index:].strip()
+                            if ',' in role_part:
+                                role_part = role_part.split(',')[0]
+                            party = role_part.replace('minister van', 'Minister van')
+                        elif 'staatssecretaris' in tekst.lower():
+                            secretary_index = tekst.lower().find('staatssecretaris')
+                            role_part = tekst[secretary_index:].strip()
+                            if ',' in role_part:
+                                role_part = role_part.split(',')[0]
+                            party = role_part.replace('staatssecretaris', 'Staatssecretaris')
+                        else:
+                            party = "Minister"
+                    
+                    elif 'voorzitter' in tekst.lower():
+                        name = "Voorzitter"
+                        party = "Chair"
+                    
+                    else:
+                        # This should be an MP - look for party
+                        words = tekst.split()
+                        for word in words:
+                            if word in known_parties:
+                                party = word
+                                break
+                        
+                        # Extract name
+                        if 'heer' in tekst.lower():
+                            heer_index = next((j for j, part in enumerate(words) if 'heer' in part.lower()), -1)
+                            if heer_index >= 0 and heer_index + 1 < len(words):
+                                name = words[heer_index + 1]
+                        elif 'mevrouw' in tekst.lower():
+                            mevrouw_index = next((j for j, part in enumerate(words) if 'mevrouw' in part.lower()), -1)
+                            if mevrouw_index >= 0 and mevrouw_index + 1 < len(words):
+                                name = words[mevrouw_index + 1]
+                    
+                    if name and party:
+                        speakers_map[name] = party
+            
+            print(f"Extracted {len(speakers_map)} speakers from parsed data")
+            if speakers_map:
+                return speakers_map
+        
+        print("No parsed speaker data found, continuing without speaker mapping...")
+        return {}
     
     def chunk_text_smartly(self, text: str) -> List[ChunkInfo]:
         """
@@ -219,8 +208,7 @@ Text to analyze:
         """
         chunks = []
         
-        # Try to split on natural boundaries (speakers, agenda items, etc.)
-        # Look for common patterns in Dutch parliamentary texts
+        # Same splitting patterns as Claude version
         split_patterns = [
             r'\n\n(?=De heer|Mevrouw|Minister)',  # New speaker
             r'\n\n(?=Agendapunt|AGENDAPUNT)',     # New agenda item
@@ -245,15 +233,14 @@ Text to analyze:
                 
                 # Look for natural breaks within the last 2000 chars of the chunk
                 search_start = max(target_end - 2000, current_pos)
-                search_text = text[search_start:target_end + 1000]  # Look a bit ahead too
+                search_text = text[search_start:target_end + 1000]
                 
                 for pattern in split_patterns:
                     matches = list(re.finditer(pattern, search_text))
                     if matches:
-                        # Take the match closest to our target
                         for match in matches:
                             abs_pos = search_start + match.start()
-                            if current_pos + 5000 <= abs_pos <= target_end + 500:  # Reasonable range
+                            if current_pos + 5000 <= abs_pos <= target_end + 500:
                                 if best_break is None or abs(abs_pos - target_end) < abs(best_break - target_end):
                                     best_break = abs_pos
                 
@@ -263,7 +250,7 @@ Text to analyze:
             # Extract chunk
             chunk_text = text[current_pos:chunk_end].strip()
             
-            if chunk_text:  # Only add non-empty chunks
+            if chunk_text:
                 chunk = ChunkInfo(
                     chunk_number=chunk_num,
                     start_pos=current_pos,
@@ -281,222 +268,234 @@ Text to analyze:
         
         return chunks
     
-    def extract_json_from_response(self, response_text: str) -> Dict:
+    def get_relevant_speakers(self, chunk_text: str, speakers_map: Dict[str, str]) -> Dict[str, str]:
         """
-        Robustly extract JSON from API response that might have extra text
+        Find speakers that are actually mentioned in this chunk
         """
-        # Method 1: Try to parse the entire response
-        try:
-            return json.loads(response_text.strip())
-        except json.JSONDecodeError:
-            pass
+        relevant_speakers = {}
+        chunk_lower = chunk_text.lower()
         
-        # Method 2: Find JSON between curly braces
-        json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
-        if json_match:
-            try:
-                return json.loads(json_match.group())
-            except json.JSONDecodeError:
-                pass
+        for name, party in speakers_map.items():
+            if name.lower() in chunk_lower:
+                relevant_speakers[name] = party
         
-        # Method 3: Find JSON between triple backticks (markdown)
-        code_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', response_text, re.DOTALL)
-        if code_match:
-            try:
-                return json.loads(code_match.group(1))
-            except json.JSONDecodeError:
-                pass
+        return relevant_speakers
+    
+    def fix_broken_json(self, json_text: str) -> str:
+        """
+        Attempt to fix common JSON formatting issues
+        """
+        # Remove common problematic patterns
+        json_text = json_text.strip()
+        json_text = re.sub(r',(\s*[}\]])', r'\1', json_text)  # Remove trailing commas
+        json_text = re.sub(r'(["\w])\s*\n\s*(["\w])', r'\1 \2', json_text)  # Fix broken strings
+        json_text = re.sub(r'"\s*\n\s*"', r'""', json_text)  # Fix split quotes
         
-        # Method 4: Try to fix common JSON issues
-        try:
-            # Fix trailing commas
-            fixed_text = re.sub(r',(\s*[}\]])', r'\1', response_text)
-            # Fix single quotes
-            fixed_text = re.sub(r"'([^']*)':", r'"\1":', fixed_text)
-            
-            json_match = re.search(r'\{.*\}', fixed_text, re.DOTALL)
-            if json_match:
-                return json.loads(json_match.group())
-        except json.JSONDecodeError:
-            pass
+        # Balance braces and brackets
+        if json_text.count('{') > json_text.count('}'):
+            json_text += '}' * (json_text.count('{') - json_text.count('}'))
         
-        # Method 5: Manual parsing for simple cases
-        try:
-            # Look for topics array specifically
-            topics_match = re.search(r'"topics"\s*:\s*\[(.*?)\]', response_text, re.DOTALL)
-            if topics_match:
-                return {
-                    "topics": [],
-                    "decisions": [],
-                    "extracted_from_partial": True
-                }
-        except:
-            pass
+        if json_text.count('[') > json_text.count(']'):
+            json_text += ']' * (json_text.count('[') - json_text.count(']'))
         
-        # If all fails, return error structure
-        return {
-            "error": "Could not parse JSON response",
-            "raw_response": response_text[:500],
-            "topics": [],
-            "decisions": []
-        }
-
+        # Fix missing quotes around keys
+        json_text = re.sub(r'(\w+):', r'"\1":', json_text)
+        
+        return json_text
+    
     def summarize_chunk(self, chunk: ChunkInfo, speakers_map: Dict[str, str], 
-                       meeting_info: Dict) -> Dict:
+                       meeting_info: Dict, max_retries: int = 1) -> Dict:
         """
-        Summarize a single chunk with better JSON handling
+        Summarize a single chunk of parliamentary debate
+        """
+        # Get speakers that are actually mentioned in this chunk
+        relevant_speakers = self.get_relevant_speakers(chunk.text[:3000], speakers_map)
+        speaker_context = relevant_speakers if len(relevant_speakers) <= 30 else dict(list(speakers_map.items())[:30])
         
-        Args:
-            chunk: ChunkInfo object with text to summarize
-            speakers_map: Mapping of speakers to parties
-            meeting_info: Information about the meeting
-            
-        Returns:
-            Dictionary with chunk summary
-        """
-        # Use even shorter, more reliable prompt
-        messages = [
-            {
-                "role": "user",
-                "content": f"""
-Extract topics and party positions from this Dutch parliament text. Respond with valid JSON only.
+        prompt = f"""
+        Analyze this Dutch parliamentary debate chunk and return valid JSON only.
 
-{{
-    "topics": [
+        Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
+        Date: {meeting_info.get('vergadering_datum', 'Unknown')}
+
+        Speakers mentioned in this section: {speaker_context}
+
+        Return this exact JSON structure with your analysis:
         {{
-            "topic": "Topic name", 
-            "party_positions": [{{"party": "Party", "position": "Position"}}]
+            "chunk_summary": "Brief overview of what was discussed",
+            "topics": [
+                {{
+                    "topic": "Topic name",
+                    "description": "What was discussed about this topic", 
+                    "party_positions": [
+                        {{
+                            "party": "Party or speaker name",
+                            "position": "Their stance on this topic",
+                            "key_quotes": []
+                        }}
+                    ]
+                }}
+            ],
+            "key_decisions": [],
+            "notable_exchanges": []
         }}
-    ],
-    "decisions": ["Any decisions"]
-}}
 
-Text:
-{chunk.text[:10000]}
-"""
-            }
-        ]
+        Text to analyze:
+        {chunk.text[:3000]}...
+        """
         
-        try:
-            response_text = self.make_api_request(messages, max_tokens=800)  # Even smaller
-            
-            # Use robust JSON extraction
-            chunk_analysis = self.extract_json_from_response(response_text)
-            chunk_analysis['chunk_number'] = chunk.chunk_number
-            
-            # Ensure required fields exist
-            if 'topics' not in chunk_analysis:
-                chunk_analysis['topics'] = []
-            if 'decisions' not in chunk_analysis:
-                chunk_analysis['decisions'] = []
+        messages = [{"role": "user", "content": prompt}]
+        
+        for attempt in range(max_retries + 1):
+            try:
+                response_text = self.make_api_request(messages, max_tokens=1500)
                 
-            return chunk_analysis
-            
-        except Exception as e:
-            print(f"    Error in chunk {chunk.chunk_number}: {e}")
-            return {
-                'chunk_number': chunk.chunk_number,
-                'error': str(e),
-                'topics': [],
-                'decisions': []
-            }
+                if not response_text:
+                    raise ValueError("Empty response from DeepSeek")
+                
+                # Clean up response
+                response_text = response_text.strip()
+                response_text = response_text.replace('```json', '').replace('```', '').strip()
+                
+                # Extract JSON part
+                start_brace = response_text.find('{')
+                end_brace = response_text.rfind('}')
+                
+                if start_brace != -1 and end_brace != -1:
+                    json_part = response_text[start_brace:end_brace + 1]
+                    
+                    try:
+                        chunk_analysis = json.loads(json_part)
+                    except json.JSONDecodeError:
+                        print(f"  Attempting to repair JSON for chunk {chunk.chunk_number}...")
+                        fixed_json = self.fix_broken_json(json_part)
+                        chunk_analysis = json.loads(fixed_json)
+                    
+                    chunk_analysis['chunk_number'] = chunk.chunk_number
+                    return chunk_analysis
+                else:
+                    raise ValueError("No JSON found in response")
+                    
+            except json.JSONDecodeError as e:
+                if attempt < max_retries:
+                    print(f"  JSON error, retrying chunk {chunk.chunk_number}...")
+                    continue
+                else:
+                    print(f"  JSON parsing failed on chunk {chunk.chunk_number} - creating minimal response")
+                    return {
+                        'chunk_number': chunk.chunk_number,
+                        'chunk_summary': f'Chunk {chunk.chunk_number} processing failed but contained parliamentary discussion',
+                        'topics': [{
+                            'topic': 'Parliamentary Discussion',
+                            'description': 'Content could not be fully processed due to formatting issues',
+                            'party_positions': []
+                        }],
+                        'key_decisions': [],
+                        'notable_exchanges': []
+                    }
+                    
+            except Exception as e:
+                if attempt < max_retries:
+                    print(f"  Error, retrying chunk {chunk.chunk_number}...")
+                    continue
+                else:
+                    print(f"  Failed chunk {chunk.chunk_number}: {e}")
+        
+        # Return minimal valid response on failure
+        return {
+            'chunk_number': chunk.chunk_number,
+            'chunk_summary': f'Chunk {chunk.chunk_number} could not be processed',
+            'topics': [],
+            'key_decisions': [],
+            'notable_exchanges': []
+        }
     
     def combine_chunk_summaries(self, chunk_summaries: List[Dict], 
                                meeting_info: Dict) -> Dict:
         """
         Combine multiple chunk summaries into a comprehensive meeting summary
-        
-        Args:
-            chunk_summaries: List of chunk analysis results
-            meeting_info: Meeting metadata
-            
-        Returns:
-            Complete meeting summary
         """
         # Collect all topics across chunks
         all_topics = {}
         all_decisions = []
+        all_exchanges = []
         
         for chunk_summary in chunk_summaries:
             if 'topics' in chunk_summary:
                 for topic_info in chunk_summary['topics']:
-                    topic_name = topic_info.get('topic', 'Unknown Topic')
+                    topic_name = topic_info['topic']
                     
                     if topic_name not in all_topics:
                         all_topics[topic_name] = {
                             'topic': topic_name,
-                            'description': topic_info.get('description', f"Discussion about {topic_name}"),
+                            'description': topic_info['description'],
                             'party_positions': [],
                             'mentioned_in_chunks': []
                         }
                     
-                    # Add party positions
                     all_topics[topic_name]['party_positions'].extend(
                         topic_info.get('party_positions', [])
                     )
                     all_topics[topic_name]['mentioned_in_chunks'].append(
-                        chunk_summary.get('chunk_number', 0)
+                        chunk_summary['chunk_number']
                     )
             
-            # Collect decisions
-            all_decisions.extend(chunk_summary.get('decisions', []))
-            all_decisions.extend(chunk_summary.get('key_decisions', []))  # Support both formats
+            all_decisions.extend(chunk_summary.get('key_decisions', []))
+            all_exchanges.extend(chunk_summary.get('notable_exchanges', []))
         
         # Create final summary using DeepSeek
-        topics_summary = []
-        for topic_name, topic_data in all_topics.items():
-            # Consolidate party positions
-            party_positions_map = {}
-            for pos in topic_data['party_positions']:
-                party = pos.get('party', 'Unknown')
-                position = pos.get('position', 'No position stated')
-                if party in party_positions_map:
-                    party_positions_map[party] += f"; {position}"
-                else:
-                    party_positions_map[party] = position
-            
-            topics_summary.append({
-                'topic': topic_name,
-                'party_positions': party_positions_map,
-                'chunks': topic_data['mentioned_in_chunks']
-            })
+        topics_json = json.dumps(list(all_topics.values()), ensure_ascii=False, indent=2)
         
-        # Create concise final summary prompt
-        messages = [
-            {
-                "role": "user",
-                "content": f"""
-Create final summary for Dutch parliamentary meeting.
+        synthesis_prompt = f"""
+    Create a comprehensive summary of this Dutch parliamentary meeting.
 
-Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
-Date: {meeting_info.get('vergadering_datum', 'Unknown')}
+    Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
+    Date: {meeting_info.get('vergadering_datum', 'Unknown')}
 
-Topics found: {len(topics_summary)}
-Decisions found: {len(all_decisions)}
+    Topics found: {len(all_topics)}
+    Decisions: {len(all_decisions)}
 
-Respond with JSON:
-{{
-    "executive_summary": "2-3 sentence overview",
-    "main_topics": [
-        {{
-            "topic": "Topic name",
-            "summary": "What was discussed",
-            "party_positions": {{"Party": "Position"}},
-            "outcome": "Result or next steps"
-        }}
-    ],
-    "key_decisions": ["List of decisions"],
-    "political_dynamics": "Brief analysis of agreements/disagreements"
-}}
+    Return this exact JSON structure:
+    {{
+        "executive_summary": "2-3 sentence overview of the entire meeting",
+        "main_topics": [
+            {{
+                "topic": "Topic name",
+                "summary": "What was discussed about this topic",
+                "party_positions": {{
+                    "Party/Speaker": "Their overall position on this topic"
+                }},
+                "outcome": "Any decisions or next steps"
+            }}
+        ],
+        "key_decisions": ["List of decisions/motions/votes"],
+        "political_dynamics": "Brief analysis of agreements, disagreements, coalition dynamics",
+        "next_steps": ["What happens next based on this meeting"]
+    }}
 
-Keep it concise and factual.
-"""
-            }
-        ]
+    Topics and positions data:
+    {topics_json[:2000]}...
+
+    Key decisions: {all_decisions[:10]}
+    Notable exchanges: {all_exchanges[:5]}
+    """
+        
+        messages = [{"role": "user", "content": synthesis_prompt}]
         
         try:
-            response_text = self.make_api_request(messages, max_tokens=1500)
-            final_summary = self.extract_json_from_response(response_text)
+            response_text = self.make_api_request(messages, max_tokens=3000)
+            
+            response_text = response_text.strip()
+            response_text = response_text.replace('```json', '').replace('```', '').strip()
+            
+            start_brace = response_text.find('{')
+            end_brace = response_text.rfind('}')
+            
+            if start_brace != -1 and end_brace != -1:
+                json_part = response_text[start_brace:end_brace + 1]
+                final_summary = json.loads(json_part)
+            else:
+                raise ValueError("No JSON found in final summary")
             
             # Add metadata
             final_summary['meeting_info'] = meeting_info
@@ -507,74 +506,19 @@ Keep it concise and factual.
                 'ai_model': 'deepseek-chat'
             }
             
-            # Ensure required fields exist
-            if 'main_topics' not in final_summary:
-                final_summary['main_topics'] = []
-            if 'key_decisions' not in final_summary:
-                final_summary['key_decisions'] = list(set(all_decisions))  # Remove duplicates
-            if 'executive_summary' not in final_summary:
-                final_summary['executive_summary'] = f"Parliamentary meeting covering {len(all_topics)} main topics with {len(all_decisions)} decisions made."
-            
             return final_summary
             
         except Exception as e:
             print(f"Error creating final summary: {e}")
-            # Return a basic summary with collected data
             return {
-                'executive_summary': f"Parliamentary meeting on {meeting_info.get('vergadering_datum', 'unknown date')} covering {len(all_topics)} topics.",
-                'main_topics': [
-                    {
-                        'topic': topic['topic'],
-                        'summary': f"Discussion about {topic['topic']}",
-                        'party_positions': topic['party_positions'],
-                        'outcome': 'To be determined'
-                    }
-                    for topic in topics_summary[:10]  # Limit to top 10
-                ],
-                'key_decisions': list(set(all_decisions)),
-                'political_dynamics': 'Analysis not available due to processing error',
+                'error': str(e),
                 'meeting_info': meeting_info,
-                'processing_info': {
-                    'chunks_processed': len(chunk_summaries),
-                    'total_topics_found': len(all_topics),
-                    'processing_date': datetime.now().isoformat(),
-                    'ai_model': 'deepseek-chat',
-                    'error': str(e)
-                }
+                'raw_chunk_summaries': chunk_summaries
             }
-    
-    def debug_unicode_issues(self, text: str, sample_size: int = 1000) -> None:
-        """
-        Debug function to identify problematic Unicode characters
-        """
-        sample = text[:sample_size]
-        print(f"Debugging Unicode in text sample...")
-        print(f"Sample length: {len(sample)} characters")
-        
-        # Find problematic characters
-        problematic_chars = []
-        for i, char in enumerate(sample):
-            try:
-                char.encode('ascii')
-            except UnicodeEncodeError:
-                problematic_chars.append((i, char, ord(char), hex(ord(char))))
-        
-        if problematic_chars:
-            print(f"Found {len(problematic_chars)} problematic characters:")
-            for i, char, code, hex_code in problematic_chars[:10]:  # Show first 10
-                print(f"  Position {i}: '{char}' (U+{hex_code[2:].upper().zfill(4)}, {code})")
-        else:
-            print("No problematic ASCII characters found")
     
     def summarize_parliamentary_meeting(self, verslag_data: Dict) -> Dict:
         """
         Complete pipeline to summarize a parliamentary meeting
-        
-        Args:
-            verslag_data: Dictionary with meeting data and text content
-            
-        Returns:
-            Complete summary of the meeting
         """
         print(f"\n=== Summarizing Meeting with DeepSeek ===")
         print(f"Meeting: {verslag_data.get('vergadering_titel', 'Unknown')}")
@@ -587,9 +531,6 @@ Keep it concise and factual.
         
         print(f"Text length: {len(text)} characters")
         
-        # Debug Unicode issues
-        self.debug_unicode_issues(text)
-        
         # Extract meeting info
         meeting_info = {
             'vergadering_titel': verslag_data.get('vergadering_titel'),
@@ -600,8 +541,13 @@ Keep it concise and factual.
         
         # Step 1: Identify speakers and parties
         print("Step 1: Identifying speakers and parties...")
-        speakers_map = self.identify_speakers_and_parties(text)
-        print(f"Found {len(speakers_map)} speakers/parties")
+        try:
+            speakers_map = self.identify_speakers_and_parties(text, verslag_data)
+            print(f"Found {len(speakers_map)} speakers/parties")
+        except Exception as e:
+            print(f"Speaker identification failed: {e}")
+            print("Continuing without speaker mapping...")
+            speakers_map = {}
         
         # Step 2: Chunk the text
         print("Step 2: Chunking text...")
@@ -624,9 +570,9 @@ Keep it concise and factual.
 
 def main():
     """
-    Main function to test the DeepSeek summarizer
+    Main function to summarize all available verslagen with DeepSeek
     """
-    print("=== DeepSeek Parliamentary Summarizer ===")
+    print("=== DeepSeek Parliamentary Summarizer - Batch Mode ===")
     
     # Check for API key
     api_key = os.getenv('DEEPSEEK_API_KEY')
@@ -652,39 +598,125 @@ def main():
         
         print(f"Found {len(ready_verslagen)} verslagen ready for summarization")
         
+        # Check which ones already have summaries
+        existing_summaries = []
+        new_verslagen = []
+        
+        for verslag in ready_verslagen:
+            # Check for DeepSeek-specific summary files
+            summary_filename = f"deepseek_summary_{verslag.get('id', 'unknown')}.json"
+            if os.path.exists(summary_filename):
+                existing_summaries.append(verslag)
+                print(f"✓ Already summarized: {verslag.get('vergadering_titel', 'Unknown')}")
+            else:
+                new_verslagen.append(verslag)
+        
+        if existing_summaries:
+            print(f"\n{len(existing_summaries)} verslagen already have DeepSeek summaries")
+        
+        if not new_verslagen:
+            print("All verslagen have already been summarized with DeepSeek! ✓")
+            return
+        
+        print(f"\n{len(new_verslagen)} verslagen need to be summarized")
+        
+        # Show cost estimate
+        estimated_cost_per_verslag = 0.02  # Rough estimate based on DeepSeek pricing
+        total_estimated_cost = len(new_verslagen) * estimated_cost_per_verslag
+        claude_estimated_cost = total_estimated_cost * 10  # Claude is roughly 10x more expensive
+        
+        print(f"\nCost estimate:")
+        print(f"  DeepSeek: ~${total_estimated_cost:.2f}")
+        print(f"  Claude Haiku: ~${claude_estimated_cost:.2f}")
+        print(f"  Savings: ~${claude_estimated_cost - total_estimated_cost:.2f}")
+        
+        # Ask for confirmation
+        print("\nVersions to be summarized:")
+        for i, verslag in enumerate(new_verslagen, 1):
+            print(f"  {i}. {verslag.get('vergadering_titel', 'Unknown')} ({verslag.get('vergadering_datum', 'Unknown date')})")
+        
+        confirm = input(f"\nProceed with summarizing {len(new_verslagen)} meetings? (y/n): ")
+        if confirm.lower() != 'y':
+            print("Cancelled.")
+            return
+        
         # Initialize summarizer
         summarizer = DeepSeekParliamentarySummarizer(api_key)
         
-        # Process first verslag as test
-        test_verslag = ready_verslagen[0]
-        print(f"\nTesting with: {test_verslag.get('vergadering_titel', 'Unknown')}")
+        # Process each verslag
+        successful = 0
+        failed = 0
+        start_time = time.time()
         
-        # Create summary
-        summary = summarizer.summarize_parliamentary_meeting(test_verslag)
-        
-        # Save result
-        output_filename = f"deepseek_summary_{test_verslag.get('id', 'unknown')}.json"
-        with open(output_filename, 'w', encoding='utf-8') as f:
-            json.dump(summary, f, ensure_ascii=False, indent=2)
-        
-        print(f"\n✓ Summary saved to: {output_filename}")
-        
-        # Show preview
-        if 'executive_summary' in summary:
-            print(f"\nExecutive Summary:")
-            print(f"  {summary['executive_summary']}")
+        for i, verslag in enumerate(new_verslagen, 1):
+            print(f"\n{'='*60}")
+            print(f"Processing {i}/{len(new_verslagen)}: {verslag.get('vergadering_titel', 'Unknown')}")
+            print(f"{'='*60}")
             
-            if 'main_topics' in summary:
-                print(f"\nMain Topics ({len(summary['main_topics'])}):")
-                for topic in summary['main_topics'][:3]:  # Show first 3
-                    print(f"  - {topic.get('topic', 'Unknown topic')}")
+            try:
+                # Create summary
+                summary = summarizer.summarize_parliamentary_meeting(verslag)
+                
+                # Check if summary was successful
+                if 'error' in summary and 'executive_summary' not in summary:
+                    print(f"❌ Summary failed: {summary['error']}")
+                    failed += 1
+                    continue
+                
+                # Save result with DeepSeek prefix
+                output_filename = f"deepseek_summary_{verslag.get('id', 'unknown')}.json"
+                with open(output_filename, 'w', encoding='utf-8') as f:
+                    json.dump(summary, f, ensure_ascii=False, indent=2)
+                
+                print(f"✓ Summary saved to: {output_filename}")
+                successful += 1
+                
+                # Show brief preview
+                if 'executive_summary' in summary:
+                    print(f"\nPreview: {summary['executive_summary'][:150]}...")
+                    if 'main_topics' in summary:
+                        print(f"Topics covered: {len(summary['main_topics'])}")
+                
+                # Show progress and time estimate
+                elapsed_time = time.time() - start_time
+                avg_time_per_verslag = elapsed_time / i
+                remaining_time = avg_time_per_verslag * (len(new_verslagen) - i)
+                print(f"\nProgress: {i}/{len(new_verslagen)} - Est. time remaining: {remaining_time/60:.1f} minutes")
+                
+            except KeyboardInterrupt:
+                print(f"\n\n⚠️ Process interrupted by user")
+                print(f"Progress: {successful} successful, {failed} failed, {len(new_verslagen) - i} remaining")
+                print("You can restart the script to continue with remaining verslagen.")
+                return
+                
+            except Exception as e:
+                print(f"❌ Error processing verslag: {e}")
+                failed += 1
+                continue
         
-        # Show cost estimate
-        if 'processing_info' in summary:
-            chunks = summary['processing_info'].get('chunks_processed', 0)
-            estimated_tokens = chunks * 15000  # Rough estimate
-            estimated_cost = (estimated_tokens / 1000000) * 0.14  # DeepSeek pricing
-            print(f"\nEstimated cost: ~${estimated_cost:.3f} (vs ~${estimated_cost/0.14*0.25:.3f} with Claude Haiku)")
+        # Final summary
+        total_time = time.time() - start_time
+        print(f"\n{'='*60}")
+        print("BATCH PROCESSING COMPLETE")
+        print(f"{'='*60}")
+        print(f"✓ Successfully processed: {successful}")
+        print(f"❌ Failed: {failed}")
+        print(f"📁 Total DeepSeek summaries available: {len(existing_summaries) + successful}")
+        print(f"⏱️ Total time: {total_time/60:.1f} minutes")
+        print(f"💰 Estimated cost: ~${successful * estimated_cost_per_verslag:.2f}")
+        
+        if successful > 0:
+            print(f"\n🎉 You now have {len(existing_summaries) + successful} parliamentary meeting summaries from DeepSeek!")
+            print("Ready to load into your Angular app for testing!")
+            
+            # Offer to compare with Claude summaries if available
+            claude_count = 0
+            for verslag in ready_verslagen:
+                if os.path.exists(f"summary_{verslag.get('id', 'unknown')}.json"):
+                    claude_count += 1
+            
+            if claude_count > 0:
+                print(f"\nNote: You also have {claude_count} Claude summaries available for comparison.")
         
     except FileNotFoundError:
         print("verslagen_parsed.json not found. Please run the XML parser first.")

@@ -1,4 +1,4 @@
-// src/app/app.component.ts
+// src/app/app.component.ts - Updated with loading states
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,10 +22,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
-
-// CDK imports - REMOVED virtual scrolling temporarily
-// import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-// import { ViewportRuler } from '@angular/cdk/scrolling';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 import { SummaryService } from './services/summary.service';
 import { 
@@ -61,7 +60,10 @@ import {
     MatBadgeModule,
     MatTooltipModule,
     MatListModule,
-    MatRippleModule
+    MatRippleModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -75,6 +77,9 @@ export class AppComponent implements OnInit, OnDestroy {
   partyFilters$: Observable<PartyFilter[]>;
   searchFilter$: Observable<SearchFilter>;
   selectedDocument$: Observable<ProcessedDocument | null>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
+  documentStats$: Observable<any>;
   
   // Fixed: Use BehaviorSubject for selectedDocumentId
   private selectedDocumentIdSubject = new BehaviorSubject<string | null>(null);
@@ -125,7 +130,8 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private summaryService: SummaryService
+    private summaryService: SummaryService,
+    private snackBar: MatSnackBar
   ) {
     // Set up preprocessed documents observable
     this.documents$ = this.summaryService.filteredDocuments$.pipe(
@@ -135,6 +141,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.topicFilters$ = this.summaryService.topicFilters$;
     this.partyFilters$ = this.summaryService.partyFilters$;
     this.searchFilter$ = this.summaryService.searchFilter$;
+    this.loading$ = this.summaryService.loading$;
+    this.error$ = this.summaryService.error$;
+    this.documentStats$ = this.summaryService.getDocumentStats();
     
     // Fixed: Create proper selected document observable
     this.selectedDocument$ = combineLatest([
@@ -164,6 +173,34 @@ export class AppComponent implements OnInit, OnDestroy {
     ).subscribe(documents => {
       if (documents.length > 0 && !this.selectedDocumentId) {
         this.onDocumentSelected(documents[0]);
+      }
+    });
+
+    // Handle error messages
+    this.error$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(error => {
+      if (error) {
+        this.snackBar.open(error, 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+
+    // Show success message when documents are loaded
+    this.documentStats$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(stats => {
+      if (stats.totalDocuments > 0) {
+        this.snackBar.open(
+          `Loaded ${stats.totalDocuments} parliamentary documents with ${stats.totalTopics} topics`, 
+          'Close', 
+          {
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          }
+        );
       }
     });
   }
@@ -346,6 +383,36 @@ export class AppComponent implements OnInit, OnDestroy {
       return null;
     }
     return position.key_evidence || null;
+  }
+
+  // New methods for file management
+  async onRefreshDocuments(): Promise<void> {
+    await this.summaryService.refreshDocuments();
+    this.snackBar.open('Documents refreshed', 'Close', { duration: 2000 });
+  }
+
+  async onLoadSpecificFiles(): Promise<void> {
+    // This would typically open a dialog or file picker
+    // For now, you can hardcode some filenames for testing
+    const filenames = [
+      'deepseek_summary_84d94edd-499f-4d88-9e06-c5c0cd71b1c4.json',
+      // Add more filenames as needed
+    ];
+    
+    try {
+      await this.summaryService.loadSpecificFiles(filenames);
+      this.snackBar.open(`Attempted to load ${filenames.length} additional files`, 'Close', { duration: 3000 });
+    } catch (error) {
+      this.snackBar.open('Error loading additional files', 'Close', { duration: 3000 });
+    }
+  }
+
+  // Helper method to show document statistics
+  showDocumentStats(): void {
+    this.documentStats$.pipe(takeUntil(this.destroy$)).subscribe(stats => {
+      const message = `${stats.totalDocuments} documents, ${stats.totalTopics} topics, ${stats.uniqueParties} parties`;
+      this.snackBar.open(message, 'Close', { duration: 5000 });
+    });
   }
 
   // Optimized trackBy functions

@@ -1,0 +1,14 @@
+{
+  "generated": "2025-06-04T20:36:10.506Z",
+  "files": [
+    "deepseek_summary_84d94edd-499f-4d88-9e06-c5c0cd71b1c4.json",
+    "deepseek_summary_b2b22f81-cadd-490e-b161-3446b1de3297.json",
+    "deepseek_summary_c4f9fd24-03b1-4038-8bad-9cf496baad44.json"
+  ],
+  "count": 3,
+  "patterns": {
+    "deepseek": 3,
+    "claude": 0,
+    "other": 0
+  }
+}

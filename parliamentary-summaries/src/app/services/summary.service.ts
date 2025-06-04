@@ -2,7 +2,8 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, combineLatest, map } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest, map, forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { 
   ParliamentarySummary, 
   ParliamentaryDocument, 
@@ -13,6 +14,12 @@ import {
   EnhancedPartyPosition
 } from '../models/parliamentary-summary.model';
 
+interface SummaryFileInfo {
+  filename: string;
+  model: string;
+  id: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +27,8 @@ export class SummaryService {
   private documentsSubject = new BehaviorSubject<ParliamentaryDocument[]>([]);
   private topicFiltersSubject = new BehaviorSubject<TopicFilter[]>([]);
   private partyFiltersSubject = new BehaviorSubject<PartyFilter[]>([]);
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  private errorSubject = new BehaviorSubject<string | null>(null);
   private searchFilterSubject = new BehaviorSubject<SearchFilter>({
     query: '',
     includeTopics: true,
@@ -33,6 +42,8 @@ export class SummaryService {
   public topicFilters$ = this.topicFiltersSubject.asObservable();
   public partyFilters$ = this.partyFiltersSubject.asObservable();
   public searchFilter$ = this.searchFilterSubject.asObservable();
+  public loading$ = this.loadingSubject.asObservable();
+  public error$ = this.errorSubject.asObservable();
 
   // Enhanced filtered documents based on current filters
   public filteredDocuments$ = combineLatest([
@@ -47,31 +58,223 @@ export class SummaryService {
   );
 
   constructor(private http: HttpClient) {
-    this.loadDocuments();
+    this.loadAllSummaryFiles();
   }
 
-  private async loadDocuments(): Promise<void> {
-    try {
-      // For now, we'll load from a single JSON file
-      // Later you can expand this to load multiple files or use an API
-      const summary = await this.http.get<ParliamentarySummary>('/assets/summaries/sample-summary.json').toPromise();
-      
-      if (summary) {
-        const document: ParliamentaryDocument = {
-          id: summary.meeting_info.verslag_id,
-          title: summary.meeting_info.vergadering_titel,
-          date: new Date(summary.meeting_info.vergadering_datum),
-          summary: summary
-        };
+  /**
+   * Load all summary files from the assets/summaries directory
+   */
+  private async loadAllSummaryFiles(): Promise<void> {
+    this.loadingSubject.next(true);
+    this.errorSubject.next(null);
 
-        this.documentsSubject.next([document]);
-        this.initializeEnhancedFilters([document]);
+    try {
+      // First, try to get a list of available files
+      const summaryFiles = await this.discoverSummaryFiles();
+      
+      if (summaryFiles.length === 0) {
+        console.warn('No summary files found, creating mock data');
+        this.createEnhancedMockDocument();
+        return;
+      }
+
+      console.log(`Found ${summaryFiles.length} summary files:`, summaryFiles);
+
+      // Load all files in parallel
+      const loadRequests = summaryFiles.map(fileInfo => 
+        this.loadSingleSummaryFile(fileInfo)
+      );
+
+      const results = await forkJoin(loadRequests).toPromise();
+      const validDocuments = results?.filter(doc => doc !== null) as ParliamentaryDocument[];
+
+      if (validDocuments && validDocuments.length > 0) {
+        // Sort documents by date (newest first)
+        validDocuments.sort((a, b) => b.date.getTime() - a.date.getTime());
+        
+        this.documentsSubject.next(validDocuments);
+        this.initializeEnhancedFilters(validDocuments);
+        
+        console.log(`Successfully loaded ${validDocuments.length} parliamentary documents`);
+      } else {
+        throw new Error('No valid documents could be loaded');
       }
     } catch (error) {
-      console.error('Error loading documents:', error);
-      // For development, create a mock document if file doesn't exist
+      console.error('Error loading summary files:', error);
+      this.errorSubject.next('Failed to load parliamentary data. Using sample data.');
       this.createEnhancedMockDocument();
+    } finally {
+      this.loadingSubject.next(false);
     }
+  }
+
+  /**
+   * Discover available summary files in the assets directory
+   * This method tries different approaches to find files
+   */
+  private async discoverSummaryFiles(): Promise<SummaryFileInfo[]> {
+    // Method 1: Try to load a detailed manifest file
+    try {
+      const manifestResponse = await this.http.get<{files: string[], count: number, generated: string}>('/assets/summaries/manifest.json').toPromise();
+      if (manifestResponse && manifestResponse.files) {
+        console.log(`Found manifest with ${manifestResponse.count} files (generated: ${manifestResponse.generated})`);
+        return this.parseFileNames(manifestResponse.files);
+      }
+    } catch (error) {
+      console.log('No detailed manifest file found, trying simple file list...');
+    }
+
+    // Method 2: Try simple file list
+    try {
+      const fileList = await this.http.get<string[]>('/assets/summaries/file-list.json').toPromise();
+      if (fileList && fileList.length > 0) {
+        console.log(`Found simple file list with ${fileList.length} files`);
+        return this.parseFileNames(fileList);
+      }
+    } catch (error) {
+      console.log('No file list found, trying alternative discovery methods');
+    }
+
+    // Method 3: Try a predefined list of known patterns
+    const knownFiles = await this.tryKnownFilePatterns();
+    if (knownFiles.length > 0) {
+      return knownFiles;
+    }
+
+    // Method 4: Try common file patterns (this requires you to know some IDs)
+    return this.tryCommonPatterns();
+  }
+
+  /**
+   * Parse filenames to extract model and ID information
+   */
+  private parseFileNames(filenames: string[]): SummaryFileInfo[] {
+    return filenames
+      .filter(filename => filename.endsWith('.json'))
+      .map(filename => {
+        // Parse pattern: {MODEL}_summary_{ID}.json or {MODEL}_{ID}.json
+        const match = filename.match(/^(.+?)(?:_summary)?_([a-f0-9\-]{36})\.json$/);
+        if (match) {
+          return {
+            filename,
+            model: match[1],
+            id: match[2]
+          };
+        }
+        // Fallback: treat as unknown pattern but still try to load
+        return {
+          filename,
+          model: 'unknown',
+          id: filename.replace('.json', '')
+        };
+      })
+      .filter(info => info.id !== 'unknown'); // Only include properly parsed files
+  }
+
+  /**
+   * Try to load files with known patterns
+   */
+  private async tryKnownFilePatterns(): Promise<SummaryFileInfo[]> {
+    // Since we can't easily discover files in a browser environment,
+    // and the manifest.json approach is working, we'll skip this method
+    console.log('Skipping known file patterns discovery - using manifest approach');
+    return [];
+  }
+
+  /**
+   * Try some common file patterns based on your naming convention
+   */
+  private async tryCommonPatterns(): Promise<SummaryFileInfo[]> {
+    // Since we can't easily list files in a browser environment,
+    // you might need to provide a way to discover files
+    
+    // For now, return empty array and rely on manual file list or manifest
+    console.warn('Could not auto-discover files. Consider creating a manifest.json file.');
+    return [];
+  }
+
+  /**
+   * Load a single summary file
+   */
+  private loadSingleSummaryFile(fileInfo: SummaryFileInfo): Observable<ParliamentaryDocument | null> {
+    const url = `/assets/summaries/${fileInfo.filename}`;
+    
+    return this.http.get<ParliamentarySummary>(url).pipe(
+      map(summary => {
+        if (!summary || !summary.meeting_info) {
+          console.warn(`Invalid summary structure in ${fileInfo.filename}`);
+          return null;
+        }
+
+        const document: ParliamentaryDocument = {
+          id: summary.meeting_info.verslag_id || fileInfo.id,
+          title: summary.meeting_info.vergadering_titel || `Meeting ${fileInfo.id}`,
+          date: new Date(summary.meeting_info.vergadering_datum || Date.now()),
+          summary: {
+            ...summary,
+            processing_info: {
+              ...summary.processing_info,
+              ai_model: summary.processing_info.ai_model || fileInfo.model
+            }
+          }
+        };
+
+        console.log(`Loaded: ${document.title} (${fileInfo.model})`);
+        return document;
+      }),
+      catchError(error => {
+        console.error(`Failed to load ${fileInfo.filename}:`, error);
+        return of(null);
+      })
+    );
+  }
+
+  /**
+   * Create a helper method to manually load specific files if auto-discovery fails
+   */
+  public async loadSpecificFiles(filenames: string[]): Promise<void> {
+    this.loadingSubject.next(true);
+    this.errorSubject.next(null);
+
+    try {
+      const fileInfos = this.parseFileNames(filenames);
+      const loadRequests = fileInfos.map(fileInfo => this.loadSingleSummaryFile(fileInfo));
+      
+      const results = await forkJoin(loadRequests).toPromise();
+      const validDocuments = results?.filter(doc => doc !== null) as ParliamentaryDocument[];
+
+      if (validDocuments && validDocuments.length > 0) {
+        const currentDocuments = this.documentsSubject.value;
+        const allDocuments = [...currentDocuments, ...validDocuments];
+        
+        // Remove duplicates based on ID
+        const uniqueDocuments = allDocuments.filter((doc, index, arr) => 
+          arr.findIndex(d => d.id === doc.id) === index
+        );
+        
+        // Sort by date
+        uniqueDocuments.sort((a, b) => b.date.getTime() - a.date.getTime());
+        
+        this.documentsSubject.next(uniqueDocuments);
+        this.initializeEnhancedFilters(uniqueDocuments);
+        
+        console.log(`Successfully loaded ${validDocuments.length} additional documents`);
+      }
+    } catch (error) {
+      console.error('Error loading specific files:', error);
+      this.errorSubject.next('Failed to load some files');
+    } finally {
+      this.loadingSubject.next(false);
+    }
+  }
+
+  /**
+   * Create manifest.json helper method
+   * Call this method to generate a manifest of your files
+   */
+  public generateManifestCode(filenames: string[]): string {
+    const manifest = JSON.stringify(filenames, null, 2);
+    return `Create this file at /assets/summaries/manifest.json:\n\n${manifest}`;
   }
 
   private createEnhancedMockDocument(): void {
@@ -155,7 +358,7 @@ export class SummaryService {
         total_topics_found: 2,
         processing_date: new Date().toISOString(),
         enhancement_level: 'detailed',
-        ai_model: 'claude-3-haiku-20240307'
+        ai_model: 'deepseek'
       }
     };
 
@@ -353,59 +556,14 @@ export class SummaryService {
     this.searchFilterSubject.next({ ...currentFilter, ...searchFilter });
   }
 
-  // Method to load additional enhanced summary files
+  // Legacy method - kept for backward compatibility
   async loadEnhancedSummaryFile(filename: string): Promise<void> {
-    try {
-      const summary = await this.http.get<ParliamentarySummary>(`/assets/summaries/${filename}`).toPromise();
-      
-      if (summary) {
-        const document: ParliamentaryDocument = {
-          id: summary.meeting_info.verslag_id,
-          title: summary.meeting_info.vergadering_titel,
-          date: new Date(summary.meeting_info.vergadering_datum),
-          summary: summary
-        };
-
-        const currentDocuments = this.documentsSubject.value;
-        const updatedDocuments = [...currentDocuments, document];
-        
-        this.documentsSubject.next(updatedDocuments);
-        this.initializeEnhancedFilters(updatedDocuments);
-      }
-    } catch (error) {
-      console.error(`Error loading enhanced summary file ${filename}:`, error);
-    }
+    await this.loadSpecificFiles([filename]);
   }
 
   // Method to load multiple summary files
   async loadMultipleSummaryFiles(filenames: string[]): Promise<void> {
-    const documents: ParliamentaryDocument[] = [];
-    
-    for (const filename of filenames) {
-      try {
-        const summary = await this.http.get<ParliamentarySummary>(`/assets/summaries/${filename}`).toPromise();
-        
-        if (summary) {
-          const document: ParliamentaryDocument = {
-            id: summary.meeting_info.verslag_id,
-            title: summary.meeting_info.vergadering_titel,
-            date: new Date(summary.meeting_info.vergadering_datum),
-            summary: summary
-          };
-          documents.push(document);
-        }
-      } catch (error) {
-        console.warn(`Could not load ${filename}:`, error);
-      }
-    }
-    
-    if (documents.length > 0) {
-      const currentDocuments = this.documentsSubject.value;
-      const updatedDocuments = [...currentDocuments, ...documents];
-      
-      this.documentsSubject.next(updatedDocuments);
-      this.initializeEnhancedFilters(updatedDocuments);
-    }
+    await this.loadSpecificFiles(filenames);
   }
 
   getDocumentById(id: string): Observable<ParliamentaryDocument | undefined> {
@@ -449,5 +607,60 @@ export class SummaryService {
     );
   }
 
-  
+  // Method to refresh/reload all files
+  public async refreshDocuments(): Promise<void> {
+    this.documentsSubject.next([]);
+    await this.loadAllSummaryFiles();
+  }
+
+  // Get statistics about loaded documents
+  public getDocumentStats(): Observable<{
+    totalDocuments: number;
+    totalTopics: number;
+    uniqueParties: number;
+    dateRange: { earliest: Date; latest: Date } | null;
+    modelBreakdown: { [model: string]: number };
+  }> {
+    return this.documents$.pipe(
+      map(documents => {
+        if (documents.length === 0) {
+          return {
+            totalDocuments: 0,
+            totalTopics: 0,
+            uniqueParties: 0,
+            dateRange: null,
+            modelBreakdown: {}
+          };
+        }
+
+        const totalTopics = documents.reduce((sum, doc) => sum + doc.summary.main_topics.length, 0);
+        const allParties = new Set<string>();
+        const modelBreakdown: { [model: string]: number } = {};
+        
+        documents.forEach(doc => {
+          // Count parties
+          doc.summary.main_topics.forEach(topic => {
+            Object.keys(topic.party_positions).forEach(party => allParties.add(party));
+          });
+          
+          // Count models
+          const model = doc.summary.processing_info.ai_model || 'unknown';
+          modelBreakdown[model] = (modelBreakdown[model] || 0) + 1;
+        });
+
+        const dates = documents.map(doc => doc.date).sort((a, b) => a.getTime() - b.getTime());
+        
+        return {
+          totalDocuments: documents.length,
+          totalTopics,
+          uniqueParties: allParties.size,
+          dateRange: {
+            earliest: dates[0],
+            latest: dates[dates.length - 1]
+          },
+          modelBreakdown
+        };
+      })
+    );
+  }
 }

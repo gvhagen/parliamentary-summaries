@@ -1,0 +1,51 @@
+{
+  "executive_summary": "The Dutch parliamentary meeting covered a range of topics, including the implementation of the CSRD and CSDDD directives, the proposal for a Citizen's Climate Assembly, and issues related to childcare affordability. While there were some disagreements, the discussions focused on finding a balance between sustainability goals and reducing administrative burdens, particularly for SMEs. The meeting resulted in several key decisions, such as adding a debate on long-term care to the agenda and scheduling votes on certain legislative items.",
+  "main_topics": [
+    {
+      "topic": "CSRD and CSDDD implementation",
+      "summary": "The debate discusses the implementation of the CSRD and CSDDD and their impact on the competitiveness of Dutch and European companies, particularly SMEs. There is a focus on finding a balance between maintaining sustainability goals and reducing administrative burdens.",
+      "party_positions": {
+        "GroenLinks-PvdA": "Supports the CSRD and CSDDD, but wants to ensure that the essential sustainability goals are not compromised in the process of simplifying the administrative requirements, particularly for SMEs.",
+        "VVD": "Seeks clarification on whether the CSRD and CSDDD aim to create a level playing field within Europe or also between Europe, China, and the United States.",
+        "Nieuw Sociaal Contract (NSC)": "Wants to simplify the administrative requirements of the CSRD and CSDDD, but without compromising the essential sustainability goals."
+      },
+      "outcome": "The parties discussed a previously submitted motion on the CSRD and CSDDD, with the NSC confirming that the intent is to seek a simplification of the administrative requirements while still maintaining the essential sustainability goals of the directives."
+    },
+    {
+      "topic": "Citizen's Climate Assembly",
+      "summary": "The debate focuses on a motion proposing the implementation of a Citizen's Climate Assembly.",
+      "party_positions": {
+        "Eerdmans": "Proposed a motion regarding the Citizen's Climate Assembly.",
+        "GroenLinks-PvdA": "Criticized the motion, arguing that it could undermine citizen participation."
+      },
+      "outcome": "The motion regarding the Citizen's Climate Assembly was discussed, with GroenLinks-PvdA criticizing it as potentially undermining citizen participation."
+    },
+    {
+      "topic": "Childcare affordability",
+      "summary": "The discussion focused on the possibility of implementing price caps or other measures to address the rising childcare prices and make it more affordable for families.",
+      "party_positions": {
+        "D66": "Discussed the issue of childcare affordability and possible measures to address it.",
+        "GroenLinks-PvdA": "Discussed the issue of childcare affordability and possible measures to address it."
+      },
+      "outcome": "The parties discussed the issue of childcare affordability and the possibility of implementing measures to make it more affordable for families."
+    }
+  ],
+  "key_decisions": [
+    "Adding a debate on long-term care to the agenda",
+    "Scheduling votes on certain legislative items",
+    "Changes to parliamentary committee assignments"
+  ],
+  "political_dynamics": "The meeting saw some disagreements, particularly on the implementation of the CSRD and CSDDD directives and the proposal for a Citizen's Climate Assembly. However, the discussions focused on finding a balance between sustainability goals and reducing administrative burdens, especially for SMEs. The coalition parties seemed to be working together to find common ground on these issues.",
+  "next_steps": "Based on the key decisions made, the parliament will likely proceed with the scheduled votes on certain legislative items and the addition of a debate on long-term care to the agenda. Further discussions and negotiations on the implementation of the CSRD and CSDDD directives and the Citizen's Climate Assembly proposal may also take place in the coming weeks.",
+  "meeting_info": {
+    "vergadering_titel": "60e vergadering, donderdag 6 maart 2025",
+    "vergadering_datum": "2025-03-06T00:00:00+01:00",
+    "verslag_id": "b2b22f81-cadd-490e-b161-3446b1de3297",
+    "status": "VerslagStatus.GECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 13,
+    "total_topics_found": 18,
+    "processing_date": "2025-06-03T22:43:57.827950"
+  }
+}

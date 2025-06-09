@@ -1,123 +1,30 @@
 [
   {
-    "id": "e03c5a93-35a5-4902-952a-8c49deb6b39a",
-    "titel": "61e vergadering, dinsdag 11 maart 2025",
-    "datum": "2025-03-11T00:00:00+01:00",
+    "id": "c1b3d006-61fe-473d-81a6-6de40008f8b3",
+    "titel": "63e vergadering, donderdag 13 maart 2025",
+    "datum": "2025-03-13T00:00:00+01:00",
     "soort": "VergaderingSoort.PLENAIR",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.504437"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.972131"
   },
   {
-    "id": "30502ff2-ab8e-4a2d-bd1c-e7bb936c1046",
-    "titel": "60e vergadering, donderdag 6 maart 2025",
-    "datum": "2025-03-06T00:00:00+01:00",
+    "id": "4dadd4a1-6cc0-4c00-9503-95111366ae21",
+    "titel": "92e vergadering, donderdag 5 juni 2025",
+    "datum": "2025-06-05T00:00:00+02:00",
     "soort": "VergaderingSoort.PLENAIR",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.504708"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.972498"
   },
   {
-    "id": "e4b08bdc-2a51-4bd2-bcc6-1595d856fb6c",
-    "titel": "89e vergadering, woensdag 28 mei 2025",
+    "id": "9fd35ea5-c1ce-4c00-9b4d-27f4879fb7ae",
+    "titel": "EU-informatievoorziening",
     "datum": "2025-05-28T00:00:00+02:00",
-    "soort": "VergaderingSoort.PLENAIR",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.504962"
-  },
-  {
-    "id": "01a00d89-833c-4655-b9fb-8ba258802a35",
-    "titel": "Strafrechtketen",
-    "datum": "2025-05-27T00:00:00+02:00",
     "soort": "VergaderingSoort.COMMISSIE",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.505224"
-  },
-  {
-    "id": "3b43b5b7-8d19-4901-b840-4bb251790a24",
-    "titel": "88e vergadering, dinsdag 27 mei 2025",
-    "datum": "2025-05-27T00:00:00+02:00",
-    "soort": "VergaderingSoort.PLENAIR",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.505450"
-  },
-  {
-    "id": "e13c9739-769e-4024-bce6-f1bd531f83ea",
-    "titel": "Passend onderwijs",
-    "datum": "2025-05-21T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.505664"
-  },
-  {
-    "id": "3342c352-aa9f-43f4-a16d-6dfbd7d35ee2",
-    "titel": "Justitiële jeugd",
-    "datum": "2025-05-22T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.505875"
-  },
-  {
-    "id": "e023bcea-7d09-47ed-a5e2-aa59a789f9d3",
-    "titel": "NAVO Defensie ministeriële",
-    "datum": "2025-05-22T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.506088"
-  },
-  {
-    "id": "706304c5-5438-4868-ba5e-eb420760c8f4",
-    "titel": "Armoede- en schuldenbeleid",
-    "datum": "2025-05-22T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.506300"
-  },
-  {
-    "id": "d3424fac-9420-4bb3-8940-7e3845e4cb95",
-    "titel": "Staat van de volkshuisvesting",
-    "datum": "2025-05-21T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.506510"
-  },
-  {
-    "id": "e10ec3ad-4a59-4354-82e3-e5f9af091702",
-    "titel": "75e vergadering, donderdag 10 april 2025",
-    "datum": "2025-04-10T00:00:00+02:00",
-    "soort": "VergaderingSoort.PLENAIR",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.506724"
-  },
-  {
-    "id": "efab2aaf-549d-4c8a-8fd6-e64806115f45",
-    "titel": "Initiatiefnota van het lid Bushoff - “Stop de commercie, steun de huisarts. Een plan voor toekomstbestendige huisartsenzorg” (Kamerstuk 36666)",
-    "datum": "2025-05-26T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.506937"
-  },
-  {
-    "id": "2f2e05d7-bcba-4654-9201-7d1ddaade448",
-    "titel": "Initiatiefnota van het lid Beckerman: ‘Red de camping’",
-    "datum": "2025-05-26T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.507148"
-  },
-  {
-    "id": "225a6458-cd07-48c1-870a-0849534f9b06",
-    "titel": "Gewasbeschermingsmiddelen",
-    "datum": "2025-05-15T00:00:00+02:00",
-    "soort": "VergaderingSoort.COMMISSIE",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.507348"
-  },
-  {
-    "id": "bccd7c59-a842-47dd-aee5-d816c7cb19b7",
-    "titel": "59e vergadering, woensdag 5 maart 2025",
-    "datum": "2025-03-05T00:00:00+01:00",
-    "soort": "VergaderingSoort.PLENAIR",
-    "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.507523"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.972846"
   },
   {
     "id": "aba1974b-4a6d-4f4c-809c-2ee14a849b06",
@@ -125,15 +32,125 @@
     "datum": "2025-05-20T00:00:00+02:00",
     "soort": "VergaderingSoort.PLENAIR",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.507697"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.973182"
   },
   {
-    "id": "efe6d7e2-3278-47ed-9c88-dbb31bcdbb38",
-    "titel": "Arbeidsmarktkrapte",
-    "datum": "2025-05-21T00:00:00+02:00",
+    "id": "5d9109b3-c59f-4f2b-857c-5482173179eb",
+    "titel": "Debat over de val van het kabinet met tolk Nederlandse Gebarentaal",
+    "datum": "2025-06-04T00:00:00+02:00",
     "soort": "VergaderingSoort.COMMISSIE",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.507870"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.973518"
+  },
+  {
+    "id": "f6102bb7-43b5-4d46-994a-2cebf2354dbf",
+    "titel": "91e vergadering, woensdag 4 juni 2025",
+    "datum": "2025-06-04T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.973874"
+  },
+  {
+    "id": "90b82eb3-5a23-4e29-9abf-f73288664f8e",
+    "titel": "Verklaring van de minister-president met tolk Nederlandse Gebarentaal",
+    "datum": "2025-06-04T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.974208"
+  },
+  {
+    "id": "3aa26c4e-99ea-4d6e-ba19-0ad2a352f521",
+    "titel": "90e vergadering, dinsdag 3 juni 2025",
+    "datum": "2025-06-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.974550"
+  },
+  {
+    "id": "fc2cf452-9c85-441f-a4ab-449a786c3f8e",
+    "titel": "Toerisme en recreatie",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.974893"
+  },
+  {
+    "id": "dac6e072-91f5-4ab3-b02e-a3260c98ca73",
+    "titel": "Constitutionele toetsing",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.975199"
+  },
+  {
+    "id": "c1ad9ddc-142c-4604-bbb0-3e9b988e6a79",
+    "titel": "Euthanasie bij psychisch lijden van jonge mensen",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.975477"
+  },
+  {
+    "id": "c95f4bef-9c6f-4787-a9df-99eadb92f0a0",
+    "titel": "Initiatiefnota van de leden Bromet en Van Campen over “De wijsheid in pacht” (Kamerstuk 36 687)",
+    "datum": "2025-06-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.975759"
+  },
+  {
+    "id": "33f7279d-2a67-48c7-818c-c2d3596e7b09",
+    "titel": "Suriname",
+    "datum": "2025-06-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.976037"
+  },
+  {
+    "id": "4d0e0cc9-d565-40b8-8d6a-90687928f59f",
+    "titel": "Staatsdeelnemingen",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.976309"
+  },
+  {
+    "id": "6989c6a4-bf75-45f8-8bbe-2f0618d307a3",
+    "titel": "Initiatiefnota 'Wolken aan de horizon'",
+    "datum": "2025-06-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.976581"
+  },
+  {
+    "id": "e40c147f-039d-45a9-9eb9-e66641f2747f",
+    "titel": "Toeslagen",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.976853"
+  },
+  {
+    "id": "f4119cc9-552e-4ecc-964d-07187841e12e",
+    "titel": "62e vergadering, woensdag 12 maart 2025",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.977129"
   },
   {
     "id": "040047a7-2415-4504-8ae2-e69c651b0fd2",
@@ -141,7 +158,134 @@
     "datum": "2025-05-22T00:00:00+02:00",
     "soort": "VergaderingSoort.PLENAIR",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.508044"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.977402"
+  },
+  {
+    "id": "e4b08bdc-2a51-4bd2-bcc6-1595d856fb6c",
+    "titel": "89e vergadering, woensdag 28 mei 2025",
+    "datum": "2025-05-28T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.977673"
+  },
+  {
+    "id": "e03c5a93-35a5-4902-952a-8c49deb6b39a",
+    "titel": "61e vergadering, dinsdag 11 maart 2025",
+    "datum": "2025-03-11T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.977950"
+  },
+  {
+    "id": "01a00d89-833c-4655-b9fb-8ba258802a35",
+    "titel": "Strafrechtketen",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.978358"
+  },
+  {
+    "id": "3b43b5b7-8d19-4901-b840-4bb251790a24",
+    "titel": "88e vergadering, dinsdag 27 mei 2025",
+    "datum": "2025-05-27T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.978628"
+  },
+  {
+    "id": "e13c9739-769e-4024-bce6-f1bd531f83ea",
+    "titel": "Passend onderwijs",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.978899"
+  },
+  {
+    "id": "3342c352-aa9f-43f4-a16d-6dfbd7d35ee2",
+    "titel": "Justitiële jeugd",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.979170"
+  },
+  {
+    "id": "e023bcea-7d09-47ed-a5e2-aa59a789f9d3",
+    "titel": "NAVO Defensie ministeriële",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.979445"
+  },
+  {
+    "id": "706304c5-5438-4868-ba5e-eb420760c8f4",
+    "titel": "Armoede- en schuldenbeleid",
+    "datum": "2025-05-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.979716"
+  },
+  {
+    "id": "d3424fac-9420-4bb3-8940-7e3845e4cb95",
+    "titel": "Staat van de volkshuisvesting",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.979989"
+  },
+  {
+    "id": "e10ec3ad-4a59-4354-82e3-e5f9af091702",
+    "titel": "75e vergadering, donderdag 10 april 2025",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.980264"
+  },
+  {
+    "id": "efab2aaf-549d-4c8a-8fd6-e64806115f45",
+    "titel": "Initiatiefnota van het lid Bushoff - “Stop de commercie, steun de huisarts. Een plan voor toekomstbestendige huisartsenzorg” (Kamerstuk 36666)",
+    "datum": "2025-05-26T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.980537"
+  },
+  {
+    "id": "2f2e05d7-bcba-4654-9201-7d1ddaade448",
+    "titel": "Initiatiefnota van het lid Beckerman: ‘Red de camping’",
+    "datum": "2025-05-26T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.980811"
+  },
+  {
+    "id": "225a6458-cd07-48c1-870a-0849534f9b06",
+    "titel": "Gewasbeschermingsmiddelen",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.981082"
+  },
+  {
+    "id": "efe6d7e2-3278-47ed-9c88-dbb31bcdbb38",
+    "titel": "Arbeidsmarktkrapte",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.981500"
   },
   {
     "id": "3fca5260-db89-460f-965e-4576920db5be",
@@ -149,7 +293,8 @@
     "datum": "2025-05-15T00:00:00+02:00",
     "soort": "VergaderingSoort.COMMISSIE",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.508217"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.981769"
   },
   {
     "id": "2962166a-6a6c-435e-91de-c2c1dc70e971",
@@ -157,6 +302,1168 @@
     "datum": "2025-05-13T00:00:00+02:00",
     "soort": "VergaderingSoort.COMMISSIE",
     "aanvangstijd": null,
-    "retrieved_at": "2025-05-31T13:03:57.508402"
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.982046"
+  },
+  {
+    "id": "6a296ab7-ae83-4c03-b497-f293394c9f15",
+    "titel": "86e vergadering, woensdag 21 mei 2025",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.982317"
+  },
+  {
+    "id": "1e64d6a1-1234-4af2-be05-73c870140811",
+    "titel": "Technische briefing Risicoprofilering bij handhaving",
+    "datum": "2025-05-21T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.982591"
+  },
+  {
+    "id": "f0a82d0b-1c90-4070-9b0b-97a1259f069f",
+    "titel": "Spoor",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.982866"
+  },
+  {
+    "id": "a5b1ee60-5302-463d-8de1-309d3e07ee41",
+    "titel": "Terugkeerverordening",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.983119"
+  },
+  {
+    "id": "bb2646d0-e433-4431-9e54-dc21252e9d67",
+    "titel": "Raad Buitenlandse Zaken Defensie van 20 mei 2025",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.983349"
+  },
+  {
+    "id": "d0667715-c30a-45cd-a9d2-f63e9403ee57",
+    "titel": "Nationale veiligheid en weerbaarheid",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.983696"
+  },
+  {
+    "id": "2b64aeae-a524-456d-be7d-4993e440b883",
+    "titel": "Raad Buitenlandse Zaken Ontwikkeling op 26 mei 2025",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.983930"
+  },
+  {
+    "id": "c97b0b2f-d051-46e9-b15a-0be50fb5cba9",
+    "titel": "Regels omtrent productie, transport en levering van warmte (Wet collectieve warmte)",
+    "datum": "2025-05-19T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.984168"
+  },
+  {
+    "id": "630f8ca2-0b16-4247-b8c8-717631a13062",
+    "titel": "AIVD en criminele ondermijning",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.984402"
+  },
+  {
+    "id": "ab1f914d-8f2b-4ed6-8407-ff666c1ea12d",
+    "titel": "Nettarieven",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.984636"
+  },
+  {
+    "id": "557db178-6e74-45e3-bcb5-9e0558909249",
+    "titel": "84e vergadering, donderdag 15 mei 2025",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.984867"
+  },
+  {
+    "id": "b0b93984-cbf8-4eaf-a7b7-0b71a0f56d4f",
+    "titel": "Mentale gezondheid scholieren en studenten",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.985215"
+  },
+  {
+    "id": "b1df6f26-5268-4b3c-a5e7-6dbeeb85d28b",
+    "titel": "Leefomgeving (tweede termijn)",
+    "datum": "2025-05-13T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.985446"
+  },
+  {
+    "id": "d124e577-ae46-4b19-8dc9-b02013479ccf",
+    "titel": "Raad Buitenlandse Zaken Handel op 15 mei 2025",
+    "datum": "2025-05-13T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.985797"
+  },
+  {
+    "id": "32a6d5c7-cfc1-429f-af58-506b5a74a0d2",
+    "titel": "Wijziging van de begrotingsstaten van het Ministerie van Economische Zaken voor het jaar 2025 (Incidentele suppletoire begroting inzake maatwerkgarantie) (36734)",
+    "datum": "2025-05-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.986031"
+  },
+  {
+    "id": "03f659ef-173b-4ed4-b089-11aecf210112",
+    "titel": "83e vergadering, woensdag 14 mei 2025",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.986374"
+  },
+  {
+    "id": "a4d286cf-ed93-416a-ac60-9f0f2eb8a7f8",
+    "titel": "Aanpassingen van de bedrijfsopvolgingsregeling en schenk- en erfrecht voor familiebedrijven",
+    "datum": "2025-05-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.986612"
+  },
+  {
+    "id": "5f4d4f5a-eacb-49d0-9724-9b39c25a5d62",
+    "titel": "82e vergadering, dinsdag 13 mei 2025",
+    "datum": "2025-05-13T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.986847"
+  },
+  {
+    "id": "14e33dd9-f142-4bb8-8c49-613c2991a2c8",
+    "titel": "Vragenuur met tolk Nederlandse Gebarentaal",
+    "datum": "2025-05-13T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.987086"
+  },
+  {
+    "id": "04e4371d-a3c4-4c7d-9ea8-0a4f2a376c54",
+    "titel": "Leefstijlpreventie",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.987429"
+  },
+  {
+    "id": "84093aca-7d03-4f26-815a-b352e635b65c",
+    "titel": "Juridische beroepen",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.987678"
+  },
+  {
+    "id": "8e28a209-02b6-4a23-9fc8-09fea4c90b47",
+    "titel": "Leefomgeving",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.988135"
+  },
+  {
+    "id": "04199ef0-1fda-413f-a91e-0cc614309041",
+    "titel": "Vreemdelingen- en asielbeleid",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.988491"
+  },
+  {
+    "id": "b78a01cb-1a61-4d77-a2f0-625b6788833d",
+    "titel": "Digitaliserende overheid",
+    "datum": "2025-04-23T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.988837"
+  },
+  {
+    "id": "7b0e371a-b87c-4a84-a64b-a4de9ce36b14",
+    "titel": "Functioneren rijksdienst",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.989049"
+  },
+  {
+    "id": "d300b42a-a1a2-450d-893c-d6c1cdf1c5e2",
+    "titel": "DUO en hoger onderwijs",
+    "datum": "2025-04-23T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.989249"
+  },
+  {
+    "id": "e085ac7f-0d6d-4125-b804-01769b06ea2a",
+    "titel": "81e vergadering, donderdag 24 april 2025",
+    "datum": "2025-04-24T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.989654"
+  },
+  {
+    "id": "2d8a1613-784e-4201-be14-c9112998adf7",
+    "titel": "Regulier verblijf",
+    "datum": "2025-04-17T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.989954"
+  },
+  {
+    "id": "c7bd8e1f-7d09-40b3-ac41-0c47f78225cd",
+    "titel": "Energieraad (informeel) d.d. 12-13 mei 2025",
+    "datum": "2025-04-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.990255"
+  },
+  {
+    "id": "149dff70-c229-4e7a-ab14-fb97d082cb25",
+    "titel": "Duurzaam vervoer",
+    "datum": "2025-04-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.990455"
+  },
+  {
+    "id": "cb1f7745-3650-4401-af45-e8b3ac5e8c1f",
+    "titel": "80e vergadering, woensdag 23 april 2025",
+    "datum": "2025-04-23T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.990655"
+  },
+  {
+    "id": "0fbfc7b5-056b-4552-bf08-c41c90ddd003",
+    "titel": "IBO Bekostiging van de elektriciteitsinfrastructuur",
+    "datum": "2025-04-23T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.990856"
+  },
+  {
+    "id": "8f2804d1-9d80-4d88-9395-7ae07741f4bc",
+    "titel": "Nationale Strategie Vrouwengezondheid (digitaal)Nationale Strategie Vrouwengezondheid (digitaal)",
+    "datum": "2025-04-23T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.991152"
+  },
+  {
+    "id": "79594a3f-f054-4366-bcb2-fffcb2167d07",
+    "titel": "79e vergadering, dinsdag 22 april 2025",
+    "datum": "2025-04-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.991363"
+  },
+  {
+    "id": "cd7e6cdf-c845-4d91-80bf-c7c8bdb07615",
+    "titel": "Procedurevergadering commissie Volkshuisvesting en Ruimtelijke Ordening",
+    "datum": "2025-04-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.991562"
+  },
+  {
+    "id": "ef5c59ed-4f61-471c-b738-148ea61aadfb",
+    "titel": "Procedures en brieven commissie voor Sociale Zaken en Werkgelegenheid",
+    "datum": "2025-04-22T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.991761"
+  },
+  {
+    "id": "9a9b3c3a-4ce4-44bc-ab26-3f4be669195b",
+    "titel": "Auto",
+    "datum": "2025-04-17T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.991964"
+  },
+  {
+    "id": "a01c2cc6-9cbb-41cd-ba07-2dafed467933",
+    "titel": "Behandelvoorbehoud EU-voorstel SAFE en defensiewitboek",
+    "datum": "2025-04-17T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.992163"
+  },
+  {
+    "id": "ac834526-dc89-4705-92be-15206c08ac03",
+    "titel": "Circulaire economie",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.992365"
+  },
+  {
+    "id": "bf4e9432-7c07-47a5-8dc3-f394b0b802ad",
+    "titel": "Politie",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.992565"
+  },
+  {
+    "id": "a6c48b0b-8145-41e9-9642-3652f3124f85",
+    "titel": "Digitale ontwikkelingen in de zorg (voortzetting)",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.992767"
+  },
+  {
+    "id": "37e17a91-45c6-42ec-8757-94bf03cab175",
+    "titel": "Economische ontwikkeling Caribisch deel Koninkrijk",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.992970"
+  },
+  {
+    "id": "138b076c-84b5-47e1-a79a-908db4d0c293",
+    "titel": "Digitale ontwikkelingen in de zorg",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.993183"
+  },
+  {
+    "id": "f904c9f4-4d17-4d53-84a1-dc34503264cf",
+    "titel": "Goed bestuur en toezicht in de zorg (+IGJ en Zorgfraude)",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.993388"
+  },
+  {
+    "id": "4e5df8eb-0c77-4d42-99ac-690e5c684829",
+    "titel": "Ggz / Suïcidepreventie",
+    "datum": "2025-04-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.993587"
+  },
+  {
+    "id": "31ae8845-945f-4561-89fd-d8c3811c0bb7",
+    "titel": "78e vergadering, donderdag 17 april 2025",
+    "datum": "2025-04-17T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.993787"
+  },
+  {
+    "id": "d07a44ee-4897-449b-8df9-47101062cb0f",
+    "titel": "77e vergadering, woensdag 16 april 2025",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.993986"
+  },
+  {
+    "id": "fedf94c2-18ba-4dc7-923b-d09b1f96d684",
+    "titel": "Wapeninzet Hawija",
+    "datum": "2025-04-16T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.994186"
+  },
+  {
+    "id": "8400d33b-645e-45b8-9c6a-1e0c478c10de",
+    "titel": "76e vergadering, dinsdag 15 april 2025",
+    "datum": "2025-04-15T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.994386"
+  },
+  {
+    "id": "ab99780f-c02c-4ea8-9186-fee9b1e525a8",
+    "titel": "64e vergadering, dinsdag 18 maart 2025",
+    "datum": "2025-03-18T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.994587"
+  },
+  {
+    "id": "42202f4e-ec89-4707-a2dd-1eb6b2eac674",
+    "titel": "Raad Buitenlandse Zaken 14 april 2025",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.994787"
+  },
+  {
+    "id": "9003930b-e42a-41ec-86c1-5e129f7a118d",
+    "titel": "Hybride dreigingen en maatschappelijke weerbaarheid",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.994992"
+  },
+  {
+    "id": "aa2651d6-6330-4b19-8d35-6c7ab6084ff2",
+    "titel": "Klimaatakkoord gebouwde omgeving",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.995196"
+  },
+  {
+    "id": "1e62ee80-0a29-4f17-a32a-a0059f057490",
+    "titel": "Pgb",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.995400"
+  },
+  {
+    "id": "28df614a-69ed-4712-92e7-58b22e89ab0d",
+    "titel": "Media",
+    "datum": "2025-04-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.995602"
+  },
+  {
+    "id": "d91cdecd-65f0-4664-927f-88b89bd36646",
+    "titel": "Wijziging van de Zorgverzekeringswet teneinde het verplicht eigen risico voor de zorgverzekering in 2026 ongewijzigd te laten",
+    "datum": "2025-04-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.995802"
+  },
+  {
+    "id": "8b204b83-b86d-4fda-a6a0-18b5d8f89924",
+    "titel": "Verzamelwet 2024 (Kamerstuk 36682)",
+    "datum": "2025-04-14T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.996003"
+  },
+  {
+    "id": "1d990dbb-4570-4065-884d-9d049aa0f1f8",
+    "titel": "Schiphol",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.996203"
+  },
+  {
+    "id": "ad90d9cc-ba56-4e7d-9f2a-051323fe9fae",
+    "titel": "Ruimtevaart",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.996402"
+  },
+  {
+    "id": "27cb0f73-57d2-47c1-93cf-25c6aabf17b9",
+    "titel": "NAFIN",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.996603"
+  },
+  {
+    "id": "c19ac495-0a49-4fd2-b8d6-1da9fba966e3",
+    "titel": "74e vergadering, woensdag 9 april 2025",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.996803"
+  },
+  {
+    "id": "0da921a9-bfa2-4f6b-b8fb-541f5bec0347",
+    "titel": "Stikstof en natuur",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.997101"
+  },
+  {
+    "id": "bfc5db27-77f3-4ccd-b685-fdd6164074fd",
+    "titel": "PFAS",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.997398"
+  },
+  {
+    "id": "01c340b5-3185-4842-a480-43c11495f79b",
+    "titel": "73e vergadering, dinsdag 8 april 2025",
+    "datum": "2025-04-08T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.997598"
+  },
+  {
+    "id": "9bc3b241-688a-40a3-a356-0cfd5ea07a4b",
+    "titel": "Procedurevergadering commissie voor Onderwijs, Cultuur en Wetenschap",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.997800"
+  },
+  {
+    "id": "a98028ef-6c26-4d39-a3c4-f55388051fbd",
+    "titel": "Procedurevergadering commissie voor Infrastructuur en Waterstaat",
+    "datum": "2025-04-10T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.998000"
+  },
+  {
+    "id": "88c109cc-fe02-4fdb-a6fe-3bfca95f504c",
+    "titel": "Betaalbare energierekening voor huishoudens",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.998202"
+  },
+  {
+    "id": "e02e4db3-9088-48ac-993e-316c2ca842c9",
+    "titel": "Procedurevergadering commissie voor Landbouw, Visserij, Voedselzekerheid en Natuur",
+    "datum": "2025-04-09T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.998499"
+  },
+  {
+    "id": "e2e58d5e-5848-4bd7-8af3-ba37c81743c8",
+    "titel": "Mijnbouw",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.998700"
+  },
+  {
+    "id": "7902fd86-d622-4351-9709-83c10dad82bf",
+    "titel": "Zzp",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.998890"
+  },
+  {
+    "id": "285923de-3d05-43a2-bb80-1d4c84cdd665",
+    "titel": "Spoorgoederenvervoer",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999069"
+  },
+  {
+    "id": "833d13e8-8b5b-431a-99c4-bc04ced497a5",
+    "titel": "Raad Buitenlandse Zaken Handel",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999246"
+  },
+  {
+    "id": "601e394a-2e3b-4425-8331-f6699ea4490a",
+    "titel": "Digitalisering en leermiddelen in het funderend onderwijs",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999428"
+  },
+  {
+    "id": "fd43294d-d08e-4722-b550-5e3de024fa5a",
+    "titel": "Zeden en (on)veiligheid van vrouwen",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999605"
+  },
+  {
+    "id": "aa840f39-cb1b-4107-8666-4f8f73910b1d",
+    "titel": "Beleidsbrief Ontwikkelingshulp",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999783"
+  },
+  {
+    "id": "433e916d-e591-449b-bb63-bb7893664157",
+    "titel": "Strategische keuzes bereikbaarheid",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:24.999966"
+  },
+  {
+    "id": "2f185917-3b88-45e7-85b5-4eff9705d474",
+    "titel": "Stages in het mbo, hbo, wo en aansluiting op de arbeidsmarkt",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.000144"
+  },
+  {
+    "id": "9335baab-386a-4dee-a46e-345da9042f4f",
+    "titel": "Eurogroep/Ecofin-Raad",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.000327"
+  },
+  {
+    "id": "1383e016-855f-42a0-b1a1-113fccda1557",
+    "titel": "Wet gegevensverstrekking douane voor uitvoering politie- of toezichtstaken",
+    "datum": "2025-04-07T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.000509"
+  },
+  {
+    "id": "5a92b75b-b3be-40c3-898c-843f22641ce6",
+    "titel": "Gesubsidieerde rechtsbijstand",
+    "datum": "2025-04-01T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.000688"
+  },
+  {
+    "id": "2c12db91-820d-4b05-a174-2bbe8aa49f89",
+    "titel": "Hersteloperatie kinderopvangtoeslag",
+    "datum": "2025-03-27T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.000870"
+  },
+  {
+    "id": "05a32c65-c3d5-4a07-bf17-e1f3bda38791",
+    "titel": "72e vergadering, donderdag 3 april 2025",
+    "datum": "2025-04-03T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.001317"
+  },
+  {
+    "id": "efccae89-4bdf-4aea-9b3b-726505186e97",
+    "titel": "71e vergadering, woensdag 2 april 2025",
+    "datum": "2025-04-02T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.001503"
+  },
+  {
+    "id": "ea64158b-0413-4d38-a54e-de2ce5dcc713",
+    "titel": "70e vergadering, dinsdag 1 april 2025",
+    "datum": "2025-04-01T00:00:00+02:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.001681"
+  },
+  {
+    "id": "93132b50-4a0b-4cad-9c02-b6b49f17d925",
+    "titel": "Financiën decentrale overheden",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.001863"
+  },
+  {
+    "id": "c25efa88-e292-458c-ab09-d67e89d30388",
+    "titel": "Buitenlandse inmenging en beïnvloeding",
+    "datum": "2025-03-27T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002042"
+  },
+  {
+    "id": "f3ecf81a-8c70-4180-83fb-ec5ed523860d",
+    "titel": "Kansspelen",
+    "datum": "2025-03-27T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002221"
+  },
+  {
+    "id": "c860c8a7-8578-4252-9cb3-92dc7d13a0e2",
+    "titel": "Water",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002402"
+  },
+  {
+    "id": "1b7a34ff-560a-4349-9fff-3a2b888e8c39",
+    "titel": "NAVO-ministeriële 3-4 april 2025",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002581"
+  },
+  {
+    "id": "7bcb4fe2-3544-4d37-b5f2-bc95255826a4",
+    "titel": "Nationale fiscaliteit",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002763"
+  },
+  {
+    "id": "fe11d8c3-d260-4618-b7f7-e55c7bec68b1",
+    "titel": "Onderwijskansen",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.002941"
+  },
+  {
+    "id": "2153c17f-dcf6-4ae4-abef-a9506ef144d9",
+    "titel": "Initiatiefnota van de leden Omtzigt en Idsinga over \"Realistisch ramen\"",
+    "datum": "2025-03-31T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.003120"
+  },
+  {
+    "id": "1b47e4fe-a891-447c-96e6-77c0c1895f27",
+    "titel": "Initiatiefnota van het lid Slagt-Tichelman over Wijkgerichte ouderenzorg door zorgzame buurten",
+    "datum": "2025-03-31T00:00:00+02:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.003297"
+  },
+  {
+    "id": "2f5185c3-336e-4c99-a87a-96096ef2e9b7",
+    "titel": "Informele Raad Buitenlandse Zaken Defensie",
+    "datum": "2025-03-25T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.003477"
+  },
+  {
+    "id": "9032d839-46fe-49a1-b898-4875ee0d0a18",
+    "titel": "Oorlogen in Democratische Republiek Congo en Soedan",
+    "datum": "2025-03-25T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.003830"
+  },
+  {
+    "id": "b776a8fd-ca62-453e-8f75-2e08a69ce316",
+    "titel": "69e vergadering, donderdag 27 maart 2025",
+    "datum": "2025-03-27T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.004011"
+  },
+  {
+    "id": "f6cd285d-82f3-43c4-a88d-f82c15fa0360",
+    "titel": "68e vergadering, woensdag 26 maart 2025",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.004360"
+  },
+  {
+    "id": "85092421-ac72-486c-9c3e-05b79d60af00",
+    "titel": "Commissie Van der Meer-II en Raad voor Rechtsbijstand",
+    "datum": "2025-03-26T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.004538"
+  },
+  {
+    "id": "3d825a8a-ef44-444d-bfc1-4874d33e3443",
+    "titel": "Medisch zorglandschap",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.004717"
+  },
+  {
+    "id": "1c012695-7748-4e5e-9154-7950fffa041b",
+    "titel": "67e vergadering, dinsdag 25 maart 2025",
+    "datum": "2025-03-25T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.004898"
+  },
+  {
+    "id": "f99d8735-c5a0-46ea-a20c-b3ff71fd158b",
+    "titel": "Midden- en kleinbedrijf",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005077"
+  },
+  {
+    "id": "48b8cf5f-005d-4364-a984-61ae8d7a2454",
+    "titel": "Raad Algemene Zaken - Cohesiebeleid 28 maart 2025",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005254"
+  },
+  {
+    "id": "b81f4309-0945-4bfa-ab3d-e2ec2adb9d72",
+    "titel": "Opvang Oekraïne",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005432"
+  },
+  {
+    "id": "5d604f89-d524-4eb6-84d3-755b0f6e27ec",
+    "titel": "Wet open overheid",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005610"
+  },
+  {
+    "id": "a770de7b-fede-47be-9f9e-c63760999e68",
+    "titel": "Voortzetting commissiedebat box 3",
+    "datum": "2025-03-19T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005787"
+  },
+  {
+    "id": "a3e9626d-7137-4769-9fd8-65332487c34c",
+    "titel": "Initiatiefnota van het lid Omtzigt over tien voorstellen ter verbetering van de constitutionele toetsing (TK 36344)",
+    "datum": "2025-03-24T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.005965"
+  },
+  {
+    "id": "97214edc-5486-4be5-a2c9-a809aaff7e0b",
+    "titel": "Woningbouwopgave en koopsector",
+    "datum": "2025-03-19T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.006142"
+  },
+  {
+    "id": "e2a3ae2b-9e49-4eaa-b7bc-e5235bbd8708",
+    "titel": "Herstel Groningen",
+    "datum": "2025-03-19T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.006324"
+  },
+  {
+    "id": "820fc391-fc60-4ee2-bcbf-7a1479f338be",
+    "titel": "Bescherming persoonsgegevens en digitale grondrechten",
+    "datum": "2025-03-18T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.006501"
+  },
+  {
+    "id": "9743b407-1c9a-460f-92f5-932964017f78",
+    "titel": "Mestbeleid",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.006680"
+  },
+  {
+    "id": "c5e03e54-b7ad-41a0-9b04-d4569dc6251f",
+    "titel": "66e vergadering, donderdag 20 maart 2025",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.006843"
+  },
+  {
+    "id": "a6274644-744b-4580-8cd8-3d8abe945ccc",
+    "titel": "Gesprek over de Greenpeace-uitspraak en uitspraak intern salderen van de Raad van State",
+    "datum": "2025-03-20T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007165"
+  },
+  {
+    "id": "e52e0e37-fcb3-46fa-8d05-a95569593aa6",
+    "titel": "Belastingdienst",
+    "datum": "2025-03-13T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007329"
+  },
+  {
+    "id": "f5c1d624-0dcc-4ef3-b110-0a4e6799cac8",
+    "titel": "Procedurevergadering commissie voor Koninkrijksrelaties",
+    "datum": "2025-03-19T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007492"
+  },
+  {
+    "id": "a1645248-9e62-4297-9cd1-00303a03aa30",
+    "titel": "65e vergadering, woensdag 19 maart 2025",
+    "datum": "2025-03-19T00:00:00+01:00",
+    "soort": "VergaderingSoort.PLENAIR",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007654"
+  },
+  {
+    "id": "86b7ada2-af75-483c-a525-90aed88fced1",
+    "titel": "Ruimtelijke ordening",
+    "datum": "2025-03-13T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007819"
+  },
+  {
+    "id": "81c6a39d-4a73-457f-9b1a-0b968cbb3ae8",
+    "titel": "Milieuraad op 27 maart",
+    "datum": "2025-03-13T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.007983"
+  },
+  {
+    "id": "fe5fd1cb-0e3c-4e35-b62f-de127dc0387c",
+    "titel": "Integriteit openbaar bestuur",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.008228"
+  },
+  {
+    "id": "88976625-b89f-46fa-a578-b249a613d308",
+    "titel": "Situatie Selibon",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.008471"
+  },
+  {
+    "id": "a9b7672d-bc53-4ade-b8b8-64362218e7a3",
+    "titel": "Gasmarkt en leveringszekerheid",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.008637"
+  },
+  {
+    "id": "c6d425b2-075f-4c0f-9107-8ec56988310b",
+    "titel": "Personen- en familierecht",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.008805"
+  },
+  {
+    "id": "a150a062-956f-4dfc-bd55-a73a673f923d",
+    "titel": "Initiatiefnota van het lid Inge van Dijk over bescherming van de rechten van belastingbetalers en toeslagontvangers",
+    "datum": "2025-03-17T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.008967"
+  },
+  {
+    "id": "3702cdb9-2c80-48df-826f-0b1f74946f2d",
+    "titel": "Gevangeniswezen",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.009130"
+  },
+  {
+    "id": "ea97748e-d9df-4923-b548-5b0d66659006",
+    "titel": "Vreemdelingen- en asielbeleid",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.009294"
+  },
+  {
+    "id": "365e544d-b4f7-4d93-a88d-59a6e565a525",
+    "titel": "Wetenschappers over regeldruk bij woningbouw en in de ruimtelijke ordening",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.009616"
+  },
+  {
+    "id": "5e4e6d26-e1fb-4e7f-aa59-cd25a8a88af5",
+    "titel": "Technische briefing ministerie VWS inzake Wetsvoorstel integere bedrijfsvoering zorg- en jeugdhulpaanbieders (36686)",
+    "datum": "2025-03-12T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.009859"
+  },
+  {
+    "id": "85b070b5-9a89-45b8-8b96-bc7c16d711ad",
+    "titel": "Procedurevergadering vaste commissie Economische Zaken",
+    "datum": "2025-03-11T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.010025"
+  },
+  {
+    "id": "c4619847-94f4-40ab-a9ad-f9b76ba4612e",
+    "titel": "Procedures en brieven commissie voor Sociale Zaken en Werkgelegenheid",
+    "datum": "2025-03-11T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.010189"
+  },
+  {
+    "id": "883b9137-f549-4d21-8ab6-a0ad16afa271",
+    "titel": "Procedurevergadering commissie Volkshuisvesting en Ruimtelijke Ordening",
+    "datum": "2025-03-11T00:00:00+01:00",
+    "soort": "VergaderingSoort.COMMISSIE",
+    "aanvangstijd": null,
+    "eindtijd": null,
+    "retrieved_at": "2025-06-09T22:00:25.010353"
   }
 ]

@@ -7,6 +7,8 @@ import os
 from dataclasses import dataclass
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import sys
+import argparse
 
 @dataclass
 class ChunkInfo:
@@ -19,7 +21,7 @@ class ChunkInfo:
 
 class DeepSeekParliamentarySummarizer:
     """
-    Summarizer for parliamentary debates using DeepSeek API
+    Enhanced summarizer with fact-checking capabilities for parliamentary debates using DeepSeek API
     """
     
     def __init__(self, api_key: str = None):
@@ -306,19 +308,35 @@ class DeepSeekParliamentarySummarizer:
     def summarize_chunk(self, chunk: ChunkInfo, speakers_map: Dict[str, str], 
                        meeting_info: Dict, max_retries: int = 1) -> Dict:
         """
-        Summarize a single chunk of parliamentary debate
+        Summarize a single chunk of parliamentary debate with fact-checking
         """
         # Get speakers that are actually mentioned in this chunk
         relevant_speakers = self.get_relevant_speakers(chunk.text[:3000], speakers_map)
         speaker_context = relevant_speakers if len(relevant_speakers) <= 30 else dict(list(speakers_map.items())[:30])
         
         prompt = f"""
-        Analyze this Dutch parliamentary debate chunk with attention to both factual content and political dynamics.
+        Analyze this Dutch parliamentary debate chunk with attention to both factual content and political dynamics, including fact-checking of verifiable claims.
 
         Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
         Date: {meeting_info.get('vergadering_datum', 'Unknown')}
 
         Speakers mentioned in this section: {speaker_context}
+
+        CRITICAL FACT-CHECKING INSTRUCTIONS:
+        - ONLY flag claims that are CLEARLY and DEMONSTRABLY incorrect with readily available verification
+        - Focus ONLY on: clear numerical errors, obvious historical inaccuracies, blatant legal/procedural mistakes
+        - NEVER flag: 
+          * Claims that are "unverifiable" or lack sources (politicians often speak from memory)
+          * Broad qualitative statements ("things got worse/better")
+          * Political opinions disguised as facts
+          * Estimates, approximations, or "rough figures" (even if slightly off)
+          * Complex policy assessments that could be interpreted multiple ways
+          * Claims about future projections or trends
+          * Statements where the speaker indicates uncertainty ("uit mijn hoofd", "approximately", etc.)
+        - Use EXTREMELY conservative confidence levels - when in doubt, DO NOT flag
+        - For flagged items, you must have concrete, easily verifiable contradictory evidence
+        - Perfect example of what TO flag: "The Dutch parliament has 200 seats" (it has 150)
+        - Perfect example of what NOT to flag: "Denmark invested 200 million via this mechanism" (could be true, just not immediately verifiable)
 
         Guidelines for analysis:
         - Capture not just what was said, but HOW it was said (tone, tensions, agreements)
@@ -326,6 +344,7 @@ class DeepSeekParliamentarySummarizer:
         - Identify underlying political strategies and rhetorical approaches
         - Look for subtext and implications beyond literal statements
         - Highlight moments of conflict, consensus, or unexpected alignment
+        - Apply fact-checking VERY sparingly - better to miss a false claim than incorrectly flag a true/unverifiable one
 
         Return this exact JSON structure with nuanced analysis:
         {{
@@ -347,8 +366,26 @@ class DeepSeekParliamentarySummarizer:
             ],
             "key_decisions": ["Include context: who pushed for it, who opposed"],
             "notable_exchanges": ["Describe heated debates, clever responses, or revealing moments"],
-            "political_undercurrents": "Subtle dynamics, coalition pressures, or strategic positioning"
+            "political_undercurrents": "Subtle dynamics, coalition pressures, or strategic positioning",
+            "fact_check_flags": [
+                {{
+                    "claim": "Exact claim that was made",
+                    "speaker": "Who made the claim",
+                    "issue": "What is clearly and demonstrably incorrect about this claim",
+                    "correct_info": "What the correct, easily verifiable information is",
+                    "confidence": "HIGH (only flag claims with absolute certainty and clear contradictory evidence)",
+                    "reasoning": "Specific evidence that proves this claim is wrong (not just unverifiable)",
+                    "category": "One of: clear_numerical_error, historical_fact, legal_procedure, institutional_fact"
+                }}
+            ]
         }}
+
+        REMEMBER: 
+        - Empty fact_check_flags array is perfectly fine and expected most of the time
+        - Only flag claims where you have concrete, easily verifiable evidence they are wrong
+        - Unverifiable ≠ incorrect - do not flag unverifiable claims
+        - Politicians often speak from memory with approximations - this is normal
+        - Broad qualitative assessments ("things got worse") are opinions, not facts to check
 
         Text to analyze:
         {chunk.text[:3000]}...
@@ -358,7 +395,7 @@ class DeepSeekParliamentarySummarizer:
         
         for attempt in range(max_retries + 1):
             try:
-                response_text = self.make_api_request(messages, max_tokens=1500)
+                response_text = self.make_api_request(messages, max_tokens=2000)
                 
                 if not response_text:
                     raise ValueError("Empty response from DeepSeek")
@@ -386,6 +423,8 @@ class DeepSeekParliamentarySummarizer:
                     # Ensure all expected fields exist
                     if 'political_undercurrents' not in chunk_analysis:
                         chunk_analysis['political_undercurrents'] = ''
+                    if 'fact_check_flags' not in chunk_analysis:
+                        chunk_analysis['fact_check_flags'] = []
                     
                     return chunk_analysis
                 else:
@@ -406,7 +445,8 @@ class DeepSeekParliamentarySummarizer:
                             'party_positions': []
                         }],
                         'key_decisions': [],
-                        'notable_exchanges': []
+                        'notable_exchanges': [],
+                        'fact_check_flags': []
                     }
                     
             except Exception as e:
@@ -423,7 +463,8 @@ class DeepSeekParliamentarySummarizer:
             'topics': [],
             'key_decisions': [],
             'notable_exchanges': [],
-            'political_undercurrents': ''
+            'political_undercurrents': '',
+            'fact_check_flags': []
         }
     
     def combine_chunk_summaries(self, chunk_summaries: List[Dict], 
@@ -436,6 +477,7 @@ class DeepSeekParliamentarySummarizer:
         all_decisions = []
         all_exchanges = []
         political_themes = []
+        all_fact_checks = []
         
         for chunk_summary in chunk_summaries:
             if 'topics' in chunk_summary:
@@ -467,18 +509,23 @@ class DeepSeekParliamentarySummarizer:
             all_exchanges.extend(chunk_summary.get('notable_exchanges', []))
             if chunk_summary.get('political_undercurrents'):
                 political_themes.append(chunk_summary['political_undercurrents'])
+            
+            # Collect fact-check flags
+            all_fact_checks.extend(chunk_summary.get('fact_check_flags', []))
         
         # Create final summary using DeepSeek
         topics_json = json.dumps(list(all_topics.values()), ensure_ascii=False, indent=2)
+        fact_checks_json = json.dumps(all_fact_checks, ensure_ascii=False, indent=2)
         
         synthesis_prompt = f"""
-    Create a comprehensive and nuanced summary of this Dutch parliamentary meeting.
+    Create a comprehensive and nuanced summary of this Dutch parliamentary meeting, including consolidation of fact-checking results.
 
     Meeting: {meeting_info.get('vergadering_titel', 'Unknown')}
     Date: {meeting_info.get('vergadering_datum', 'Unknown')}
 
     Topics found: {len(all_topics)}
     Decisions: {len(all_decisions)}
+    Fact-check flags found: {len(all_fact_checks)}
     Political themes observed: {political_themes[:5]}
 
     Guidelines for the final summary:
@@ -488,6 +535,9 @@ class DeepSeekParliamentarySummarizer:
     - Identify strategic moves: blocking tactics, compromise attempts, political theater
     - Note the meeting's tone: cooperative, contentious, procedural, dramatic?
     - Consider broader implications: what do these discussions mean for future policy?
+    - For fact-checking: ONLY include flags that represent clear, demonstrable errors with concrete contradictory evidence
+    - Remove any "unverifiable" or "lacks sources" flags - these are not fact-check failures
+    - Focus fact-check summary on genuine corrections that matter for public understanding
 
     Return this exact JSON structure:
     {{
@@ -507,11 +557,27 @@ class DeepSeekParliamentarySummarizer:
         "political_dynamics": "Analysis of coalition behavior, opposition strategies, cross-party dynamics, and notable tensions or agreements",
         "meeting_tone": "Overall atmosphere: cooperative, hostile, procedural, dramatic, etc.",
         "strategic_implications": "What this meeting reveals about party strategies and future policy directions",
-        "next_steps": ["What happens next, including political maneuvering expected"]
+        "next_steps": ["What happens next, including political maneuvering expected"],
+        "fact_check_summary": {{
+            "total_flags": {len(all_fact_checks)},
+            "categories": "Brief overview of what types of clearly incorrect claims were flagged (if any)",
+            "significant_corrections": [
+                {{
+                    "claim": "The clearly incorrect claim",
+                    "speaker": "Who made it",
+                    "correction": "The correct, easily verifiable information",
+                    "impact": "Why this correction matters for public understanding"
+                }}
+            ],
+            "credibility_note": "Assessment of overall factual accuracy of the debate - note that most claims are political opinions or unverifiable statements, which is normal in parliamentary debates"
+        }}
     }}
 
     Topics and positions data:
     {topics_json[:2000]}...
+
+    Fact-check flags to consolidate (FILTER OUT unverifiable/source-lacking claims):
+    {fact_checks_json[:1500]}...
 
     Key decisions: {all_decisions[:10]}
     Notable exchanges: {all_exchanges[:5]}
@@ -520,7 +586,7 @@ class DeepSeekParliamentarySummarizer:
         messages = [{"role": "user", "content": synthesis_prompt}]
         
         try:
-            response_text = self.make_api_request(messages, max_tokens=3000)
+            response_text = self.make_api_request(messages, max_tokens=3500)
             
             response_text = response_text.strip()
             response_text = response_text.replace('```json', '').replace('```', '').strip()
@@ -539,9 +605,14 @@ class DeepSeekParliamentarySummarizer:
             final_summary['processing_info'] = {
                 'chunks_processed': len(chunk_summaries),
                 'total_topics_found': len(all_topics),
+                'total_fact_checks': len(all_fact_checks),
                 'processing_date': datetime.now().isoformat(),
-                'ai_model': 'deepseek-chat'
+                'ai_model': 'deepseek-chat',
+                'fact_checking_enabled': True
             }
+            
+            # Add raw fact-check data for transparency
+            final_summary['raw_fact_checks'] = all_fact_checks
             
             return final_summary
             
@@ -550,14 +621,15 @@ class DeepSeekParliamentarySummarizer:
             return {
                 'error': str(e),
                 'meeting_info': meeting_info,
-                'raw_chunk_summaries': chunk_summaries
+                'raw_chunk_summaries': chunk_summaries,
+                'raw_fact_checks': all_fact_checks
             }
     
     def summarize_parliamentary_meeting(self, verslag_data: Dict) -> Dict:
         """
-        Complete pipeline to summarize a parliamentary meeting
+        Complete pipeline to summarize a parliamentary meeting with fact-checking
         """
-        print(f"\n=== Summarizing Meeting with DeepSeek ===")
+        print(f"\n=== Summarizing Meeting with DeepSeek + Fact-Checking ===")
         print(f"Meeting: {verslag_data.get('vergadering_titel', 'Unknown')}")
         print(f"Date: {verslag_data.get('vergadering_datum', 'Unknown')}")
         
@@ -590,26 +662,69 @@ class DeepSeekParliamentarySummarizer:
         print("Step 2: Chunking text...")
         chunks = self.chunk_text_smartly(text)
         
-        # Step 3: Summarize each chunk
-        print("Step 3: Summarizing chunks...")
+        # Step 3: Summarize each chunk with fact-checking
+        print("Step 3: Summarizing chunks with fact-checking...")
         chunk_summaries = []
         for i, chunk in enumerate(chunks):
             print(f"  Processing chunk {i+1}/{len(chunks)}...")
             chunk_summary = self.summarize_chunk(chunk, speakers_map, meeting_info)
             chunk_summaries.append(chunk_summary)
+            
+            # Show fact-check results
+            fact_checks = chunk_summary.get('fact_check_flags', [])
+            if fact_checks:
+                print(f"    Found {len(fact_checks)} fact-check flag(s)")
         
         # Step 4: Combine into final summary
-        print("Step 4: Creating final summary...")
+        print("Step 4: Creating final summary with consolidated fact-checks...")
         final_summary = self.combine_chunk_summaries(chunk_summaries, meeting_info)
         
-        print("✓ Summary complete!")
+        # Show fact-checking summary
+        total_fact_checks = len(final_summary.get('raw_fact_checks', []))
+        if total_fact_checks > 0:
+            print(f"✓ Summary complete with {total_fact_checks} fact-check flag(s)")
+        else:
+            print("✓ Summary complete - no fact-check flags raised")
+        
         return final_summary
 
+# Update the main function to indicate fact-checking capability
 def main():
     """
-    Main function to summarize all available verslagen with DeepSeek
+    Main function to summarize verslagen with DeepSeek + Fact-Checking
     """
-    print("=== DeepSeek Parliamentary Summarizer - Batch Mode ===")
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='DeepSeek Parliamentary Summarizer with Fact-Checking',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python deepseek_summarizer.py                    # Interactive mode
+  python deepseek_summarizer.py --all             # Process all documents without prompts
+  python deepseek_summarizer.py --batch           # Same as --all
+  python deepseek_summarizer.py --count 5         # Process exactly 5 documents
+  python deepseek_summarizer.py --all --yes       # Process all with no confirmation
+        """
+    )
+    
+    parser.add_argument('--all', '--batch', action='store_true', 
+                       help='Process all available documents without asking')
+    parser.add_argument('--count', type=int, metavar='N',
+                       help='Process exactly N documents (skip selection prompt)')
+    parser.add_argument('--yes', '-y', action='store_true',
+                       help='Skip confirmation prompt (auto-confirm)')
+    
+    args = parser.parse_args()
+    
+    # Determine mode
+    batch_mode = args.all
+    auto_confirm = args.yes
+    fixed_count = args.count
+    
+    if batch_mode:
+        print("=== DeepSeek Parliamentary Summarizer + Fact-Checker - Batch Mode ===")
+    else:
+        print("=== DeepSeek Parliamentary Summarizer + Fact-Checker - Interactive Mode ===")
     
     # Check for API key
     api_key = os.getenv('DEEPSEEK_API_KEY')
@@ -633,65 +748,123 @@ def main():
             print("Make sure you've run the document processor and XML parser first.")
             return
         
-        print(f"Found {len(ready_verslagen)} verslagen ready for summarization")
+        print(f"📊 Found {len(ready_verslagen)} verslagen ready for summarization")
         
         # Check which ones already have summaries
         existing_summaries = []
         new_verslagen = []
         
         for verslag in ready_verslagen:
-            # Check for DeepSeek-specific summary files
-            summary_filename = f"deepseek_summary_{verslag.get('id', 'unknown')}.json"
+            # Check for DeepSeek-specific summary files with fact-checking
+            summary_filename = f"deepseek_factcheck_summary_{verslag.get('id', 'unknown')}.json"
             if os.path.exists(summary_filename):
                 existing_summaries.append(verslag)
-                print(f"✓ Already summarized: {verslag.get('vergadering_titel', 'Unknown')}")
             else:
                 new_verslagen.append(verslag)
         
         if existing_summaries:
-            print(f"\n{len(existing_summaries)} verslagen already have DeepSeek summaries")
+            print(f"✅ {len(existing_summaries)} verslagen already have DeepSeek fact-checked summaries")
         
         if not new_verslagen:
-            print("All verslagen have already been summarized with DeepSeek! ✓")
+            print("All verslagen have already been summarized with DeepSeek fact-checking! ✓")
             return
         
-        print(f"\n{len(new_verslagen)} verslagen need to be summarized")
+        print(f"🆕 {len(new_verslagen)} verslagen need to be summarized with fact-checking")
         
-        # Show cost estimate
-        estimated_cost_per_verslag = 0.02  # Rough estimate based on DeepSeek pricing
-        total_estimated_cost = len(new_verslagen) * estimated_cost_per_verslag
-        claude_estimated_cost = total_estimated_cost * 10  # Claude is roughly 10x more expensive
+        # Determine number of documents to process
+        if batch_mode:
+            num_to_process = len(new_verslagen)
+            print(f"🚀 Batch mode: Processing all {num_to_process} documents")
+        elif fixed_count is not None:
+            if fixed_count > len(new_verslagen):
+                print(f"❌ Requested {fixed_count} documents but only {len(new_verslagen)} available")
+                return
+            elif fixed_count <= 0:
+                print("❌ Count must be greater than 0")
+                return
+            num_to_process = fixed_count
+            print(f"🎯 Fixed count mode: Processing {num_to_process} documents")
+        else:
+            # Interactive mode - show available documents with details
+            print(f"\n📋 Available documents for summarization:")
+            for i, verslag in enumerate(new_verslagen, 1):
+                title = verslag.get('vergadering_titel', 'Unknown Title')
+                date = verslag.get('vergadering_datum', 'Unknown Date')
+                text_length = len(verslag.get('readable_text', ''))
+                print(f"  {i:2d}. {title[:60]}{'...' if len(title) > 60 else ''}")
+                print(f"      📅 {date} | 📝 {text_length:,} characters")
+            
+            # Ask user how many to process
+            while True:
+                try:
+                    user_input = input(f"\n🔢 How many documents would you like to summarize? (1-{len(new_verslagen)}, or 'all' for all): ").strip().lower()
+                    
+                    if user_input == 'all':
+                        num_to_process = len(new_verslagen)
+                        break
+                    elif user_input == '0':
+                        print("Cancelled.")
+                        return
+                    else:
+                        num_to_process = int(user_input)
+                        if 1 <= num_to_process <= len(new_verslagen):
+                            break
+                        else:
+                            print(f"❌ Please enter a number between 1 and {len(new_verslagen)}, or 'all'")
+                except ValueError:
+                    print("❌ Please enter a valid number or 'all'")
         
-        print(f"\nCost estimate:")
-        print(f"  DeepSeek: ~${total_estimated_cost:.2f}")
-        print(f"  Claude Haiku: ~${claude_estimated_cost:.2f}")
-        print(f"  Savings: ~${claude_estimated_cost - total_estimated_cost:.2f}")
+        # Select the documents to process (take the first N)
+        selected_verslagen = new_verslagen[:num_to_process]
         
-        # Ask for confirmation
-        print("\nVersions to be summarized:")
-        for i, verslag in enumerate(new_verslagen, 1):
-            print(f"  {i}. {verslag.get('vergadering_titel', 'Unknown')} ({verslag.get('vergadering_datum', 'Unknown date')})")
+        # Show final selection and cost
+        estimated_cost_per_verslag = 0.025
+        total_cost = num_to_process * estimated_cost_per_verslag
+        claude_cost = total_cost * 12
         
-        confirm = input(f"\nProceed with summarizing {len(new_verslagen)} meetings? (y/n): ")
-        if confirm.lower() != 'y':
-            print("Cancelled.")
-            return
+        if not batch_mode or not auto_confirm:
+            print(f"\n📋 Selected for processing:")
+            for i, verslag in enumerate(selected_verslagen, 1):
+                title = verslag.get('vergadering_titel', 'Unknown')
+                date = verslag.get('vergadering_datum', 'Unknown')
+                print(f"  {i}. {title} ({date})")
+            
+            print(f"\n💰 Cost breakdown:")
+            print(f"   DeepSeek: ~${total_cost:.2f}")
+            print(f"   Claude equivalent: ~${claude_cost:.2f}")
+            print(f"   Savings: ~${claude_cost - total_cost:.2f}")
+        
+        # Confirmation (skip if auto-confirm or batch mode with --yes)
+        if auto_confirm:
+            print(f"✅ Auto-confirming processing of {num_to_process} meeting(s)")
+        elif batch_mode:
+            confirm = input(f"\n✅ Proceed with summarizing {num_to_process} meeting(s) with fact-checking? (y/n): ")
+            if confirm.lower() != 'y':
+                print("Cancelled.")
+                return
+        else:
+            # Interactive mode confirmation
+            confirm = input(f"\n✅ Proceed with summarizing {num_to_process} meeting(s) with fact-checking? (y/n): ")
+            if confirm.lower() != 'y':
+                print("Cancelled.")
+                return
         
         # Initialize summarizer
         summarizer = DeepSeekParliamentarySummarizer(api_key)
         
-        # Process each verslag
+        # Process selected verslagen
         successful = 0
         failed = 0
+        total_fact_checks = 0
         start_time = time.time()
         
-        for i, verslag in enumerate(new_verslagen, 1):
+        for i, verslag in enumerate(selected_verslagen, 1):
             print(f"\n{'='*60}")
-            print(f"Processing {i}/{len(new_verslagen)}: {verslag.get('vergadering_titel', 'Unknown')}")
+            print(f"Processing {i}/{len(selected_verslagen)}: {verslag.get('vergadering_titel', 'Unknown')}")
             print(f"{'='*60}")
             
             try:
-                # Create summary
+                # Create summary with fact-checking
                 summary = summarizer.summarize_parliamentary_meeting(verslag)
                 
                 # Check if summary was successful
@@ -700,8 +873,12 @@ def main():
                     failed += 1
                     continue
                 
-                # Save result with DeepSeek prefix
-                output_filename = f"deepseek_summary_{verslag.get('id', 'unknown')}.json"
+                # Count fact-checks
+                fact_checks = summary.get('raw_fact_checks', [])
+                total_fact_checks += len(fact_checks)
+                
+                # Save result with fact-check prefix
+                output_filename = f"deepseek_factcheck_summary_{verslag.get('id', 'unknown')}.json"
                 with open(output_filename, 'w', encoding='utf-8') as f:
                     json.dump(summary, f, ensure_ascii=False, indent=2)
                 
@@ -713,16 +890,20 @@ def main():
                     print(f"\nPreview: {summary['executive_summary'][:150]}...")
                     if 'main_topics' in summary:
                         print(f"Topics covered: {len(summary['main_topics'])}")
+                    if fact_checks:
+                        print(f"Fact-check flags: {len(fact_checks)}")
+                        for fc in fact_checks[:2]:  # Show first 2
+                            print(f"  - {fc.get('speaker', 'Unknown')}: {fc.get('claim', '')[:100]}...")
                 
                 # Show progress and time estimate
                 elapsed_time = time.time() - start_time
                 avg_time_per_verslag = elapsed_time / i
-                remaining_time = avg_time_per_verslag * (len(new_verslagen) - i)
-                print(f"\nProgress: {i}/{len(new_verslagen)} - Est. time remaining: {remaining_time/60:.1f} minutes")
+                remaining_time = avg_time_per_verslag * (len(selected_verslagen) - i)
+                print(f"\nProgress: {i}/{len(selected_verslagen)} - Est. time remaining: {remaining_time/60:.1f} minutes")
                 
             except KeyboardInterrupt:
                 print(f"\n\n⚠️ Process interrupted by user")
-                print(f"Progress: {successful} successful, {failed} failed, {len(new_verslagen) - i} remaining")
+                print(f"Progress: {successful} successful, {failed} failed, {len(selected_verslagen) - i} remaining")
                 print("You can restart the script to continue with remaining verslagen.")
                 return
                 
@@ -738,22 +919,29 @@ def main():
         print(f"{'='*60}")
         print(f"✓ Successfully processed: {successful}")
         print(f"❌ Failed: {failed}")
-        print(f"📁 Total DeepSeek summaries available: {len(existing_summaries) + successful}")
+        print(f"📁 Total DeepSeek fact-checked summaries available: {len(existing_summaries) + successful}")
+        print(f"🔍 Total fact-check flags raised: {total_fact_checks}")
         print(f"⏱️ Total time: {total_time/60:.1f} minutes")
         print(f"💰 Estimated cost: ~${successful * estimated_cost_per_verslag:.2f}")
         
         if successful > 0:
-            print(f"\n🎉 You now have {len(existing_summaries) + successful} parliamentary meeting summaries from DeepSeek!")
-            print("Ready to load into your Angular app for testing!")
+            avg_fact_checks = total_fact_checks / successful if successful > 0 else 0
+            print(f"\n🎉 You now have {len(existing_summaries) + successful} parliamentary meeting summaries with fact-checking!")
+            print(f"📊 Average fact-check flags per meeting: {avg_fact_checks:.1f}")
+            print("Ready to load into your Angular app for combating misinformation!")
             
-            # Offer to compare with Claude summaries if available
-            claude_count = 0
-            for verslag in ready_verslagen:
-                if os.path.exists(f"summary_{verslag.get('id', 'unknown')}.json"):
-                    claude_count += 1
-            
-            if claude_count > 0:
-                print(f"\nNote: You also have {claude_count} Claude summaries available for comparison.")
+            # Show fact-checking statistics
+            if total_fact_checks > 0:
+                print(f"\n🚨 FACT-CHECKING SUMMARY:")
+                print(f"   - {total_fact_checks} potentially incorrect claims flagged")
+                print(f"   - Conservative approach: only flags claims with high confidence")
+                print(f"   - Each flag includes source verification and reasoning")
+                print(f"   - Perfect for transparent, credible fact-checking in your platform")
+            else:
+                print(f"\n✅ FACT-CHECKING SUMMARY:")
+                print(f"   - No clearly incorrect claims detected in processed meetings")
+                print(f"   - This suggests relatively high factual accuracy in recent debates")
+                print(f"   - System is working conservatively as intended")
         
     except FileNotFoundError:
         print("verslagen_parsed.json not found. Please run the XML parser first.")

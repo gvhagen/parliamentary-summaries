@@ -565,8 +565,11 @@ class DeepSeekParliamentarySummarizer:
                 {{
                     "claim": "The clearly incorrect claim",
                     "speaker": "Who made it",
-                    "correction": "The correct, easily verifiable information",
-                    "impact": "Why this correction matters for public understanding"
+                    "issue": "What is clearly and demonstrably incorrect about this claim",
+                    "correct_info": "The correct, easily verifiable information",
+                    "confidence": "HIGH (only include claims with absolute certainty)",
+                    "reasoning": "Specific evidence that proves this claim is wrong",
+                    "category": "One of: clear_numerical_error, historical_fact, legal_procedure, institutional_fact"
                 }}
             ],
             "credibility_note": "Assessment of overall factual accuracy of the debate - note that most claims are political opinions or unverifiable statements, which is normal in parliamentary debates"

@@ -1,0 +1,54 @@
+{
+  "executive_summary": "The 61st parliamentary meeting on March 11, 2025, revealed heightened coalition tensions and strategic maneuvering amid high-stakes debates on housing, climate, and EU relations. Right-wing parties (PVV, FVD) capitalized on anti-EU sentiment and rural discontent, while progressive factions (GroenLinks-PvdA, D66) tested coalition boundaries. The session underscored the fragility of the governing coalition, with unexpected cross-party alliances and procedural clashes masking deeper ideological divides.",
+  "main_topics": [
+    {
+      "topic": "Attendance and Composition",
+      "summary": "Full attendance and high-profile ministerial presence signaled the session's political weight, with PVV members chairing and progressive parties poised for contentious debates.",
+      "party_positions": {
+        "PVV": "Prominent role (e.g., chairing) to assert influence, likely preparing for polarizing issues like immigration or EU skepticism.",
+        "VVD": "Strong representation to maintain coalition dominance but showed internal splits on EU matters.",
+        "GroenLinks-PvdA": "Active attendance to challenge right-wing narratives, particularly on climate and social justice."
+      },
+      "outcome": "Procedural unity maintained, but ideological tensions foreshadowed later clashes.",
+      "political_context": "The presence of contentious portfolios (Climate, Justice) and PVV leadership hinted at looming ideological battles."
+    },
+    {
+      "topic": "Enforcement of Rental Housing Regulations",
+      "summary": "Debate on penalties for landlords violating affordability rules exposed coalition disarray and opposition pressure.",
+      "party_positions": {
+        "Minister Keijzer (VVD)": "Defensive, citing systemic complexity and selective compliance statistics to deflect criticism of lax enforcement.",
+        "GroenLinks-PvdA": "Pushed for stricter accountability, framing the issue as a failure of coalition priorities.",
+        "PVV/FVD": "Avoided direct engagement, likely to avoid alienating potential landlord supporters."
+      },
+      "outcome": "Minister forced to commit to compiling municipal data on fines—a concession to opposition pressure.",
+      "political_context": "Highlighted coalition vulnerability on housing affordability, a key voter concern."
+    }
+  ],
+  "key_decisions": [
+    "Motion-Eerdmans passed: Right-wing bloc (PVV, FVD, NSC, partial VVD/CDA) leveraged anti-EU sentiment to cut defense spending benchmarks.",
+    "Nationaal Burgerberaad Klimaat defunded: JA21 success, isolating left-wing parties on climate policy.",
+    "2050 gas-free target upheld: Defeat for agrarian-right bloc (BBB, FVD), preserving progressive climate commitments.",
+    "Motion 94 (middle vs. high incomes) passed: Unusual NSC-CDA-PVV alliance signaled tactical concessions by right-leaning parties.",
+    "Motion 93 (childcare costs) rejected: Coalition discipline (VVD/D66) overrode broad left support, revealing prioritization of fiscal restraint."
+  ],
+  "political_dynamics": "Coalition fragility was evident in VVD/CDA splits on EU issues and GroenLinks-PvdA’s probing for no-confidence openings. Right-wing parties (PVV, FVD, JA21) aligned on anti-EU and rural-agenda motions, while NSC positioned as a bridge between left and right. Opposition exploited coalition disunity, notably on housing enforcement. The PVV’s silent support for some motions hinted at populist triangulation.",
+  "meeting_tone": "Procedurally cooperative but substantively contentious, with dramatic exchanges (e.g., Klaver’s critique of 'partisan inflexibility') and tactical voting blocs.",
+  "strategic_implications": "Parties are testing post-election alignments: JA21 as a radical-right alternative to VVD, GroenLinks-PvdA building ad-hoc majorities on niche issues, and NSC balancing left-right appeals. The PVV’s selective engagement suggests a focus on consolidating anti-establishment support. Housing and climate debates revealed urban-rural and inter-coalition divides.",
+  "next_steps": [
+    "Opposition (GroenLinks-PvdA, D66) may escalate pressure on housing enforcement with no-confidence threats.",
+    "Right-wing bloc (PVV, FVD, JA21) will likely amplify anti-EU rhetoric ahead of European Council meetings.",
+    "NSC’s bridging role may face strain as left-right tensions intensify."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "61e vergadering, dinsdag 11 maart 2025",
+    "vergadering_datum": "2025-03-11T00:00:00+01:00",
+    "verslag_id": "84d94edd-499f-4d88-9e06-c5c0cd71b1c4",
+    "status": "VerslagStatus.GECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 16,
+    "total_topics_found": 27,
+    "processing_date": "2025-06-14T15:20:25.679030",
+    "ai_model": "deepseek-chat"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "executive_summary": "The 89th parliamentary meeting on May 28, 2025, revealed a mix of coalition caution and opposition pressure, with debates centering on social equity, online misogyny, and governance reforms. The PVV's selective engagement and the NSC's fiscal watchdog role highlighted strategic positioning, while GroenLinks-PvdA leveraged progressive rhetoric to push for social justice. The meeting underscored tensions between market-driven policies and demands for state intervention.",
+  "main_topics": [
+    {
+      "topic": "Online misogyny & social media regulation",
+      "summary": "Debate over Motion 29279 targeting anti-women ideologies online, reflecting broader tensions between free speech and safety.",
+      "party_positions": {
+        "GroenLinks-PvdA": "Demanded urgent action, framing it as a human rights issue to rally progressive support.",
+        "VVD-led coalition": "Delayed commitment with procedural caution, avoiding immediate policy binds."
+      },
+      "outcome": "Motion held over, allowing GroenLinks-PvdA to maintain pressure while the coalition buys time.",
+      "political_context": "Ahead of local elections, GroenLinks-PvdA positioned itself as a champion of women's rights, while the coalition avoided alienating free-speech advocates."
+    },
+    {
+      "topic": "Women's shelters funding",
+      "summary": "Discussion on Motion 958 regarding shelter accessibility, testing coalition priorities on social welfare vs. budget constraints.",
+      "party_positions": {
+        "GroenLinks-PvdA": "Pushed for guaranteed funding, framing it as a social equity issue.",
+        "VVD-led coalition": "Avoided direct commitment, passing the decision to parliament ('oordeel Kamer')."
+      },
+      "outcome": "Motion deferred to parliament, reflecting coalition reluctance to bind itself to specific spending.",
+      "political_context": "Opposition sought to expose gaps in the coalition's social policy, while the government prioritized fiscal flexibility."
+    },
+    {
+      "topic": "Legal fee disparities",
+      "summary": "Debate on fee reforms for legal services, highlighting left-right divides on state intervention.",
+      "party_positions": {
+        "NSC": "Criticized the government for overlooking social inequities, positioning itself as a fiscal watchdog.",
+        "VVD-led coalition": "Deflected with procedural arguments, emphasizing market flexibility."
+      },
+      "outcome": "No formal decision, but NSC's intervention signaled growing scrutiny of coalition policies.",
+      "political_context": "NSC distanced itself from both the VVD and progressive parties, reinforcing its centrist fiscal stance."
+    }
+  ],
+  "key_decisions": [
+    "Motion 957 (online misogyny) held over—strategic delay by GroenLinks-PvdA to maintain pressure.",
+    "Motion 958 (shelters) deferred to parliament—coalition avoided binding commitment.",
+    "Motion 288 (kill switches) approved despite ministerial resistance, pushed by NSC.",
+    "Motion 289 (youth resilience) unanimously approved—uncontroversial and symbolic."
+  ],
+  "political_dynamics": "The coalition (VVD/D66) balanced deregulation with progressive demands, while GroenLinks-PvdA tested its limits. NSC emerged as a critical voice on fiscal equity, and the PVV remained strategically silent on technocratic issues. Opposition parties used motions to force accountability, but cross-party collaboration was limited.",
+  "meeting_tone": "Contentious yet procedural, with moments of tension (e.g., NSC's interruptions) but no outright hostility.",
+  "strategic_implications": "Parties are positioning for upcoming local elections: GroenLinks-PvdA on social justice, NSC on fiscal prudence, and the PVV reserving its populist rhetoric. The coalition's cautious approach suggests fragility in its priorities.",
+  "next_steps": [
+    "GroenLinks-PvdA will likely escalate pressure on social equity motions.",
+    "NSC may continue its fiscal critiques, potentially aligning with opposition on specific issues.",
+    "PVV is expected to re-engage on immigration/security themes in future sessions."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "89e vergadering, woensdag 28 mei 2025",
+    "vergadering_datum": "2025-05-28T00:00:00+02:00",
+    "verslag_id": "410b5ae3-6434-4ace-bb2c-a711636310d6",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 11,
+    "total_topics_found": 15,
+    "processing_date": "2025-06-14T15:08:47.386548",
+    "ai_model": "deepseek-chat"
+  }
+}

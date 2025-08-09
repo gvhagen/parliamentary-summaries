@@ -1,0 +1,59 @@
+{
+  "executive_summary": "The 88th parliamentary meeting on 27 May 2025 revealed a fragmented political landscape, with coalition parties (VVD, NSC, CDA) navigating opposition pressures from PVV and GroenLinks-PvdA. Key debates centered on AI innovation, migration, and labor protections, with strategic compromises masking underlying tensions. The session highlighted both coalition discipline and opposition theatrics, setting the stage for future policy battles.",
+  "main_topics": [
+    {
+      "topic": "Attendance and Composition",
+      "summary": "The session began with a roll call, showcasing a diverse political spectrum from PVV to GroenLinks-PvdA, signaling potential clashes.",
+      "party_positions": {
+        "PVV": "Assertive presence, ready to dominate debates.",
+        "VVD": "Strong representation, central to coalition dynamics.",
+        "GroenLinks-PvdA": "Unified bloc, poised to push progressive agendas."
+      },
+      "outcome": "Procedural agreement to begin the session.",
+      "political_context": "The diversity underscored the fragmented political landscape, with coalition parties balancing opposition pressures."
+    },
+    {
+      "topic": "AI and Digital Innovation",
+      "summary": "Debate on government investments in AI, framed as a shared responsibility between state and private sector.",
+      "party_positions": {
+        "Minister Beljaarts (VVD)": "Defensive yet collaborative, stressing dual approach of state facilitation and private initiative.",
+        "Sneller (D66)": "Supportive but pushing for institutionalization, referencing SER and productivity board."
+      },
+      "outcome": "AI Conference Endorsement adopted swiftly to preempt opposition criticism.",
+      "political_context": "VVD walked a tightrope between pro-business rhetoric and fiscal restraint, while D66 positioned itself as a pragmatic broker."
+    }
+  ],
+  "key_decisions": [
+    "AI Conference Endorsement: Pushed by D66, adopted swiftly to preempt opposition criticism.",
+    "Rajkowski's motion adopted: VVD/NSC/PVV alliance overrode left opposition.",
+    "Boomsma's border strategy rejected: Lack of cross-bloc support.",
+    "PVV's benefit cuts motion failed: Isolated far-right position.",
+    "Motion 36332 (Saris) passed: Allows temporary blue card limits during crises, pushed by GroenLinks-PvdA with VVD acquiescence.",
+    "Ceder/Van Nispen motions passed: Imposes residency requirements and excludes sanctioned companies from hiring blue card holders, a ChristenUnie/VVD collaboration opposed only by DENK.",
+    "Clawback mechanism approved: GroenLinks-PvdA/VVD compromise despite ideological differences.",
+    "PVV private equity ban rejected: Shows limits of populist proposals in current parliament.",
+    "Motions on DEI repeal (FVD/SGP) likely defeated by progressive/coalition opposition.",
+    "Austerity reporting (VVD/Bikkers) passed with NSC/BBB support."
+  ],
+  "political_dynamics": "Coalition discipline was visible, with VVD supporting left-led motions and ChristenUnie asserting identity through migration policy. GroenLinks-PvdA balanced worker protection with progressive values, while DENK solidified niche appeal. Opposition parties like PVV tested limits with theatrical moves, but their proposals often failed due to isolation. Strategic alignments, such as ChristenUnie and GroenLinks-PvdA finding rare common ground on labor protections, highlighted unexpected collaborations.",
+  "meeting_tone": "Formal yet contentious, with moments of procedural cooperation masking underlying strategic positioning. Notable exchanges included sharp critiques and tactical interruptions.",
+  "strategic_implications": "The meeting revealed VVD's balancing act between coalition pragmatism and right-wing pressure, D66's role as a pragmatic broker, and GroenLinks-PvdA's testing of coalition boundaries. The fragmented landscape suggests future policy battles will require careful negotiation and compromise.",
+  "next_steps": [
+    "Continued maneuvering on AI and digital innovation policies, with D66 likely pushing for further institutionalization.",
+    "Ongoing debates on migration and labor protections, with coalition parties seeking to maintain unity amid opposition pressures.",
+    "Potential escalation of opposition theatrics from PVV and BBB, particularly on populist proposals.",
+    "Strategic collaborations between unlikely allies, such as ChristenUnie and GroenLinks-PvdA, may emerge on specific issues."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "88e vergadering, dinsdag 27 mei 2025",
+    "vergadering_datum": "2025-05-27T00:00:00+02:00",
+    "verslag_id": "f7ce11c6-c5ba-4201-a2e2-c32919867555",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 17,
+    "total_topics_found": 36,
+    "processing_date": "2025-06-14T15:33:04.376109",
+    "ai_model": "deepseek-chat"
+  }
+}

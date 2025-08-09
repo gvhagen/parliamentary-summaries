@@ -1,0 +1,49 @@
+{
+  "executive_summary": "The 91st parliamentary meeting on June 4, 2025, highlighted the fragile coalition dynamics and pre-election positioning, with opposition parties like GL-PvdA leveraging PVV's far-right ties to pressure centrist allies. Wilders' defensive tactics and the PVV's institutional presence under Bosma's chairmanship underscored their growing influence, while coalition partners (VVD, CDA) navigated tensions between ideological purity and procedural unity. The tone was contentious yet procedural, foreshadowing future battles over cultural wedge issues and coalition realignments.",
+  "main_topics": [
+    {
+      "topic": "Procedural Opening",
+      "summary": "Standard roll call and acknowledgment of attendees, including ministers and the Prime Minister, setting the formal tone for the session.",
+      "party_positions": {
+        "Presiding Officer (Martin Bosma, PVV)": "Neutral and procedural, ensuring formalities are observed. PVV's Bosma presiding signals their institutional influence despite historical oppositional role."
+      },
+      "outcome": "All parties agreed to proceed with the session, establishing quorum without objections.",
+      "political_context": "The PVV's procedural neutrality here contrasts with their controversial stances, hinting at their strategic institutional normalization."
+    },
+    {
+      "topic": "Wilders' Participation in Budapest Conference",
+      "summary": "Timmermans (GL-PvdA) criticized Wilders for attending a far-right conference with figures tied to Putin and antisemitism, framing it as neglect of Dutch domestic issues.",
+      "party_positions": {
+        "GroenLinks-PvdA (Timmermans)": "Accusatory and moralistic, using hyperbolic language ('corrupt leader Orbán') to delegitimize Wilders and appeal to progressive voters.",
+        "PVV (Wilders)": "Defensive and counter-attacking, deflecting criticism by pivoting to Timmermans' stance on Israel, a PVV strong suit."
+      },
+      "outcome": "No formal decision, but Wilders implied PVV would abandon further collaboration ('Het is een keer klaar'), signaling a retreat to ideological purity.",
+      "political_context": "Opposition exploited PVV's far-right ties to pressure centrist parties (CDA, BBB) to distance themselves, though none intervened—revealing coalition fragility."
+    }
+  ],
+  "key_decisions": [
+    "No formal decisions on Wilders' Budapest attendance, but the debate revealed opposition's strategy to weaponize PVV's far-right alliances.",
+    "VVD signaled openness to post-election negotiations with PVV (a shift from historical opposition), while NSC avoided committing to exclude PVV from future coalitions.",
+    "Timmermans' motion for expedited elections (opposition-led challenge to demissionary cabinet's legitimacy) was likely opposed by coalition parties."
+  ],
+  "political_dynamics": "Coalition dynamics were strained, with VVD cautiously realigning toward PVV/BBB post-collapse, while ChristenUnie positioned itself as anti-populist. PVV's Wilders used blame-shifting to rally his base, while GL-PvdA exploited cultural wedge issues (e.g., Ukraine, Orbán) to divide centrist parties. The Chair's interventions ('korte vragen') hinted at frustration with circular pre-election debates.",
+  "meeting_tone": "Contentious yet procedural, with dramatic exchanges (e.g., Timmermans' 'fascist collaboration' accusation vs. Wilders' Israel pivot) but no outright hostility.",
+  "strategic_implications": "Parties are prioritizing base mobilization over governance: PVV solidifying its far-right base, GL-PvdA appealing to progressives, and VVD/NSC leaving doors open to PVV alliances. Defense spending and cultural issues (immigration, EU skepticism) will likely dominate future policy debates.",
+  "next_steps": [
+    "Continued opposition pressure on centrist parties (CDA, BBB) to clarify their stance on PVV alliances.",
+    "VVD's rightward shift may accelerate post-election, especially if PVV gains seats.",
+    "Potential escalation of cultural wedge issues (Ukraine, immigration) as coalition parties avoid substantive compromises."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "91e vergadering, woensdag 4 juni 2025",
+    "vergadering_datum": "2025-06-04T00:00:00+02:00",
+    "verslag_id": "f09ab5af-04bd-4217-b8da-ad74a4e097ef",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 8,
+    "total_topics_found": 11,
+    "processing_date": "2025-06-14T14:37:34.383760",
+    "ai_model": "deepseek-chat"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "executive_summary": "The 63rd parliamentary meeting on March 13, 2025, highlighted tensions within the coalition and opposition over EU policies, fiscal austerity, and youth care reforms. Key debates revolved around the ReArm initiative, Ukraine aid transparency, and welfare cuts, revealing strategic positioning by parties like NSC, D66, and PVV. The meeting's tone oscillated between procedural calm and ideological clashes, with implications for coalition stability and future policy directions.",
+  "main_topics": [
+    {
+      "topic": "ReArm Initiative and Eurobonds",
+      "summary": "Debate on supporting the EU's ReArm initiative, with NSC and CDA opposing eurobonds while backing other provisions. GroenLinks-PvdA accused NSC of inconsistency, framing it as a threat to coalition unity.",
+      "party_positions": {
+        "NSC (Kahraman)": "Supported ReArm but rejected eurobonds, citing coalition agreement. Defensive tone to preempt criticism.",
+        "GroenLinks-PvdA (Piri)": "Criticized NSC's 'superverwarrend' messaging, alleging hypocrisy to undermine the government's pro-EU stance.",
+        "CDA": "Signaled flexibility on eurobonds, diverging from NSC to align with coalition partners."
+      },
+      "outcome": "No formal decision, but NSC pushed for ReArm support without eurobonds, facing opposition from GroenLinks-PvdA and JA21.",
+      "political_context": "Contentious due to NSC's balancing act between EU-skeptic grassroots and pro-EU coalition partners, testing coalition cohesion."
+    },
+    {
+      "topic": "Ukraine Aid Transparency",
+      "summary": "D66 pressed the government for accountability on Ukraine spending, while the minister avoided specifics, highlighting coalition discomfort with scrutiny.",
+      "party_positions": {
+        "D66 (Paternotte)": "Demanded transparency, comparing Dutch aid unfavorably to Denmark's €200M commitment to expose gaps.",
+        "Minister Veldkamp": "Deflected with vague promises (€700M future pledges), avoiding concrete figures to maintain coalition unity.",
+        "GroenLinks-PvdA": "Silently aligned with D66, leveraging the issue to challenge government transparency."
+      },
+      "outcome": "Motion to adopt the Danish model rejected; D66's push signaled broader tensions over aid efficacy.",
+      "political_context": "Sensitive due to intra-EU policy competition and domestic debates about aid accountability."
+    },
+    {
+      "topic": "Youth Care Reforms",
+      "summary": "GroenLinks-PvdA proposed stricter wait-time norms in the Youth Act, while DENK and PVV coordinated anti-austerity messaging.",
+      "party_positions": {
+        "GroenLinks-PvdA": "Sought structural fixes, using GGZ failures to justify stricter rules.",
+        "DENK/PVV": "Opposed austerity, with PVV adopting an aggressive tone to position itself as a defender of care services.",
+        "Coalition (VVD/D66)": "Remained silent, relying on procedural resistance to avoid substantive debate."
+      },
+      "outcome": "Amendment proposals pending; SP's push for recentralization left PVV noncommittal, revealing internal divides.",
+      "political_context": "Highlighted opposition attempts to exploit coalition vulnerabilities on welfare issues."
+    }
+  ],
+  "key_decisions": [
+    "Motion on Hungary/Article 7: Passed with government support (routine EU procedure backing).",
+    "Motion on Danish model for Ukraine: Rejected by minister (preference for Dutch flexibility over D66's transparency demands).",
+    "Amendment to include wait-time norms in Youth Act: Pushed by GroenLinks-PvdA; D66 sought clarification (coalition resisted structural changes).",
+    "PVV's demand to enforce motion banning private equity: Coalition likely to oppose (fiscal conservatism vs. populist rhetoric)."
+  ],
+  "political_dynamics": "Coalition tensions emerged as D66 probed governance flaws while NSC struggled with its pro-EU/anti-eurobond dichotomy. Opposition parties (DENK/PVV) coordinated anti-austerity messaging, testing coalition unity. GroenLinks-PvdA exploited NSC's contradictions to paint the coalition as unstable, while CDA's flexibility on eurobonds hinted at intra-coalition divergence.",
+  "meeting_tone": "Mixed: Procedural calm punctuated by heated exchanges (e.g., Piri vs. Kahraman), with occasional humor (chair's interjection) to diffuse tension.",
+  "strategic_implications": "NSC's EU skepticism risks alienating pro-EU partners; D66's transparency demands may strain coalition solidarity. PVV's anti-austerity rhetoric signals electoral positioning, while GroenLinks-PvdA's alignment with D66 on accountability issues could pressure the government.",
+  "next_steps": [
+    "Coalition negotiations to reconcile NSC's ReArm stance with pro-EU partners.",
+    "Further opposition scrutiny of Ukraine aid spending, potentially via DENK's proposed parliamentary inquiry.",
+    "Youth care reforms likely to face delays as coalition avoids substantive debates."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "63e vergadering, donderdag 13 maart 2025",
+    "vergadering_datum": "2025-03-13T00:00:00+01:00",
+    "verslag_id": "3ccb2ed3-4471-4f9f-9497-151984f8af3e",
+    "status": "VerslagStatus.GECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 14,
+    "total_topics_found": 18,
+    "processing_date": "2025-06-14T14:13:46.192896",
+    "ai_model": "deepseek-chat"
+  }
+}

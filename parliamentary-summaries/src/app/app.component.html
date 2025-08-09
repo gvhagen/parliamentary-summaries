@@ -7,28 +7,13 @@
     <span class="toolbar-title">Parliamentary Summaries</span>
     <span class="toolbar-spacer"></span>
     
-    <!-- Document Stats Button -->
-    <button mat-icon-button 
-            matTooltip="Show Statistics" 
-            (click)="showDocumentStats()">
-      <mat-icon>analytics</mat-icon>
-    </button>
-    
-    <!-- Refresh Button -->
-    <button mat-icon-button 
-            matTooltip="Refresh Documents" 
-            (click)="onRefreshDocuments()"
-            [disabled]="loading$ | async">
-      <mat-icon>refresh</mat-icon>
-    </button>
-    
     <!-- Filter Toggle -->
-    <mat-icon 
+    <mat-icon
       class="filter-toggle"
       [matTooltip]="showFilters ? 'Hide Filters' : 'Show Filters'"
       (click)="toggleFilters()"
       style="cursor: pointer;">
-      {{ showFilters ? 'filter_list_off' : 'filter_list' }}
+      search
     </mat-icon>
   </mat-toolbar>
 
@@ -85,99 +70,6 @@
                      (ngModelChange)="onSearchChangeDebounced($event)">
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
-            
-            <!-- Search Options -->
-            <div class="search-options">
-              <mat-checkbox [checked]="searchOptions.includeContext" 
-                           (change)="updateSearchOption('includeContext', $event)">
-                Include context & background
-              </mat-checkbox>
-              <mat-checkbox [checked]="searchOptions.includeReasoning" 
-                           (change)="updateSearchOption('includeReasoning', $event)">
-                Include party reasoning
-              </mat-checkbox>
-              <mat-checkbox [checked]="searchOptions.includeProposals" 
-                           (change)="updateSearchOption('includeProposals', $event)">
-                Include specific proposals
-              </mat-checkbox>
-            </div>
-          </mat-card-content>
-        </mat-card>
-
-        <!-- Display Options -->
-        <mat-card class="filter-card">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon>visibility</mat-icon>
-              Display Options
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-checkbox [checked]="displayOptions.topicMode.showContext" 
-                         (change)="toggleDisplayOption('showContext', $event)">
-              Show topic context
-            </mat-checkbox>
-            <mat-checkbox [checked]="displayOptions.topicMode.showSpecificProposals" 
-                         (change)="toggleDisplayOption('showSpecificProposals', $event)">
-              Show specific proposals
-            </mat-checkbox>
-            <mat-checkbox [checked]="displayOptions.topicMode.showReasoning" 
-                         (change)="toggleDisplayOption('showReasoning', $event)">
-              Show party reasoning
-            </mat-checkbox>
-            <mat-checkbox [checked]="displayOptions.topicMode.showEvidence" 
-                         (change)="toggleDisplayOption('showEvidence', $event)">
-              Show evidence cited
-            </mat-checkbox>
-          </mat-card-content>
-        </mat-card>
-
-        <!-- Topic Filters -->
-        <mat-card class="filter-card">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon>topic</mat-icon>
-              Topics
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div *ngIf="topicFilters$ | async as topicFilters" class="filter-chips">
-              <mat-chip-listbox>
-                <mat-chip-option 
-                  *ngFor="let filter of topicFilters; trackBy: trackByFilterName" 
-                  [selected]="filter.selected"
-                  (selectionChange)="onTopicFilterChange(filter.name, $event.source.selected)"
-                  style="cursor: pointer;">
-                  {{ filter.name }}
-                  <span *ngIf="filter.count" class="chip-count">{{ filter.count }}</span>
-                </mat-chip-option>
-              </mat-chip-listbox>
-            </div>
-          </mat-card-content>
-        </mat-card>
-
-        <!-- Party Filters -->
-        <mat-card class="filter-card">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon>groups</mat-icon>
-              Political Parties
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div *ngIf="partyFilters$ | async as partyFilters" class="party-chips">
-              <mat-chip-listbox>
-                <mat-chip-option 
-                  *ngFor="let filter of partyFilters; trackBy: trackByFilterName" 
-                  [selected]="filter.selected"
-                  [style.--party-color]="filter.color"
-                  class="party-chip"
-                  (selectionChange)="onPartyFilterChange(filter.name, $event.source.selected)"
-                  style="cursor: pointer;">
-                  {{ filter.name }}
-                </mat-chip-option>
-              </mat-chip-listbox>
-            </div>
           </mat-card-content>
         </mat-card>
       </div>

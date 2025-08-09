@@ -1,0 +1,64 @@
+{
+  "executive_summary": "The 86th parliamentary meeting on May 21, 2025, highlighted ideological divides and coalition tensions, particularly on healthcare reform. Procedural neutrality masked underlying conflicts, with left-wing parties (GroenLinks-PvdA, SP) pushing progressive motions while right-wing factions (PVV, FVD) resisted. The session revealed strategic alliances and populist rhetoric, setting the stage for future policy battles.",
+  "main_topics": [
+    {
+      "topic": "Attendance and Procedural Formalities",
+      "summary": "The session began with routine attendance checks, confirming 133 MPs and key ministers. PVV chair Martin Bosma maintained procedural neutrality, though his party's controversial stances loomed over later debates.",
+      "party_positions": {
+        "PVV (Martin Bosma)": "Presided neutrally, masking PVV's anti-immigration/EU skepticism.",
+        "VVD": "Active presence, signaling coalition-aligned readiness.",
+        "GroenLinks-PvdA": "Noted presence, poised to challenge or collaborate."
+      },
+      "outcome": "No disputes; formalities concluded smoothly.",
+      "political_context": "Procedural calm contrasted with anticipated ideological clashes."
+    },
+    {
+      "topic": "Tariff Differentiation Between ZBC's and Hospitals",
+      "summary": "Debated adjusting reimbursement rates to reflect cost disparities between simpler zbc's and complex hospitals. Left-wing parties framed it as equity reform; market-liberal factions resisted.",
+      "party_positions": {
+        "GroenLinks-PvdA (Bushoff)": "Advocated fairness, emphasizing transparency and systemic equity.",
+        "VVD": "Likely opposed due to fiscal conservatism and coalition constraints.",
+        "PVV": "Sarcastically dismissed reform ('Samen komen we er wel'), signaling anti-establishment stance."
+      },
+      "outcome": "Motion 31765 pushed by left-wing bloc; opposition expected.",
+      "political_context": "Tested GroenLinks-PvdA/SP alliance strength and exposed coalition divides."
+    },
+    {
+      "topic": "Non-Contracted Care Regulation",
+      "summary": "Proposed stricter oversight of non-contracted care to curb costs. Opposition leveraged technocratic motions to pressure the coalition on ethical grounds.",
+      "party_positions": {
+        "GroenLinks-PvdA/SP": "Allied to demand accountability, prioritizing reform over historical tensions.",
+        "VVD (Tielen)": "Walked a tightrope—criticized fraud but avoided blaming coalition partners.",
+        "PVV": "Weaponized privatization critiques without offering solutions."
+      },
+      "outcome": "Contentious vote expected; highlights coalition fragility.",
+      "political_context": "Rising uninsured numbers revealed systemic failures, with parties split on solutions (austerity vs. investment)."
+    }
+  ],
+  "key_decisions": [
+    "Motion 31765 (tariff differentiation): Pushed by left-wing bloc; opposition from market-liberal parties expected.",
+    "Motion #28828 (WNT-norm enforcement): Left-wing opposition initiative; resisted by fiscally conservative parties.",
+    "Motion 36600-XVI (savings transparency): NSC-led, exposing coalition planning gaps; opposed by ruling bloc.",
+    "CDA's Rhenish model proposal: Faced libertarian opposition but gained left-leaning support."
+  ],
+  "political_dynamics": "Coalition tensions flared as PVV's austerity clashed with centrist (CDA, NSC) pragmatism. Opposition exploited gaps, with GroenLinks-PvdA/SP forming an unusual alliance. PVV's sarcasm and VVD's deflection revealed ideological rifts. NSC positioned as a broker, while DENK challenged government transparency.",
+  "meeting_tone": "Procedurally neutral but underlaid with hostility; populist rhetoric (PVV) contrasted with technocratic appeals (NSC, GroenLinks-PvdA).",
+  "strategic_implications": "Left-wing consolidation post-merger (GroenLinks-PvdA) and right-wing fragmentation (PVV vs. VVD) may reshape future policy. Opposition's technocratic motions signal heightened oversight demands. PVV's anti-establishment tone risks undermining cross-party cooperation.",
+  "next_steps": [
+    "Coalition negotiations to address healthcare funding divides.",
+    "Further opposition motions targeting coalition vulnerabilities.",
+    "PVV likely to escalate populist rhetoric ahead of elections."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "86e vergadering, woensdag 21 mei 2025",
+    "vergadering_datum": "2025-05-21T00:00:00+02:00",
+    "verslag_id": "c9b82c24-e76e-475a-9747-1a34fa5a7971",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 14,
+    "total_topics_found": 25,
+    "processing_date": "2025-06-14T15:53:08.572938",
+    "ai_model": "deepseek-chat"
+  }
+}

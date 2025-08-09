@@ -1,0 +1,50 @@
+{
+  "executive_summary": "The 92nd parliamentary meeting on June 5, 2025, revealed significant coalition tensions, particularly around tax reform and procedural scrutiny, while opposition parties like PVV and DENK strategically positioned themselves for future clashes. The debate on the 'Wet tegenbewijsregeling box 3' highlighted fiscal fairness disputes, with ChristenUnie challenging the VVD's prioritization of budgetary constraints over justice. The meeting's tone was procedural yet underscored underlying political strains, foreshadowing future policy battles.",
+  "main_topics": [
+    {
+      "topic": "Procedural Formalities",
+      "summary": "Roll call established quorum and set the stage for debates, with high-profile ministers present, hinting at a contentious agenda.",
+      "party_positions": {
+        "Presiding Officer (Van der Lee)": "Neutral, procedural, ensuring formalities were observed.",
+        "PVV (Bosma, Blaauw)": "Prominent attendance, signaling readiness for confrontational rhetoric later."
+      },
+      "outcome": "Meeting formally opened with all parties acknowledging the proceedings.",
+      "political_context": "PVV's strong presence foreshadowed potential clashes on migration or security, while coalition parties maintained procedural unity."
+    },
+    {
+      "topic": "Wet tegenbewijsregeling box 3",
+      "summary": "Debate on asset tax reform ('box 3') centered on fairness, implementation challenges, and budgetary trade-offs, exposing coalition rifts.",
+      "party_positions": {
+        "VVD (Van Eijk)": "Defended reform's limited flexibility, acknowledged unresolved issues for vulnerable groups, adopting a pragmatic yet defensive tone.",
+        "ChristenUnie (Grinwis)": "Challenged VVD's budgetary prioritization, framing the debate as justice vs. fiscal constraints, revealing coalition friction."
+      },
+      "outcome": "No formal decision, but VVD signaled pressure to address unresolved issues, which opposition may exploit.",
+      "political_context": "The debate underscored coalition tensions, with ChristenUnie pushing for fairness while VVD emphasized fiscal pragmatism, a rift opposition parties may leverage."
+    }
+  ],
+  "key_decisions": [
+    "Immediate repayments to overcharged Box 3 taxpayers (legally enforced, no opposition noted).",
+    "Implementation of a revised 'forfaitaire' system (2023) categorizing assets with separate fixed returns—government pushed this under legal pressure, likely opposed by PVV.",
+    "Amendment assessment deferred (BBB's Vermeer proposed it, challenged by ChristenUnie and GroenLinks-PvdA on budgetary grounds)."
+  ],
+  "political_dynamics": "Coalition dynamics were strained, with ChristenUnie publicly pressuring VVD on tax fairness, while CDA's silence hinted at discomfort. Opposition parties (PVV, DENK) were notably active, preparing to challenge the government, particularly on migration and security. GroenLinks-PvdA balanced fiscal progressivism with legal pragmatism, while SGP used moral rhetoric to lock in consensus. The PVV's absence from technical debates suggested disinterest in governance details, focusing instead on high-profile issues.",
+  "meeting_tone": "Procedural with underlying tension; cooperative in formalities but contentious in substantive debates, especially around tax reform.",
+  "strategic_implications": "The meeting revealed VVD's tightrope walk between fiscal responsibility and political optics, with opposition parties poised to exploit coalition rifts. ChristenUnie's assertiveness may push the coalition toward more progressive tax policies, while PVV's focus on migration and security will likely dominate future sessions. The deferral of amendments signals coalition caution to avoid public dissent.",
+  "next_steps": [
+    "Opposition parties (PVV, DENK) will likely amplify unresolved tax reform issues to portray government incompetence.",
+    "Coalition parties (VVD, CDA, ChristenUnie) may negotiate behind the scenes to address fairness concerns while maintaining fiscal discipline.",
+    "Future debates on migration and security, hinted at by PVV's presence, will test coalition unity and opposition strategies."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "92e vergadering, donderdag 5 juni 2025",
+    "vergadering_datum": "2025-06-05T00:00:00+02:00",
+    "verslag_id": "cf11ca27-d605-4793-9285-7c95ae7d2cd2",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 14,
+    "total_topics_found": 18,
+    "processing_date": "2025-06-14T14:22:42.355505",
+    "ai_model": "deepseek-chat"
+  }
+}

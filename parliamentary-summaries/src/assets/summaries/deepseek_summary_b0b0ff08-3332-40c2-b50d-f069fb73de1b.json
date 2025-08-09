@@ -1,0 +1,61 @@
+{
+  "executive_summary": "The 75th parliamentary meeting on April 10, 2025, revealed a mix of coalition pragmatism and opposition positioning, with high-stakes debates on regulatory transparency, social equity, and bureaucratic reform. The VVD-led coalition demonstrated discipline in blocking opposition motions, while smaller parties like ChristenUnie and BBB leveraged cross-party alliances to push accountability measures. The meeting’s tone was procedural but underscored underlying tensions, particularly between D66’s technocratic critiques and the government’s dismissive responses.",
+  "main_topics": [
+    {
+      "topic": "Attendance and Procedural Formalities",
+      "summary": "The session opened with a full house, signaling the importance of anticipated contentious legislation, particularly on economic and education reforms.",
+      "party_positions": {
+        "PVV": "Assertive presence, likely preparing for oppositional rhetoric on immigration or economic policy.",
+        "VVD": "Coalition-focused, ready to defend government policies.",
+        "GroenLinks-PvdA": "Watchful, poised to challenge right-wing ministers on climate or social equity."
+      },
+      "outcome": "Procedural norms adhered to, with temporary alignment on decorum.",
+      "political_context": "The presence of key ministers hinted at high-stakes legislation, setting the stage for later clashes."
+    },
+    {
+      "topic": "Regulatory Impact Assessments",
+      "summary": "Debate on motions for standardized policy impact analyses, with D66 accusing the government of inconsistency in transparency.",
+      "party_positions": {
+        "D66": "Advocated for stricter assessments, confronting the government on procedural grounds.",
+        "VVD (Minister Beljaarts)": "Defended existing processes, dismissing the need for additional measures."
+      },
+      "outcome": "Motions rejected, with the coalition rallying to block D66’s proposals.",
+      "political_context": "Highlighted the opposition’s push for accountability versus the coalition’s preference for streamlined governance."
+    },
+    {
+      "topic": "ANBI Arbitrariness Motion",
+      "summary": "ChristenUnie, SP, SGP, and BBB jointly proposed a motion to constrain bureaucratic discretion, testing coalition accountability.",
+      "party_positions": {
+        "ChristenUnie/SP/SGP/BBB": "Pushed for transparency, leveraging shared interests to pressure the coalition.",
+        "PVV": "Strategically disengaged, avoiding technical debates."
+      },
+      "outcome": "Motion advanced, forcing the government to address bureaucratic accountability.",
+      "political_context": "Demonstrated smaller parties’ ability to punch above their weight by forming issue-based alliances."
+    }
+  ],
+  "key_decisions": [
+    "Motion nr. 14–16 rejected: Minister Beljaarts (VVD) blocked D66’s proposals, showcasing coalition unity.",
+    "Motion #1487 on ANBI arbitrariness advanced, highlighting cross-party opposition pressure.",
+    "September consultation timeline set for legal/fiscal reforms, requiring cross-departmental approval."
+  ],
+  "political_dynamics": "The coalition (VVD, CDA) maintained discipline, while NSC pragmatically aligned on procedural points to avoid conflict. Opposition parties (D66, GroenLinks-PvdA) exploited technical debates to critique governance opacity, with DENK and SP testing the coalition’s commitment to social equity. Smaller parties (CU, BBB) formed ad-hoc alliances to amplify their influence.",
+  "meeting_tone": "Procedural with undercurrents of tension; cooperative on formalities but contentious in substantive debates.",
+  "strategic_implications": "The meeting revealed the coalition’s confidence in its majority, dismissing opposition critiques, while opposition parties are refining tactics to force accountability. Smaller parties’ cross-aisle collaboration may become a recurring strategy.",
+  "next_steps": [
+    "Further scrutiny of pending inspection data (triggered by NSC pressure).",
+    "VVD’s Kisteman to propose a motion on unannounced visits, likely facing opposition from GroenLinks-PvdA.",
+    "Continued opposition efforts to tie future debates to unimplemented past motions."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "75e vergadering, donderdag 10 april 2025",
+    "vergadering_datum": "2025-04-10T00:00:00+02:00",
+    "verslag_id": "b0b0ff08-3332-40c2-b50d-f069fb73de1b",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 12,
+    "total_topics_found": 19,
+    "processing_date": "2025-06-14T15:41:58.916160",
+    "ai_model": "deepseek-chat"
+  }
+}

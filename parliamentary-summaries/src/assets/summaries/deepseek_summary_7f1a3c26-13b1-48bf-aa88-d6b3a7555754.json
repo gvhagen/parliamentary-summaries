@@ -1,0 +1,54 @@
+{
+  "executive_summary": "The 87th parliamentary meeting on May 22, 2025, highlighted growing tensions within the coalition, particularly between PVV's nativist agenda and progressive parties like D66 and GroenLinks-PvdA. Key debates centered on education reform, fiscal responsibility, and environmental policies, with opposition parties forming ad-hoc alliances to challenge far-right initiatives. The meeting underscored strategic maneuvering, with PVV maintaining a calculated silence on certain issues while opposition parties exploited coalition vulnerabilities.",
+  "main_topics": [
+    {
+      "topic": "Attendance and Procedural Formalities",
+      "summary": "The session began with a roll call of 137 MPs and ministers, setting the stage for contentious debates between far-right and progressive blocs.",
+      "party_positions": {
+        "PVV": "Assertive, leveraging ministerial roles to dominate future debates on immigration and healthcare.",
+        "GroenLinks-PvdA": "Watchful, preparing to challenge PVV/VVD on climate and social policies.",
+        "VVD": "Coalition-focused, mediating between PVV and progressive opposition."
+      },
+      "outcome": "Procedural unity in opening formalities, but ideological divides hinted at future conflicts.",
+      "political_context": "The presence of controversial parties like PVV and FVD alongside progressive voices foreshadowed heated debates on key policies."
+    },
+    {
+      "topic": "Academic Profile vs. Practical Skills in VWO",
+      "summary": "Debate on integrating practical skills into the academically focused vwo curriculum, revealing tensions between traditional and modern educational approaches.",
+      "party_positions": {
+        "Minister Bruins (Education)": "Opposed SGP's motion, fearing it creates a false divide between academic and practical skills.",
+        "SGP (Stoffer)": "Advocated for an 'en-en' approach, blending academic rigor with practical skills to appeal to both traditionalists and modernizers."
+      },
+      "outcome": "Motion 1198 (SGP) remained opposed by Minister Bruins due to wording concerns, but shared objectives were acknowledged.",
+      "political_context": "The debate reflected broader ideological divides within the coalition, with SGP pragmatically bridging gaps while Bruins resisted perceived dilution of academic standards."
+    }
+  ],
+  "key_decisions": [
+    "Motion 1198 (SGP) opposed by Minister Bruins, highlighting coalition control over education policy.",
+    "All motions (804-807) rejected or deemed untimely by Staatssecretaris Paul, underscoring coalition's agenda control.",
+    "Commitment to revise 'kleinescholentoeslag' and clarify school boards' responsibilities, co-opting opposition ideas.",
+    "Motion 32034 (Haage) on SIVON/Kennisnet funding likely to pass with center-left/Green support, but faces coalition budget scrutiny.",
+    "VVD's Verkuijlen appointed to Digital Affairs committee, a coalition-backed move with no opposition."
+  ],
+  "political_dynamics": "The meeting revealed strained coalition dynamics, with D66 pushing ambitious reforms while CDA resisted. Opposition parties like GroenLinks-PvdA and BBB exploited government vulnerabilities, particularly after social partners' exit. PVV's silence on education signaled strategic non-engagement, while FVD tested coalition tolerance with provocative motions. Progressive motions on environmental policies forced centrist parties to choose between fiscal conservatism and sustainability pledges.",
+  "meeting_tone": "Contentious and procedural, with moments of strategic maneuvering and subtle rebranding to downplay crises. Opposition parties framed debates effectively, while coalition members maintained control over key decisions.",
+  "strategic_implications": "The meeting highlighted opposition parties' ability to form ad-hoc alliances against far-right policies, while PVV and FVD competed for populist voter bases. Coalition stability is tested by progressive reforms and fiscal scrutiny, with future debates likely to focus on immigration, healthcare, and environmental policies.",
+  "next_steps": [
+    "Continued opposition pressure on coalition vulnerabilities, particularly in education and environmental policies.",
+    "Potential escalation of tensions between PVV and progressive parties on immigration and healthcare.",
+    "Further testing of coalition tolerance by FVD with provocative motions appealing to agrarian voters.",
+    "Strategic silence or engagement by PVV on contentious issues to maintain influence without alienating moderates."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "87e vergadering, donderdag 22 mei 2025",
+    "vergadering_datum": "2025-05-22T00:00:00+02:00",
+    "verslag_id": "7f1a3c26-13b1-48bf-aa88-d6b3a7555754",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 13,
+    "total_topics_found": 22,
+    "processing_date": "2025-06-14T15:01:28.909677",
+    "ai_model": "deepseek-chat"
+  }
+}

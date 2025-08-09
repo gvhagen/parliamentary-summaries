@@ -322,31 +322,67 @@ class DeepSeekParliamentarySummarizer:
 
         Speakers mentioned in this section: {speaker_context}
 
-        CRITICAL FACT-CHECKING INSTRUCTIONS:
-        - ONLY flag claims that are CLEARLY and DEMONSTRABLY incorrect with readily available verification
-        - Focus ONLY on: clear numerical errors, obvious historical inaccuracies, blatant legal/procedural mistakes
-        - NEVER flag: 
-          * Claims that are "unverifiable" or lack sources (politicians often speak from memory)
-          * Broad qualitative statements ("things got worse/better")
-          * Political opinions disguised as facts
-          * Estimates, approximations, or "rough figures" (even if slightly off)
-          * Complex policy assessments that could be interpreted multiple ways
-          * Claims about future projections or trends
-          * Statements where the speaker indicates uncertainty ("uit mijn hoofd", "approximately", etc.)
-        - Use EXTREMELY conservative confidence levels - when in doubt, DO NOT flag
-        - For flagged items, you must have concrete, easily verifiable contradictory evidence
-        - Perfect example of what TO flag: "The Dutch parliament has 200 seats" (it has 150)
-        - Perfect example of what NOT to flag: "Denmark invested 200 million via this mechanism" (could be true, just not immediately verifiable)
+        ENHANCED FACT-CHECKING INSTRUCTIONS:
+        
+        **VERIFICATION REQUIREMENT**: If you identify a claim about publicly available information (government documents, laws, budgets, coalition agreements, etc.), you MUST:
+        1. State what specific document/source would contain the correct information
+        2. Provide the actual correct information if you know it from your training data
+        3. If you don't know the specific details, clearly state "REQUIRES VERIFICATION: [specific document needed]"
+        
+        **CONFIDENCE THRESHOLD**: Only flag claims with MEDIUM or HIGH confidence. Do not include LOW confidence flags.
 
-        Guidelines for analysis:
-        - Capture not just what was said, but HOW it was said (tone, tensions, agreements)
-        - Note coalition dynamics, opposition challenges, and cross-party collaborations
-        - Identify underlying political strategies and rhetorical approaches
-        - Look for subtext and implications beyond literal statements
-        - Highlight moments of conflict, consensus, or unexpected alignment
-        - Apply fact-checking VERY sparingly - better to miss a false claim than incorrectly flag a true/unverifiable one
+        Flag the following types of claims when you have MEDIUM or HIGH confidence they are incorrect:
 
-        Return this exact JSON structure with nuanced analysis:
+        1. **Numerical/Statistical Errors** (flag when clearly wrong):
+           - Wrong institutional numbers (e.g., parliament seats, ministry budgets)
+           - Budget/financial figures that are off by more than 30% from known values
+           - Population/demographic statistics that are significantly incorrect
+           - Electoral results that don't match official records
+           - Economic indicators that differ substantially from official figures
+           - ALWAYS provide the correct figure if known, or state what source would contain it
+
+        2. **Temporal/Historical Errors** (flag when dates/sequences are wrong):
+           - Incorrect years for major events
+           - Wrong sequence of events
+           - Misattributed policy implementation dates
+           - Incorrect terms of office for politicians
+           - Verify against your knowledge of Dutch political history
+
+        3. **Legal/Constitutional Errors** (flag clear mistakes):
+           - Misstatements about Dutch law or EU regulations
+           - Incorrect constitutional procedures
+           - Wrong voting thresholds or parliamentary procedures
+           - Misrepresented legal requirements or rights
+           - ALWAYS cite the specific law/article if you know it
+
+        4. **Institutional Facts** (flag when demonstrably wrong):
+           - Wrong names of ministries or government bodies
+           - Incorrect responsibilities of institutions (e.g., NZa vs IGJ)
+           - Misattributed policies to wrong parties/governments
+           - Wrong international agreements or treaty obligations
+           - Provide the correct institutional structure/responsibility
+
+        5. **Scientific/Medical Claims** (flag clear misinformation):
+           - Debunked medical claims
+           - Climate science denial contradicting scientific consensus
+           - False causation claims contradicted by established research
+
+        IMPORTANT VERIFICATION RULES:
+        - For claims about coalition agreements: These are public on rijksoverheid.nl - verify the actual text
+        - For budget claims: Check against official Rijksbegroting documents
+        - For legal claims: Reference specific articles in Dutch law
+        - For institutional claims: Verify against official government organizational charts
+        - If you cannot verify but know where to find the info, state: "REQUIRES VERIFICATION: [source]"
+
+        DO NOT FLAG:
+        - Political opinions or value judgments
+        - Future predictions or projections
+        - Rhetorical exaggerations/hyperbole ("ravijnjaar", "crisis", etc.)
+        - Claims where speaker indicates uncertainty ("ongeveer", "uit mijn hoofd")
+        - Unverifiable private conversations
+        - Claims that are plausible but just lack a cited source (unless extraordinary)
+
+        Return this exact JSON structure:
         {{
             "chunk_summary": "Brief overview capturing both content AND political dynamics",
             "topics": [
@@ -371,21 +407,24 @@ class DeepSeekParliamentarySummarizer:
                 {{
                     "claim": "Exact claim that was made",
                     "speaker": "Who made the claim",
-                    "issue": "What is clearly and demonstrably incorrect about this claim",
-                    "correct_info": "What the correct, easily verifiable information is",
-                    "confidence": "HIGH (only flag claims with absolute certainty and clear contradictory evidence)",
-                    "reasoning": "Specific evidence that proves this claim is wrong (not just unverifiable)",
-                    "category": "One of: clear_numerical_error, historical_fact, legal_procedure, institutional_fact"
+                    "context": "In what context was this claim made",
+                    "issue": "What is specifically incorrect about this claim",
+                    "correct_info": "The actual correct information with specific details/numbers/citations",
+                    "confidence": "MEDIUM or HIGH only",
+                    "reasoning": "Specific evidence that proves this claim is wrong",
+                    "category": "One of: numerical_error, temporal_error, legal_error, institutional_fact, scientific_claim",
+                    "impact": "How this misinformation affects public understanding or policy debate",
+                    "verification_source": "Where this can be verified (e.g., 'Coalition Agreement 2024 on rijksoverheid.nl')"
                 }}
             ]
         }}
 
         REMEMBER: 
-        - Empty fact_check_flags array is perfectly fine and expected most of the time
-        - Only flag claims where you have concrete, easily verifiable evidence they are wrong
-        - Unverifiable ≠ incorrect - do not flag unverifiable claims
-        - Politicians often speak from memory with approximations - this is normal
-        - Broad qualitative assessments ("things got worse") are opinions, not facts to check
+        - Only include MEDIUM and HIGH confidence flags
+        - Always provide specific correct information, not just "this is wrong"
+        - If information is publicly verifiable, provide the exact source
+        - Consider context: opposition parties often use selective statistics
+        - Empty fact_check_flags array is perfectly acceptable
 
         Text to analyze:
         {chunk.text[:3000]}...
@@ -510,8 +549,11 @@ class DeepSeekParliamentarySummarizer:
             if chunk_summary.get('political_undercurrents'):
                 political_themes.append(chunk_summary['political_undercurrents'])
             
-            # Collect fact-check flags
-            all_fact_checks.extend(chunk_summary.get('fact_check_flags', []))
+            # Collect fact-check flags - filter out LOW confidence here as well
+            fact_checks = chunk_summary.get('fact_check_flags', [])
+            for fc in fact_checks:
+                if fc.get('confidence', 'LOW') in ['MEDIUM', 'HIGH']:
+                    all_fact_checks.append(fc)
         
         # Create final summary using DeepSeek
         topics_json = json.dumps(list(all_topics.values()), ensure_ascii=False, indent=2)
@@ -536,7 +578,6 @@ class DeepSeekParliamentarySummarizer:
     - Note the meeting's tone: cooperative, contentious, procedural, dramatic?
     - Consider broader implications: what do these discussions mean for future policy?
     - For fact-checking: ONLY include flags that represent clear, demonstrable errors with concrete contradictory evidence
-    - Remove any "unverifiable" or "lacks sources" flags - these are not fact-check failures
     - Focus fact-check summary on genuine corrections that matter for public understanding
 
     Return this exact JSON structure:
@@ -567,9 +608,10 @@ class DeepSeekParliamentarySummarizer:
                     "speaker": "Who made it",
                     "issue": "What is clearly and demonstrably incorrect about this claim",
                     "correct_info": "The correct, easily verifiable information",
-                    "confidence": "HIGH (only include claims with absolute certainty)",
+                    "confidence": "MEDIUM or HIGH",
                     "reasoning": "Specific evidence that proves this claim is wrong",
-                    "category": "One of: clear_numerical_error, historical_fact, legal_procedure, institutional_fact"
+                    "category": "One of: numerical_error, temporal_error, legal_error, institutional_fact, scientific_claim",
+                    "verification_source": "Where this can be verified"
                 }}
             ],
             "credibility_note": "Assessment of overall factual accuracy of the debate - note that most claims are political opinions or unverifiable statements, which is normal in parliamentary debates"
@@ -579,7 +621,7 @@ class DeepSeekParliamentarySummarizer:
     Topics and positions data:
     {topics_json[:2000]}...
 
-    Fact-check flags to consolidate (FILTER OUT unverifiable/source-lacking claims):
+    Fact-check flags to consolidate (only MEDIUM/HIGH confidence):
     {fact_checks_json[:1500]}...
 
     Key decisions: {all_decisions[:10]}
@@ -610,7 +652,7 @@ class DeepSeekParliamentarySummarizer:
                 'total_topics_found': len(all_topics),
                 'total_fact_checks': len(all_fact_checks),
                 'processing_date': datetime.now().isoformat(),
-                'ai_model': 'deepseek-chat',
+                'ai_model': 'deepseek-reasoner',
                 'fact_checking_enabled': True
             }
             
@@ -937,7 +979,7 @@ Examples:
             if total_fact_checks > 0:
                 print(f"\n🚨 FACT-CHECKING SUMMARY:")
                 print(f"   - {total_fact_checks} potentially incorrect claims flagged")
-                print(f"   - Conservative approach: only flags claims with high confidence")
+                print(f"   - Conservative approach: only flags claims with MEDIUM/HIGH confidence")
                 print(f"   - Each flag includes source verification and reasoning")
                 print(f"   - Perfect for transparent, credible fact-checking in your platform")
             else:

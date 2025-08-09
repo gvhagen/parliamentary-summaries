@@ -1,0 +1,54 @@
+{
+  "executive_summary": "The 90th parliamentary meeting on June 3, 2025, revealed a complex interplay of coalition discipline and opposition tactics, with defense spending, climate policy, and social welfare emerging as key battlegrounds. The VVD and NSC maintained cohesion on foreign policy but faced fractures on domestic issues, while opposition parties like PVV and DENK prepared for culture-war clashes. Progressive parties demonstrated unity but struggled to influence budget decisions, signaling a shift toward issue-based alliances beyond traditional left-right divides.",
+  "main_topics": [
+    {
+      "topic": "Procedural Opening",
+      "summary": "Routine roll call masked underlying tensions, with polarizing figures like Wilders (PVV) and Baudet (FVD) present, foreshadowing contentious debates on climate and immigration.",
+      "party_positions": {
+        "VVD": "Neutral/procedural, emphasizing coalition stability, with key figures signaling readiness to defend government agendas.",
+        "PVV": "Confrontational undertones, likely preparing to challenge climate or immigration policies.",
+        "GroenLinks-PvdA": "Unified attendance, suggesting coordination to push progressive climate or social policies."
+      },
+      "outcome": "All parties adhered to procedural norms, indicating temporary alignment on parliamentary decorum.",
+      "political_context": "The presence of polarizing figures hinted at upcoming clashes, while coalition parties aimed to project stability."
+    },
+    {
+      "topic": "Defense Spending and NATO Commitments",
+      "summary": "Debate over defense budget increases and NATO spending norms (3.5% of GDP) highlighted tensions between fiscal conservatives, security hawks, and social welfare advocates.",
+      "party_positions": {
+        "VVD/NSC": "Strongly pro-defense, advocating for a fixed growth path to 3.5% of GDP, framing it as a security imperative.",
+        "SP": "Opposed defense spending increases, weaponizing welfare trade-offs to highlight social program cuts.",
+        "GL-PvdA": "Balanced security concerns with progressive values, questioning the prioritization of military over social investments."
+      },
+      "outcome": "Motions referred for further debate, with VVD/NSC's 3.5% GDP target facing opposition from SP and skepticism from GL-PvdA.",
+      "political_context": "The debate reflected broader NATO/European capability discussions and served as a platform for parties to signal their values ahead of elections."
+    }
+  ],
+  "key_decisions": [
+    "ChristenUnie's Ukraine lessons motion gained cross-party traction, showing humanitarian angles can bridge divides.",
+    "Boswijk/Hirsch motion passed: Rare left-right alignment (CDA and GroenLinks-PvdA) on agriculture signaled issue-based cooperation.",
+    "Bamenga's Great Lakes motion passed: Demonstrated VVD-D66 coalition cohesion on foreign policy.",
+    "Motie-El Abassi on train pricing passed with SP→PVV support, signaling weakening coalition discipline.",
+    "Fast fashion ad ban (Bamenga) adopted, showing D66's progressive wing gaining influence."
+  ],
+  "political_dynamics": "Coalition parties (VVD-D66-NSC) held together on foreign policy but fractured on social spending, with DENK and ChristenUnie acting as swing votes. Opposition parties (PVV/JA21) solidified their bloc, while progressive parties (GL-PvdA, PvdD, Volt) showed unity but lacked leverage on budget issues. Unexpected alliances emerged, such as SP/CDA cooperation on gender issues and left-right alignment on agriculture.",
+  "meeting_tone": "Contentious yet procedural, with moments of cooperation overshadowed by underlying tensions, particularly on defense and climate policy.",
+  "strategic_implications": "The meeting revealed a shift toward issue-based alliances, with populist parties finding common ground on cost-of-living issues and environmental policy becoming a new cleavage. Coalition parties are increasingly voting apart on economic regulation vs. sustainability, while opposition parties are testing boundaries on secularist discourse.",
+  "next_steps": [
+    "Further debate on defense spending motions, with VVD/NSC likely to push for their 3.5% GDP target.",
+    "Continued opposition coordination on culture-war topics, particularly from PVV/DENK.",
+    "Progressive parties (GL-PvdA, Volt) expected to leverage environmental policy as a wedge issue."
+  ],
+  "meeting_info": {
+    "vergadering_titel": "90e vergadering, dinsdag 3 juni 2025",
+    "vergadering_datum": "2025-06-03T00:00:00+02:00",
+    "verslag_id": "f73ff853-5f46-4227-beca-e22070f6ceb7",
+    "status": "VerslagStatus.ONGECORRIGEERD"
+  },
+  "processing_info": {
+    "chunks_processed": 7,
+    "total_topics_found": 18,
+    "processing_date": "2025-06-14T14:43:26.128421",
+    "ai_model": "deepseek-chat"
+  }
+}
